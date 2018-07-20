@@ -41,9 +41,17 @@ public class BaseSolverTest {
 
     @Test
     public void testTest1() throws IOException {
-        final Board finalBoard = getState(path);
-        final List<Trace> traces = solver.solve(finalBoard);
-        assert (0 < finalBoard.getR()) && (finalBoard.getR() <= 250);
+        final Board goal = getState(path);
+        final List<Trace> traces = solver.solve(goal);
+        assert (0 < goal.getR()) && (goal.getR() <= 250);
         assert traces != null;
+//        final String types = traces.stream().map(trace -> trace.type.name()).distinct().collect(Collectors.joining());
+//        System.out.println(types);
+        final Game game = new Game(goal, traces);
+        while (game.proceed()) {
+//            System.out.printf("%d\n", game.getState().getEnergy());
+        }
+        assert game.validateSuccess() : "game not success";
+        System.out.printf("%s: %d\n", goal.getPath(), game.getState().getEnergy());
     }
 }

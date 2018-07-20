@@ -1,5 +1,7 @@
 package solver;
 
+import com.google.common.base.Objects;
+
 public class Board {
     private final int R;
     private final byte[] board;
@@ -9,6 +11,15 @@ public class Board {
         R = r;
         this.board = board;
         this.path = path;
+    }
+
+    public static Board getInitialBoard(final int R) {
+        int boardSize = (R * R * R + 7) / 8;
+        return new Board(R, new byte[boardSize], "");
+    }
+
+    public byte[] getBoard() {
+        return board;
     }
 
     public int getR() {
@@ -35,6 +46,10 @@ public class Board {
         return true;
     }
 
+    public boolean fill(final Coordinate p) {
+        return fill(p.x, p.y, p.z);
+    }
+
     public String getPath() {
         return path;
     }
@@ -42,5 +57,30 @@ public class Board {
     public boolean grounded() {
         // TODO
         return true;
+    }
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        final Board board1 = (Board) o;
+        if (R != board1.R) {
+            return false;
+        }
+        for (int i = 0; i < board.length; i++) {
+            if (board[i] != board1.board[i]) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(R, board);
     }
 }

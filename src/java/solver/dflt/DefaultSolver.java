@@ -60,7 +60,7 @@ public class DefaultSolver extends BaseSolver {
                 }
             }
         }
-        System.out.printf("%d traces are loaded.\n", traces.size());
+//        System.out.printf("%d traces are loaded.\n", traces.size());
         return traces;
     }
 
