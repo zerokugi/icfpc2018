@@ -18,4 +18,9 @@ public class State {
         final int pos = (x * R * R) + (y * R) + z;
         return ((board[pos >> 3] >> (pos & 7)) & 1) == 1;
     }
+
+    public boolean grounded() {
+        // TODO
+        return true;
+    }
 }
