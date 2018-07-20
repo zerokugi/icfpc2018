@@ -1,7 +1,7 @@
 package solver.dflt;
 
 import solver.BaseSolver;
-import solver.State;
+import solver.Board;
 import solver.Trace;
 
 import java.io.File;
@@ -65,10 +65,10 @@ public class DefaultSolver extends BaseSolver {
     }
 
     @Override
-    public List<Trace> solve(final State finalState) {
+    public List<Trace> solve(final Board finalBoard) {
         try {
             final byte[] rawTraces = loadTraces(
-                    finalState.getPath()
+                    finalBoard.getPath()
                             .replace("problemsL", "dfltTracesL")
                             .replace("_tgt.mdl", ".nbt")
             );

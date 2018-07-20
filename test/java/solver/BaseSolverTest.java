@@ -27,7 +27,7 @@ public class BaseSolverTest {
                 .collect(Collectors.toList());
     }
 
-    private static State getState(final String path) throws IOException {
+    private static Board getState(final String path) throws IOException {
         final FileInputStream input = new FileInputStream(path);
         final byte[] Rb = new byte[1];
         assert input.read(Rb) == 1;
@@ -36,14 +36,14 @@ public class BaseSolverTest {
         final byte[] board = new byte[readBytes];
         assert readBytes == input.read(board);
         input.close();
-        return new State(R, board, path);
+        return new Board(R, board, path);
     }
 
     @Test
     public void testTest1() throws IOException {
-        final State finalState = getState(path);
-        final List<Trace> traces = solver.solve(finalState);
-        assert (0 < finalState.getR()) && (finalState.getR() <= 250);
+        final Board finalBoard = getState(path);
+        final List<Trace> traces = solver.solve(finalBoard);
+        assert (0 < finalBoard.getR()) && (finalBoard.getR() <= 250);
         assert traces != null;
     }
 }

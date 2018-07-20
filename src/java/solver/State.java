@@ -1,46 +1,53 @@
 package solver;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class State {
-    private final int R;
-    private final byte[] board;
-    private final String path;
+    private final Board board;
+    private List<Bot> bots;
+    private int energy;
+    private Harmonics harmonics;
 
-    public State(final int r, final byte[] board, final String path) {
-        R = r;
+    enum Harmonics {
+        LOW,
+        HIGH
+    }
+
+    public State(final Board board) {
         this.board = board;
-        this.path = path;
+        bots = new ArrayList<>();
+        bots.add(new Bot());
+        harmonics = Harmonics.LOW;
     }
 
-    public int getR() {
-        return R;
-    }
-
-    private int getPos(final int x, final int y, final int z) {
-        return (x * R * R) + (y * R) + z;
-    }
-
-    public boolean get(final int x, final int y, final int z) {
-        assert (0 <= Math.min(x, Math.min(y, z))) && (Math.max(x, Math.max(y, z)) < R);
-        final int pos = getPos(x, y, z);
-        return ((board[pos >> 3] >> (pos & 7)) & 1) == 1;
-    }
-
-    public boolean fill(final int x, final int y, final int z) {
-        assert (0 <= Math.min(x, Math.min(y, z))) && (Math.max(x, Math.max(y, z)) < R);
-        final int pos = getPos(x, y, z);
-        if (((board[pos >> 3] >> (pos & 7)) & 1) == 1) {
-            return false;
+    private boolean validate() {
+        if (harmonics == Harmonics.LOW) {
+            if (!board.grounded()) {
+                return false;
+            }
         }
-        board[pos >> 3] |= 1 << (pos & 7);
+
+        // if (bots have same bid) {
+        //   return false;
+        // }
+
+        // TODO: koko ni sonota no jouken
+
         return true;
     }
 
-    public String getPath() {
-        return path;
-    }
+    public void step(final List<Trace> traces) {
+        for (final Bot bot : bots) {
+            final Trace trace = traces.get(0);
+            switch (trace.type) {
+                case HALT:
 
-    public boolean grounded() {
-        // TODO
-        return true;
+                    break;
+                case FILL:
+
+                    break;
+            }
+        }
     }
 }
