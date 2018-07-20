@@ -1,1 +1,14 @@
 *.class
+
+# Gradle
+.gradle
+!gradle-wrapper.jar
+
+# Idea
+.idea
+
+
+# Build
+out
+build
+bin
