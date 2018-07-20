@@ -1,21 +1,21 @@
 package solver;
 
-public class Instruction {
+public class Trace {
 
     public final Type type;
     public final Integer val0;
     public final Integer val1;
 
-    public Instruction(final Type type, final int val0, final int val1) {
+    public Trace(final Type type, final int val0, final int val1) {
         this.type = type;
         this.val0 = val0;
         this.val1 = val1;
     }
 
-    public Instruction(final Type type, final int val0) {
+    public Trace(final Type type, final int val0) {
         this.type = type;
         this.val0 = val0;
-        this.val1 = null;
+        val1 = null;
     }
 
     enum Type {
