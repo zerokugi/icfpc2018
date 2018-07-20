@@ -1,5 +1,3 @@
 * Infra
-Makefile
-1. build
-2. generate nbt files into /dist/traces
-3. execute traces for all test cases and put result into /result.csv
+Add all problems into unit test
+Run unit test also do score calculation
