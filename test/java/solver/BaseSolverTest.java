@@ -36,7 +36,7 @@ public class BaseSolverTest {
         final byte[] board = new byte[readBytes];
         assert readBytes == input.read(board);
         input.close();
-        return new State(R, board);
+        return new State(R, board, path);
     }
 
     @Test
