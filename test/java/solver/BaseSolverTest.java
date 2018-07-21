@@ -27,6 +27,7 @@ public class BaseSolverTest {
     public static class ScoreSummary {
         public Number score;
         public Number timestamp;
+        @JsonIgnore public List<Trace> traces;
 
         public ScoreSummary(Number score, Number timestamp) {
             this.score = score;
@@ -50,11 +51,13 @@ public class BaseSolverTest {
     public BaseSolver solver;
     @Parameterized.Parameter // first data value (0) is default
     public String path;
+    @Parameterized.Parameter(1)
+    public String testcase;
 
     @Parameterized.Parameters(name = "{0}")
     public static Collection<Object[]> data() {
         return IntStream.range(1, 187)
-                .mapToObj(i -> new Object[]{String.format("problemsL/LA%03d_tgt.mdl", i)})
+                .mapToObj(i -> new Object[]{String.format("problemsL/LA%03d_tgt.mdl", i), String.format("LA%03d", i)})
                 .collect(Collectors.toList());
     }
 
@@ -89,6 +92,16 @@ public class BaseSolverTest {
         final ScoreSummary bestScore = bestScoreMap.get(path);
         if (bestScore == null || bestScore.score.longValue() > scoreSummary.score.longValue()) {
             scoreMap.put(path, scoreSummary);
+        }
+        scoreMap.get(path).traces = traces;
+    }
+
+    @After
+    public void after() {
+        System.out.println(scoreMap.get(path).traces.size() + " commands");
+        TraceExporter.export("dist/traces", testcase, scoreMap.get(path).traces);
+        if (bestScoreMap.get(path) == null || !Objects.equals(scoreMap.get(path).timestamp, bestScoreMap.get(path).timestamp)) {
+            TraceExporter.export("dist/bestTraces", testcase, scoreMap.get(path).traces);
         }
     }
 

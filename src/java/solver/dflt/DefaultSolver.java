@@ -1,5 +1,6 @@
 package solver.dflt;
 
+import com.google.common.annotations.VisibleForTesting;
 import solver.BaseSolver;
 import solver.Board;
 import solver.Trace;
@@ -12,7 +13,8 @@ import java.util.List;
 
 public class DefaultSolver extends BaseSolver {
 
-    private byte[] loadTraces(final String path) throws IOException {
+    @VisibleForTesting
+    public byte[] loadTraces(final String path) throws IOException {
         final int length = (int) new File(path).length();
         final FileInputStream input = new FileInputStream(path);
         final byte[] buf = new byte[length];

@@ -3,11 +3,13 @@ package solver;
 import com.google.common.collect.ImmutableList;
 import org.junit.Before;
 import org.junit.Test;
+import solver.dflt.DefaultSolver;
 
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class TraceTest {
 
@@ -38,6 +40,13 @@ public class TraceTest {
     @Test(expected = AssertionError.class)
     public void testFillFailureByOutOfBounds() {
         final List<Trace> traces = ImmutableList.of(Coordinate.toNldTrace(Trace.Type.FILL, new Coordinate(-1, 0, 0)));
+        final Game game = new Game(board, traces);
+        game.proceed();
+    }
+
+    @Test(expected = AssertionError.class)
+    public void testFillFailureByEdgeOfBounds() {
+        final List<Trace> traces = ImmutableList.of(Coordinate.toNldTrace(Trace.Type.FILL, new Coordinate(1, 0, 0)));
         final Game game = new Game(board, traces);
         game.proceed();
     }
@@ -74,7 +83,7 @@ public class TraceTest {
 
     @Test(expected = AssertionError.class)
     public void testSmoveFailureByBot() {
-        final List<Trace> traces = ImmutableList.of(Coordinate.toSmove(new Coordinate(2, 0, 0)), Trace.getWait());
+        final List<Trace> traces = ImmutableList.of(Coordinate.toSmove(new Coordinate(2, 0, 0)), new Trace(Trace.Type.WAIT));
         final Game game = new Game(board, traces);
         addBot(game, new Coordinate(1, 0, 0));
         game.proceed();

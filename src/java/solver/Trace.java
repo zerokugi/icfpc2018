@@ -1,7 +1,10 @@
 package solver;
 
 import com.google.common.collect.Lists;
+import com.google.common.primitives.Bytes;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 public class Trace {
@@ -36,14 +39,6 @@ public class Trace {
 
     public Trace(final Type type, final Integer val0, final Integer val1) {
         this(type, val0, val1, null, null);
-    }
-
-    public static Trace getSmoveX(final int d) {
-        return new Trace(Trace.Type.SMOVE, 1, d + 15);
-    }
-
-    public static Trace getWait() {
-        return new Trace(Type.WAIT);
     }
 
     public enum Type {
