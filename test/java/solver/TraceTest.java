@@ -29,10 +29,10 @@ public class TraceTest {
 
     @Test
     public void testFillSuccess() {
-        final List<Trace> traces = ImmutableList.of(Coordinate.toNldTrace(Trace.Type.FILL, new Coordinate(1, 0, 0)));
+        final List<Trace> traces = ImmutableList.of(Coordinate.toNldTrace(Trace.Type.FILL, new Coordinate(1, 0, 1)));
         final Game game = new Game(board, traces);
         assertTrue(game.proceed());
-        assertTrue(game.getState().getBoard().get(1, 0, 0));
+        assertTrue(game.getState().getBoard().get(1, 0, 1));
     }
 
     @Test(expected = AssertionError.class)
@@ -60,8 +60,8 @@ public class TraceTest {
     @Test(expected = AssertionError.class)
     public void testSmoveFailureByFilledVoxel() {
         final List<Trace> traces = ImmutableList.of(Coordinate.toSmove(new Coordinate(2, 0, 0)));
-        board.fill(1, 0, 0);
         final Game game = new Game(board, traces);
+        game.getState().getBoard().fill(1, 0, 0);
         game.proceed();
     }
 
@@ -91,8 +91,8 @@ public class TraceTest {
     @Test(expected = AssertionError.class)
     public void testLmoveFailureByVoxel() {
         final List<Trace> traces = ImmutableList.of(Coordinate.toLmove(new Coordinate(2, 0, 0), new Coordinate(0, 1, 0)));
-        board.fill(2, 1, 0);
         final Game game = new Game(board, traces);
+        game.getState().getBoard().fill(2, 1, 0);
         game.proceed();
     }
 
@@ -135,8 +135,8 @@ public class TraceTest {
     @Test(expected = AssertionError.class)
     public void testFissionFailureByVoxel() {
         final List<Trace> traces = ImmutableList.of(Coordinate.toNldTrace(Trace.Type.FISSION, new Coordinate(1, 0, 0), 3));
-        board.fill(1, 0, 0);
         final Game game = new Game(board, traces);
+        game.getState().getBoard().fill(1, 0, 0);
         game.proceed();
     }
 

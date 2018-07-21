@@ -46,7 +46,7 @@ public class Board {
     }
 
     public boolean flip(final int x, final int y, final int z, int target) {
-        assert (0 <= Math.min(x, Math.min(y, z))) && (Math.max(x, Math.max(y, z)) < R);
+        assert in(x) && in(y) && in(z);
         final int pos = getPos(x, y, z);
         if (((board[pos >> 3] >> (pos & 7)) & 1) == target) {
             return false;
@@ -89,8 +89,12 @@ public class Board {
         }
     }
 
-    private boolean in(final int x) {
+    public boolean in(final int x) {
         return (0 <= x) && (x < R);
+    }
+
+    public boolean in(final Coordinate p) {
+        return in(p.x) && in(p.y) && in(p.z);
     }
 
     @Override

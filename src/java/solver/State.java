@@ -1,6 +1,5 @@
 package solver;
 
-import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.Lists;
 
 import java.util.Comparator;
@@ -78,8 +77,13 @@ public class State {
         for (int i = 0; i < traces.size(); i++) {
             final Trace trace = traces.get(i);
             bots.get(i).assignTrace(trace);
-            trace.type.execute(this, bots.get(i), trace, true);
-//            System.out.printf("validate %s\n", trace.type.name());
+        }
+
+        for (final Bot bot : bots) {
+            if (bot.getAssignedTrace() != null) {
+                bot.getAssignedTrace().type.execute(this, bot, bot.getAssignedTrace(), true);
+//            System.out.printf("validate %s\n", bot.getAssignedTrace().type.name());
+            }
         }
         for (int i = 0; i < traces.size(); i++) {
             final Trace trace = traces.get(i);

@@ -6,7 +6,7 @@ public class Bot {
     public Coordinate pos;
     public int bid;
     public List<Integer> seeds;
-    public Trace assignedTrace;
+    private Trace assignedTrace;
 
     public Bot(final int bid, final Coordinate pos, final List<Integer> seeds) {
         this.bid = bid;

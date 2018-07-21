@@ -76,6 +76,8 @@ public class Trace {
                 final Coordinate p = targetBot.pos.clone();
                 p.applyLld(trace.val0, trace.val1);
                 if (validate) {
+                    assert state.getBoard().in(p)
+                            : "can not smove outside of the board " + p;
                     validVolatility(state, targetBot.pos, p);
                 } else {
                     unfill(state, targetBot.pos, p);
@@ -92,6 +94,10 @@ public class Trace {
                 final Coordinate mid = p.clone();
                 p.applySld(trace.val2, trace.val3);
                 if (validate) {
+                    assert state.getBoard().in(mid)
+                            : "can not LMOVE(1) to outside of the board " + mid;
+                    assert state.getBoard().in(p)
+                            : "can not LMOVE(2) to outside of the board " + p;
                     validVolatility(state, targetBot.pos, mid);
                     unfill(state, mid);
                     validVolatility(state, mid, p);
@@ -112,6 +118,8 @@ public class Trace {
                 final Optional<Bot> secondary = state.getBotByPos(p);
                 if (validate) {
                     assert secondary.isPresent() : "failed to fusionP " + targetBot.pos + " and " + p;
+                    assert secondary.get().getAssignedTrace().type == FUSIONS
+                            : "secondary bot is not assigned fusion S";
                     validVolatility(state, targetBot.pos);
                 } else {
                     unfill(state, targetBot.pos);
@@ -128,9 +136,11 @@ public class Trace {
                 if (validate) {
                     validVolatility(state, targetBot.pos);
                     p.applyNld(trace.val0);
-                    final Optional<Bot> secondary = state.getBotByPos(p);
-                    assert secondary.isPresent() : "failed to fusionS " + p + " and " + targetBot.pos;
-                    p.applyNld(secondary.get().getAssignedTrace().val0);
+                    final Optional<Bot> primary = state.getBotByPos(p);
+                    assert primary.isPresent() : "failed to fusionS " + p + " and " + targetBot.pos;
+                    assert primary.get().getAssignedTrace().type == FUSIONP
+                            : "primary bot is not assigned fusion P";
+                    p.applyNld(primary.get().getAssignedTrace().val0);
                     assert targetBot.pos.equals(p) : "fusion is not symmetric " + p + " and " + targetBot.pos;
                 } else {
                     unfill(state, p);
@@ -145,6 +155,8 @@ public class Trace {
                 if (validate) {
                     validVolatility(state, targetBot.pos);
                     validVolatility(state, p);
+                    assert state.getBoard().in(p)
+                            : "can not fission outside of the board " + p;
                 } else {
                     unfill(state, targetBot.pos);
                     unfill(state, p);
@@ -164,6 +176,9 @@ public class Trace {
                 if (validate) {
                     validVolatility(state, targetBot.pos);
                     validVolatility(state, p);
+                    final int R = state.getBoard().getR();
+                    assert 0 < Math.min(p.x, p.z) && Math.max(p.x, p.z) < R - 1 && 0 <= p.y && p.y < R
+                            : "can not fill " + p;
                 } else {
                     unfill(state, targetBot.pos);
                     unfill(state, p);
@@ -182,9 +197,9 @@ public class Trace {
         }
 
         public void validVolatility(final State state, final Coordinate p1, final Coordinate p2) {
-            for (int x = Math.min(p1.x, p2.x); x < Math.max(p1.x, p2.x); x ++) {
-                for (int y = Math.min(p1.y, p2.y); y < Math.max(p1.y, p2.y); y ++) {
-                    for (int z = Math.min(p1.z, p2.z); z < Math.max(p1.z, p2.z); z ++) {
+            for (int x = Math.min(p1.x, p2.x); x <= Math.max(p1.x, p2.x); x++) {
+                for (int y = Math.min(p1.y, p2.y); y <= Math.max(p1.y, p2.y); y++) {
+                    for (int z = Math.min(p1.z, p2.z); z <= Math.max(p1.z, p2.z); z++) {
                         validVolatility(state, new Coordinate(x, y, z));
                     }
                 }
@@ -196,9 +211,9 @@ public class Trace {
         }
 
         public void unfill(final State state, final Coordinate p1, final Coordinate p2) {
-            for (int x = Math.min(p1.x, p2.x); x < Math.max(p1.x, p2.x); x ++) {
-                for (int y = Math.min(p1.y, p2.y); y < Math.max(p1.y, p2.y); y ++) {
-                    for (int z = Math.min(p1.z, p2.z); z < Math.max(p1.z, p2.z); z ++) {
+            for (int x = Math.min(p1.x, p2.x); x <= Math.max(p1.x, p2.x); x++) {
+                for (int y = Math.min(p1.y, p2.y); y <= Math.max(p1.y, p2.y); y++) {
+                    for (int z = Math.min(p1.z, p2.z); z <= Math.max(p1.z, p2.z); z++) {
                         unfill(state, new Coordinate(x, y, z));
                     }
                 }
