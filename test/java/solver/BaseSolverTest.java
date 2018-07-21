@@ -91,7 +91,7 @@ public class BaseSolverTest {
             final List<String> updated = new ArrayList<>();
 
             final ColoredPrinter printer = new ColoredPrinter.Builder(1, false).build();
-
+            long totalEnergy = 0;
             for (Map.Entry<String, ScoreSummary> entry : scoreMap.entrySet()) {
                 final String path = entry.getKey();
                 final ScoreSummary summary = entry.getValue();
@@ -100,6 +100,7 @@ public class BaseSolverTest {
                 final ScoreSummary defaultSummary = defaultScore.get(path);
                 final double ratio = (1.0 * summary.score.longValue()) / defaultSummary.score.longValue();
                 final double oldRatio = (1.0 * oldSummary.score.longValue()) / defaultSummary.score.longValue();
+                totalEnergy += Math.max(summary.score.longValue(), oldSummary.score.longValue());
                 if (ratio < 1) { // if good
                     printer.setForegroundColor(Ansi.FColor.GREEN);
                     final String s;
@@ -147,6 +148,7 @@ public class BaseSolverTest {
                 printer.setForegroundColor(Ansi.FColor.GREEN);
                 printer.clear();
             }
+            printer.println("totalEnergy = " + totalEnergy + "\n");
 
             if (!updated.isEmpty()) {
                 printer.println(updated.size() + "updated!");
@@ -157,6 +159,7 @@ public class BaseSolverTest {
                     sb.append(String.format("Updated %d new traces!", updated.size()));
                 }
                 sb.append('\n');
+                sb.append("totalEnergy = " + totalEnergy + "\n");
                 for (final String message : updated) {
                     sb.append(message).append('\n');
                 }
