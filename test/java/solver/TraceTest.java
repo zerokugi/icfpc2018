@@ -148,4 +148,52 @@ public class TraceTest {
         game.proceed();
     }
 
+    @Test
+    public void testFusionSuccess() {
+        final List<Trace> traces = ImmutableList.of(
+                Coordinate.toNldTrace(Trace.Type.FUSIONP, new Coordinate(1, 0, 0)),
+                Coordinate.toNldTrace(Trace.Type.FUSIONS, new Coordinate(-1, 0, 0))
+        );
+        final Game game = new Game(board, traces);
+        addBot(game, new Coordinate(1, 0, 0));
+        final int seedsSize = game.getState().getBots().get(0).seeds.size();
+        final int secondBotBid = game.getState().getBots().get(1).bid;
+        assertTrue(game.proceed());
+        assertEquals(1, game.getState().getBots().size());
+        assertEquals(seedsSize + 1, game.getState().getBots().get(0).seeds.size());
+        assertTrue(game.getState().getBots().get(0).seeds.contains(secondBotBid));
+    }
+
+    @Test(expected = AssertionError.class)
+    public void testFusionFailureByNoFusionS() {
+        final List<Trace> traces = ImmutableList.of(
+                Coordinate.toNldTrace(Trace.Type.FUSIONP, new Coordinate(1, 0, 0)),
+                new Trace(Trace.Type.WAIT)
+        );
+        final Game game = new Game(board, traces);
+        addBot(game, new Coordinate(1, 0, 0));
+        game.proceed();
+    }
+
+    @Test(expected = AssertionError.class)
+    public void testFusionFailureByFarFusionS() {
+        final List<Trace> traces = ImmutableList.of(
+                Coordinate.toNldTrace(Trace.Type.FUSIONP, new Coordinate(1, 0, 0)),
+                Coordinate.toNldTrace(Trace.Type.FUSIONS, new Coordinate(-1, 0, 0))
+        );
+        final Game game = new Game(board, traces);
+        addBot(game, new Coordinate(2, 0, 0));
+        game.proceed();
+    }
+
+    @Test(expected = AssertionError.class)
+    public void testFusionFailureByDifferentNld() {
+        final List<Trace> traces = ImmutableList.of(
+                Coordinate.toNldTrace(Trace.Type.FUSIONP, new Coordinate(1, 0, 0)),
+                Coordinate.toNldTrace(Trace.Type.FUSIONS, new Coordinate(0, 1, 0))
+        );
+        final Game game = new Game(board, traces);
+        addBot(game, new Coordinate(1, 0, 0));
+        game.proceed();
+    }
 }

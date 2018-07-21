@@ -13,7 +13,6 @@ public class State {
     private final Board board;
     private final List<Bot> bots;
     private long energy;
-
     private Harmonics harmonics;
 
     public State(
