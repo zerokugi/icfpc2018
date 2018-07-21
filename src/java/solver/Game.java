@@ -21,9 +21,10 @@ public class Game {
     }
 
     public boolean proceed() {
-        if (!state.validate()) return false;
+        Validator.validateGlobal(state);
         state.consumeGlobalCost();
         if (traces.get(finishedTraces).type == Trace.Type.HALT) {
+            Validator.validateHalt(state);
             return false;
         }
         final int botCount = state.getBots().size();

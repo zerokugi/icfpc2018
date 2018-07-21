@@ -13,7 +13,6 @@ public class State {
     private final List<Bot> bots;
     private long energy;
     private Harmonics harmonics;
-    private List<Trace> currentTraces;
 
     public State(
             final Board board,
@@ -56,35 +55,8 @@ public class State {
         return bots;
     }
 
-    public List<Trace> getCurrentTraces() {
-        return currentTraces;
-    }
-
-    public boolean validate() {
-        if (harmonics == Harmonics.LOW) {
-            if (!board.grounded()) {
-                return false;
-            }
-        }
-
-        long idSet = 0;
-        for (final Bot bot : bots) {
-            if ((idSet & (1L << bot.bid)) != 0) {
-                return false;
-            }
-            idSet |= 1L << bot.bid;
-            if (getBoard().get(bot.pos)) {
-                return false;
-            }
-            for (final int seed : bot.seeds) {
-                if ((idSet & (1L << seed)) != 0) {
-                    return false;
-                }
-                idSet |= 1L << seed;
-            }
-        }
-
-        return true;
+    public Harmonics getHarmonics() {
+        return harmonics;
     }
 
     public void flip() {
@@ -102,15 +74,15 @@ public class State {
 
     public void step(final List<Trace> traces) {
         assert bots.size() == traces.size() : "bots and traces are inconsistent numbers.";
-        currentTraces = traces;
         for (int i = 0; i < traces.size(); i++) {
             final Trace trace = traces.get(i);
             bots.get(i).assignTrace(trace);
-//            System.out.printf("trace %s\n", trace.type.name());
+            trace.type.execute(this, bots.get(i), trace, true);
+//            System.out.printf("validate %s\n", trace.type.name());
         }
         for (int i = 0; i < traces.size(); i++) {
             final Trace trace = traces.get(i);
-            trace.type.execute(this, bots.get(i), trace.val0, trace.val1, trace.val2, trace.val3);
+            trace.type.execute(this, bots.get(i), trace, false);
         }
         for (int i = traces.size() - 1; i >= 0; i--) {
             if (bots.get(i).getAssignedTrace().type == Trace.Type.FUSIONS) {
@@ -118,7 +90,6 @@ public class State {
             }
         }
         bots.sort(Comparator.comparingInt(o -> o.bid));
-        currentTraces = null;
     }
 
     enum Harmonics {

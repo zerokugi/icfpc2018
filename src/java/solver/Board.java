@@ -45,13 +45,20 @@ public class Board {
         return get(c.x, c.y, c.z);
     }
 
-    public boolean fill(final int x, final int y, final int z) {
+    public boolean flip(final int x, final int y, final int z, int target) {
         assert (0 <= Math.min(x, Math.min(y, z))) && (Math.max(x, Math.max(y, z)) < R);
         final int pos = getPos(x, y, z);
-        if (((board[pos >> 3] >> (pos & 7)) & 1) == 1) {
+        if (((board[pos >> 3] >> (pos & 7)) & 1) == target) {
             return false;
         }
-        board[pos >> 3] |= 1 << (pos & 7);
+        board[pos >> 3] ^= 1 << (pos & 7);
+        return true;
+    }
+
+    public boolean fill(final int x, final int y, final int z) {
+        if (!flip(x, y, z, 1)) {
+            return false;
+        }
         filledCound ++;
         uniteAdjacents(x, y, z);
         if (y == 0) {

@@ -1,5 +1,7 @@
 package solver;
 
+import com.google.common.collect.Lists;
+
 import java.util.Optional;
 
 public class Trace {
@@ -40,85 +42,159 @@ public class Trace {
         HALT,
         WAIT {
             @Override
-            public void execute(final State state, final Bot targetBot, final Integer v0, final Integer v1, final Integer v2, final Integer v3) {
-
+            public void execute(final State state, final Bot targetBot, final Trace trace, final boolean validate) {
+                if (validate) {
+                    validVolatility(state, targetBot.pos);
+                } else {
+                    unfill(state, targetBot.pos);
+                }
             }
         },
         FLIP {
             @Override
-            public void execute(final State state, final Bot targetBot, final Integer v0, final Integer v1, final Integer v2, final Integer v3) {
+            public void execute(final State state, final Bot targetBot, final Trace trace, final boolean validate) {
 //                System.out.printf("fliped\n");
-                state.flip();
+                if (validate) {
+                    validVolatility(state, targetBot.pos);
+                } else {
+                    unfill(state, targetBot.pos);
+                    state.flip();
+                }
             }
         },
         SMOVE {
             @Override
-            public void execute(final State state, final Bot targetBot, final Integer v0, final Integer v1, final Integer v2, final Integer v3) {
-                targetBot.pos.applyLld(v0, v1);
-//                System.out.printf("moved to (%d, %d, %d)\n", targetBot.pos.x, targetBot.pos.y, targetBot.pos.z);
-                state.addEnergy(2 * Math.abs(v1 - 15));
+            public void execute(final State state, final Bot targetBot, final Trace trace, final boolean validate) {
+                final Coordinate p = targetBot.pos.clone();
+                p.applyLld(trace.val0, trace.val1);
+                if (validate) {
+                    validVolatility(state, targetBot.pos, p);
+                } else {
+                    unfill(state, targetBot.pos, p);
+                    targetBot.pos = p;
+                    state.addEnergy(2 * Math.abs(trace.val1 - 15));
+                }
             }
         },
         LMOVE {
             @Override
-            public void execute(final State state, final Bot targetBot, final Integer v0, final Integer v1, final Integer v2, final Integer v3) {
-                targetBot.pos.applySld(v0, v1);
-                targetBot.pos.applySld(v2, v3);
-//                System.out.printf("moved to (%d, %d, %d)\n", targetBot.pos.x, targetBot.pos.y, targetBot.pos.z);
-                state.addEnergy(2 * (Math.abs(v1 - 5) + 2 + Math.abs(v3 - 5)));
+            public void execute(final State state, final Bot targetBot, final Trace trace, final boolean validate) {
+                final Coordinate p = targetBot.pos.clone();
+                p.applySld(trace.val0, trace.val1);
+                final Coordinate mid = p.clone();
+                p.applySld(trace.val2, trace.val3);
+                if (validate) {
+                    validVolatility(state, targetBot.pos, mid);
+                    unfill(state, mid);
+                    validVolatility(state, mid, p);
+                } else {
+                    unfill(state, targetBot.pos, mid);
+                    validVolatility(state, mid);
+                    unfill(state, mid, p);
+                    targetBot.pos = p;
+                    state.addEnergy(2 * (Math.abs(trace.val1 - 5) + 2 + Math.abs(trace.val3 - 5)));
+                }
             }
         },
         FUSIONP {
             @Override
-            public void execute(final State state, final Bot targetBot, final Integer v0, final Integer v1, final Integer v2, final Integer v3) {
+            public void execute(final State state, final Bot targetBot, final Trace trace, final boolean validate) {
                 final Coordinate p = targetBot.pos.clone();
-                p.applyNld(v0);
+                p.applyNld(trace.val0);
                 final Optional<Bot> secondary = state.getBotByPos(p);
-                assert secondary.isPresent() : "failed to fusionP " + targetBot.pos + " and " + p;
-                targetBot.seeds.add(secondary.get().bid);
-                targetBot.seeds.addAll(secondary.get().seeds);
-                state.addEnergy(-24);
-
+                if (validate) {
+                    assert secondary.isPresent() : "failed to fusionP " + targetBot.pos + " and " + p;
+                    validVolatility(state, targetBot.pos);
+                } else {
+                    unfill(state, targetBot.pos);
+                    targetBot.seeds.add(secondary.get().bid);
+                    targetBot.seeds.addAll(secondary.get().seeds);
+                    state.addEnergy(-24);
+                }
             }
         },
         FUSIONS {
             @Override
-            public void execute(final State state, final Bot targetBot, final Integer v0, final Integer v1, final Integer v2, final Integer v3) {
+            public void execute(final State state, final Bot targetBot, final Trace trace, final boolean validate) {
                 final Coordinate p = targetBot.pos.clone();
-                p.applyNld(v0);
-                final Optional<Bot> secondary = state.getBotByPos(p);
-                assert secondary.isPresent() : "failed to fusionS " + p + " and " + targetBot.pos;
-                p.applyNld(secondary.get().getAssignedTrace().val0);
-                assert targetBot.pos.equals(p) : "fusion is not symmetric " + p + " and " + targetBot.pos;
+                if (validate) {
+                    validVolatility(state, targetBot.pos);
+                    p.applyNld(trace.val0);
+                    final Optional<Bot> secondary = state.getBotByPos(p);
+                    assert secondary.isPresent() : "failed to fusionS " + p + " and " + targetBot.pos;
+                    p.applyNld(secondary.get().getAssignedTrace().val0);
+                    assert targetBot.pos.equals(p) : "fusion is not symmetric " + p + " and " + targetBot.pos;
+                } else {
+                    unfill(state, p);
+                }
             }
         },
         FISSION {
             @Override
-            public void execute(final State state, final Bot targetBot, final Integer v0, final Integer v1, final Integer v2, final Integer v3) {
+            public void execute(final State state, final Bot targetBot, final Trace trace, final boolean validate) {
                 final Coordinate p = targetBot.pos.clone();
-                p.applyNld(v0);
-                final Bot newBot = new Bot(targetBot.seeds.get(0), p, targetBot.seeds.subList(1, v1 + 1));
-                targetBot.seeds = targetBot.seeds.subList(v1 + 1, targetBot.seeds.size());
-                state.getBots().add(newBot);
-                state.addEnergy(24);
+                p.applyNld(trace.val0);
+                if (validate) {
+                    validVolatility(state, targetBot.pos);
+                    validVolatility(state, p);
+                } else {
+                    unfill(state, targetBot.pos);
+                    unfill(state, p);
+                    final Bot newBot = new Bot(targetBot.seeds.get(0), p, Lists.newArrayList(targetBot.seeds.subList(1, trace.val1 + 1)));
+                    targetBot.seeds = targetBot.seeds.subList(trace.val1 + 1, targetBot.seeds.size());
+                    state.getBots().add(newBot);
+                    state.addEnergy(24);
+                }
             }
         },
         FILL {
             @Override
-            public void execute(final State state, final Bot targetBot, final Integer v0, final Integer v1, final Integer v2, final Integer v3) {
+            public void execute(final State state, final Bot targetBot, final Trace trace, final boolean validate) {
                 final Coordinate p = targetBot.pos.clone();
-                p.applyNld(v0);
+                p.applyNld(trace.val0);
 //                System.out.printf("filled (%d, %d, %d)\n", p.x, p.y, p.z);
-                if (state.getBoard().fill(p)) {
-                    state.addEnergy(12);
+                if (validate) {
+                    validVolatility(state, targetBot.pos);
+                    validVolatility(state, p);
                 } else {
-                    state.addEnergy(6);
+                    unfill(state, targetBot.pos);
+                    unfill(state, p);
+                    state.getBoard().fill(p);
+                    state.addEnergy(12);
                 }
             }
         };
 
-        public void execute(final State state, final Bot targetBot, final Integer v0, final Integer v1, final Integer v2, final Integer v3) {
+        public void execute(final State state, final Bot targetBot, final Trace trace, final boolean validate) {
             throw new UnsupportedOperationException();
+        }
+
+        public void validVolatility(final State state, final Coordinate p) {
+            assert state.getBoard().flip(p.x, p.y, p.z, 1) : "Volatile confliction: " + p.toString();
+        }
+
+        public void validVolatility(final State state, final Coordinate p1, final Coordinate p2) {
+            for (int x = Math.min(p1.x, p2.x); x < Math.max(p1.x, p2.x); x ++) {
+                for (int y = Math.min(p1.y, p2.y); y < Math.max(p1.y, p2.y); y ++) {
+                    for (int z = Math.min(p1.z, p2.z); z < Math.max(p1.z, p2.z); z ++) {
+                        validVolatility(state, new Coordinate(x, y, z));
+                    }
+                }
+            }
+        }
+
+        public void unfill(final State state, final Coordinate p) {
+            assert state.getBoard().flip(p.x, p.y, p.z, 0) : "Failed to unfill: " + p.toString();
+        }
+
+        public void unfill(final State state, final Coordinate p1, final Coordinate p2) {
+            for (int x = Math.min(p1.x, p2.x); x < Math.max(p1.x, p2.x); x ++) {
+                for (int y = Math.min(p1.y, p2.y); y < Math.max(p1.y, p2.y); y ++) {
+                    for (int z = Math.min(p1.z, p2.z); z < Math.max(p1.z, p2.z); z ++) {
+                        unfill(state, new Coordinate(x, y, z));
+                    }
+                }
+            }
         }
     }
 }

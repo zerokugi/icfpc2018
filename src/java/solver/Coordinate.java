@@ -1,5 +1,7 @@
 package solver;
 
+import com.google.common.base.Objects;
+
 public class Coordinate {
     public static final int[][] ADJACENTS = {
             {1, 0, 0},
@@ -52,5 +54,29 @@ public class Coordinate {
 
     public Coordinate clone() {
         return new Coordinate(x, y, z);
+    }
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        final Coordinate that = (Coordinate) o;
+        return x == that.x &&
+                y == that.y &&
+                z == that.z;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(x, y, z);
+    }
+
+    @Override
+    public String toString() {
+        return String.format("(%d, %d, %d)", x, y, z);
     }
 }

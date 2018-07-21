@@ -3,7 +3,7 @@ package solver;
 import java.util.List;
 
 public class Bot {
-    public final Coordinate pos;
+    public Coordinate pos;
     public int bid;
     public List<Integer> seeds;
     public Trace assignedTrace;
