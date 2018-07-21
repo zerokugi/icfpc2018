@@ -21,7 +21,7 @@ public class Game {
     }
 
     public boolean proceed() {
-        //if (!state.validate()) return false;
+        if (!state.validate()) return false;
         state.consumeGlobalCost();
         if (traces.get(finishedTraces).type == Trace.Type.HALT) {
             return false;

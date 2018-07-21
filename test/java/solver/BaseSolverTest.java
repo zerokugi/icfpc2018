@@ -115,7 +115,7 @@ public class BaseSolverTest {
                 final Date date = new Date(summary.timestamp.longValue());
                 final ScoreSummary oldSummary = bestScoreMap.get(path);
                 final ScoreSummary defaultSummary = defaultScore.get(path);
-
+                final double ratio = 1.0 * summary.score.longValue() / defaultSummary.score.longValue();
                 if (!Objects.equals(summary.timestamp, oldSummary.timestamp)) { // if updated
                     final String s = String.format(" | %s(%s) -> %s(%s)",
                             oldSummary.score, new Date(oldSummary.timestamp.longValue()),
@@ -125,16 +125,16 @@ public class BaseSolverTest {
                     printer.print(path + ": ");
                     printer.setAttribute(Ansi.Attribute.BOLD);
 
-                    printer.print(String.format("%s (%s)",
-                            summary.score.longValue() / defaultSummary.score.longValue(),
+                    printer.print(String.format("%4f (%s)",
+                            ratio,
                             summary.score.longValue() - oldSummary.score.longValue())
                     );
                     printer.setAttribute(Ansi.Attribute.NONE);
                     printer.println(s);
                 } else {
                     printer.clear();
-                    final String s = String.format("%s | %s(%s)",
-                            summary.score.longValue() / defaultSummary.score.longValue(),
+                    final String s = String.format("%4f | %s(%s)",
+                            ratio,
                             summary.score,
                             date
                     );
