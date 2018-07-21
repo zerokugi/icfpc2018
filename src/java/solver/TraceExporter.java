@@ -41,13 +41,13 @@ public class TraceExporter {
                     rawTraces.add((trace.val1 << 4) + (trace.val3));
                     break;
                 case FUSIONP:
-                    rawTraces.add((trace.val0) << 3 + 0b111);
+                    rawTraces.add(((trace.val0) << 3) + 0b111);
                     break;
                 case FUSIONS:
-                    rawTraces.add((trace.val0) << 3 + 0b110);
+                    rawTraces.add(((trace.val0) << 3) + 0b110);
                     break;
                 case FISSION:
-                    rawTraces.add((trace.val0) << 3 + 0b101);
+                    rawTraces.add(((trace.val0) << 3) + 0b101);
                     rawTraces.add(trace.val1);
                     break;
                 case FILL:

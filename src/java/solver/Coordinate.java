@@ -12,6 +12,26 @@ public class Coordinate {
             {0, 0, 1},
             {0, 0, -1},
     };
+    public static final int[][] NLD = {
+            {1, 0, 0},
+            {0, 1, 0},
+            {0, -1, 0},
+            {0, 0, 1},
+            {0, 0, -1},
+            {-1, 0, 0},
+            {1, 1, 0},
+            {1, 0, 1},
+            {1, -1, 0},
+            {1, 0, -1},
+            {0, 1, 1},
+            {0, -1, 1},
+            {0, 1, -1},
+            {0, -1, -1},
+            {-1, 1, 0},
+            {-1, 0, 1},
+            {-1, -1, 0},
+            {-1, 0, -1},
+    };
 
     public int x;
     public int y;
@@ -55,6 +75,18 @@ public class Coordinate {
                 (p2.x == 0) ? ((p2.y == 0) ? 3 : 2) : 1,
                 p2.x + p2.y + p2.z + 5
         );
+    }
+
+    public static Coordinate difference(final Coordinate s, final Coordinate t) {
+        return new Coordinate(t.x - s.x, t.y - s.y, t.z - s.z);
+    }
+
+    public int mlen() {
+        return Math.abs(x) + Math.abs(y) + Math.abs(z);
+    }
+
+    public int clen() {
+        return Ints.max(Math.abs(x), Math.abs(y), Math.abs(z));
     }
 
     public void applyLld(final int a, final int i) {

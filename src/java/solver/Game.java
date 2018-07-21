@@ -2,8 +2,6 @@ package solver;
 
 import java.util.List;
 
-import static solver.DebugUtil.outputBoard;
-
 public class Game {
     private final State state;
     private final Board goal;
@@ -36,7 +34,7 @@ public class Game {
     public boolean validateSuccess() {
         assert (traces.get(finishedTraces).type == Trace.Type.HALT) : "game not halted";
         assert ((finishedTraces + 1) == traces.size()) : "traces remains";
-        outputBoard(state.getBoard());
+//        outputBoard(state.getBoard());
 //        for(int i=0;i<state.getBoard().getBoard().length;i++) {
 //            if (state.getBoard().getBoard()[i] != goal.getBoard()[i]) {
 //                System.out.printf("different %d: %d %d\n", i, state.getBoard().getBoard()[i], goal.getBoard()[i]);

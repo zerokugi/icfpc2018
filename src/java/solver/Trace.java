@@ -1,10 +1,7 @@
 package solver;
 
 import com.google.common.collect.Lists;
-import com.google.common.primitives.Bytes;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 public class Trace {
@@ -71,6 +68,7 @@ public class Trace {
                 final Coordinate p = targetBot.pos.clone();
                 p.applyLld(trace.val0, trace.val1);
                 if (validate) {
+//                    System.out.printf("validate smove (%d, %d, %d)\n", p.x, p.y, p.z);
                     assert state.getBoard().in(p)
                             : "can not smove outside of the board " + p;
                     validVolatility(state, targetBot.pos, p);
@@ -89,6 +87,7 @@ public class Trace {
                 final Coordinate mid = p.clone();
                 p.applySld(trace.val2, trace.val3);
                 if (validate) {
+//                    System.out.printf("validate lmove (%d, %d, %d)\n", p.x, p.y, p.z);
                     assert state.getBoard().in(mid)
                             : "can not LMOVE(1) to outside of the board " + mid;
                     assert state.getBoard().in(p)
@@ -167,8 +166,8 @@ public class Trace {
             public void execute(final State state, final Bot targetBot, final Trace trace, final boolean validate) {
                 final Coordinate p = targetBot.pos.clone();
                 p.applyNld(trace.val0);
-//                System.out.printf("filled (%d, %d, %d)\n", p.x, p.y, p.z);
                 if (validate) {
+//                    System.out.printf("validate fill (%d, %d, %d)\n", p.x, p.y, p.z);
                     validVolatility(state, targetBot.pos);
                     validVolatility(state, p);
                     final int R = state.getBoard().getR();

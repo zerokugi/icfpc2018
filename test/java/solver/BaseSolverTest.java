@@ -9,6 +9,7 @@ import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
+import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -19,45 +20,23 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 @Ignore
 @RunWith(Parameterized.class)
 public class BaseSolverTest {
-    private static ObjectMapper MAPPER = new ObjectMapper();
+    private static final ObjectMapper MAPPER = new ObjectMapper();
+    private static final OkHttpClient HTTP_CLIENT = new OkHttpClient();
     private static Map<String, ScoreSummary> scoreMap = new LinkedHashMap<>();
     private static Map<String, ScoreSummary> bestScoreMap = new LinkedHashMap<>();
-
-    private static OkHttpClient HTTP_CLIENT = new OkHttpClient();
-
-    public static class ScoreSummary {
-        public Number score;
-        public Number timestamp;
-        @JsonIgnore
-        public List<Trace> traces;
-
-        public ScoreSummary(Number score, Number timestamp) {
-            this.score = score;
-            this.timestamp = timestamp;
-        }
-
-        public ScoreSummary() {
-        }
-    }
-
-    static {
-        try {
-            final FileInputStream input = new FileInputStream("dist/bestTraces/summary.json");
-            bestScoreMap = MAPPER.readValue(input, new TypeReference<LinkedHashMap<String, ScoreSummary>>() {
-            });
-            scoreMap = new LinkedHashMap<>(bestScoreMap);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
     public BaseSolver solver;
     @Parameterized.Parameter // first data value (0) is default
     public String path;
@@ -66,7 +45,7 @@ public class BaseSolverTest {
 
     @Parameterized.Parameters(name = "{0}")
     public static Collection<Object[]> data() {
-        return IntStream.range(1, 20)//187)
+        return IntStream.range(1, 187)
                 .mapToObj(i -> new Object[]{String.format("problemsL/LA%03d_tgt.mdl", i), String.format("LA%03d", i)})
                 .collect(Collectors.toList());
     }
@@ -81,35 +60,6 @@ public class BaseSolverTest {
         assert readBytes == input.read(board);
         input.close();
         return new Board(R, board, path);
-    }
-
-    @Test
-    public void testTest1() throws IOException {
-        final Board goal = getState(path);
-        final List<Trace> traces = solver.solve(goal);
-        assert (0 < goal.getR()) && (goal.getR() <= 250);
-        assert traces != null;
-//        final String types = traces.stream().map(trace -> trace.type.name()).distinct().collect(Collectors.joining());
-//        System.out.println(types);
-        final Game game = new Game(goal, traces);
-        while (game.proceed()) {
-//            System.out.printf("%d\n", game.getState().getEnergy());
-        }
-        assert game.validateSuccess() : "game not success";
-        System.out.printf("%s: %d\n", goal.getPath(), game.getState().getEnergy());
-
-        final ScoreSummary scoreSummary = new ScoreSummary(game.getState().getEnergy(), System.currentTimeMillis());
-        scoreSummary.traces = traces;
-        scoreMap.put(path, scoreSummary);
-    }
-
-    //@After
-    public void after() {
-        System.out.println(scoreMap.get(path).traces.size() + " commands");
-        TraceExporter.export("dist/traces", testcase, scoreMap.get(path).traces);
-        if (bestScoreMap.get(path) == null || !Objects.equals(scoreMap.get(path).timestamp, bestScoreMap.get(path).timestamp)) {
-            TraceExporter.export("dist/bestTraces", testcase, scoreMap.get(path).traces);
-        }
     }
 
     @AfterClass
@@ -234,6 +184,61 @@ public class BaseSolverTest {
             HTTP_CLIENT.newCall(request).execute();
         } catch (IOException e) {
             System.err.println("Failed to post message.");
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void testTest1() throws IOException {
+        final Board goal = getState(path);
+        final List<Trace> traces = solver.solve(goal);
+        assert (0 < goal.getR()) && (goal.getR() <= 250);
+        assert traces != null;
+//        final String types = traces.stream().map(trace -> trace.type.name()).distinct().collect(Collectors.joining());
+//        System.out.println(types);
+        final Game game = new Game(goal, traces);
+        while (game.proceed()) {
+//            System.out.printf("%d\n", game.getState().getEnergy());
+        }
+        assert game.validateSuccess() : "game not success";
+        System.out.printf("%s: %d\n", goal.getPath(), game.getState().getEnergy());
+
+        final ScoreSummary scoreSummary = new ScoreSummary(game.getState().getEnergy(), System.currentTimeMillis());
+        scoreSummary.traces = traces;
+        scoreMap.put(path, scoreSummary);
+    }
+
+    @After
+    public void after() {
+        System.out.println(scoreMap.get(path).traces.size() + " commands");
+        TraceExporter.export("dist/traces", testcase, scoreMap.get(path).traces);
+        if (bestScoreMap.get(path) == null || !Objects.equals(scoreMap.get(path).timestamp, bestScoreMap.get(path).timestamp)) {
+            TraceExporter.export("dist/bestTraces", testcase, scoreMap.get(path).traces);
+        }
+    }
+
+    public static class ScoreSummary {
+        public Number score;
+        public Number timestamp;
+        @JsonIgnore
+        public List<Trace> traces;
+
+        public ScoreSummary(Number score, Number timestamp) {
+            this.score = score;
+            this.timestamp = timestamp;
+        }
+
+        public ScoreSummary() {
+        }
+    }
+
+    static {
+        try {
+            final FileInputStream input = new FileInputStream("dist/bestTraces/summary.json");
+            bestScoreMap = MAPPER.readValue(input, new TypeReference<LinkedHashMap<String, ScoreSummary>>() {
+            });
+            scoreMap = new LinkedHashMap<>(bestScoreMap);
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

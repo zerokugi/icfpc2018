@@ -31,7 +31,7 @@ public class Board {
         return R;
     }
 
-    private int getPos(final int x, final int y, final int z) {
+    public int getPos(final int x, final int y, final int z) {
         return (x * R * R) + (y * R) + z;
     }
 
