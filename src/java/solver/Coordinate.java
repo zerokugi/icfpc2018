@@ -1,6 +1,15 @@
 package solver;
 
 public class Coordinate {
+    public static final int[][] ADJACENTS = {
+            {1, 0, 0},
+            {-1, 0, 0},
+            {0, 1, 0},
+            {0, -1, 0},
+            {0, 0, 1},
+            {0, 0, -1},
+    };
+
     public int x;
     public int y;
     public int z;

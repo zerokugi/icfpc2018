@@ -2,19 +2,24 @@ package solver;
 
 import com.google.common.base.Objects;
 
+import static solver.Coordinate.ADJACENTS;
+
 public class Board {
     private final int R;
     private final byte[] board;
     private final String path;
+    private final UnionFind unionFind;
+    private int filledCound = 0;
 
     public Board(final int r, final byte[] board, final String path) {
         R = r;
         this.board = board;
         this.path = path;
+        unionFind = new UnionFind((r * r * r) + 1);
     }
 
     public static Board getInitialBoard(final int R) {
-        int boardSize = (R * R * R + 7) / 8;
+        final int boardSize = ((R * R * R) + 7) / 8;
         return new Board(R, new byte[boardSize], "");
     }
 
@@ -43,6 +48,11 @@ public class Board {
             return false;
         }
         board[pos >> 3] |= 1 << (pos & 7);
+        filledCound ++;
+        uniteAdjacents(x, y, z);
+        if (y == 0) {
+            unionFind.unite(getPos(x, y, z), R * R * R);
+        }
         return true;
     }
 
@@ -55,8 +65,21 @@ public class Board {
     }
 
     public boolean grounded() {
-        // TODO
-        return true;
+        return unionFind.size(R * R * R) == (filledCound + 1);
+    }
+
+    private void uniteAdjacents(final int x, final int y, final int z) {
+        for (final int[] d : ADJACENTS) {
+            if (in(x + d[0]) && in(y + d[1]) && in(z + d[2])) {
+                if (get(x + d[0], y + d[1], z + d[2])) {
+                    unionFind.unite(getPos(x, y, z), getPos(x + d[0], y + d[1], z + d[2]));
+                }
+            }
+        }
+    }
+
+    private boolean in(final int x) {
+        return (0 <= x) && (x < R);
     }
 
     @Override
