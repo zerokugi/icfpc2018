@@ -1,6 +1,7 @@
 package solver.dflt;
 
 import com.google.common.annotations.VisibleForTesting;
+import jdk.nashorn.internal.ir.annotations.Ignore;
 import solver.BaseSolver;
 import solver.Board;
 import solver.Trace;
@@ -11,6 +12,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+@Ignore
 public class DefaultSolver extends BaseSolver {
 
     @VisibleForTesting

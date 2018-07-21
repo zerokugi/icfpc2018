@@ -99,7 +99,8 @@ public class BaseSolverTest {
                 final Date date = new Date(summary.timestamp.longValue());
                 final ScoreSummary oldSummary = bestScoreMap.get(path);
                 final ScoreSummary defaultSummary = defaultScore.get(path);
-                final double ratio = 1.0 * summary.score.longValue() / defaultSummary.score.longValue();
+                final double ratio = (1.0 * summary.score.longValue()) / defaultSummary.score.longValue();
+                final double oldRatio = (1.0 * oldSummary.score.longValue()) / defaultSummary.score.longValue();
                 if (ratio < 1) { // if good
                     printer.setForegroundColor(Ansi.FColor.GREEN);
                     final String s;
@@ -112,7 +113,7 @@ public class BaseSolverTest {
                         t = String.format(
                                 "%4f (%s)",
                                 ratio,
-                                summary.score.longValue() - oldSummary.score.longValue()
+                                ratio - oldRatio
                         );
                         printer.setAttribute(Ansi.Attribute.BOLD);
                         updated.add(String.format("%s: *%s* %s", path, t, s));
@@ -145,13 +146,11 @@ public class BaseSolverTest {
                 }
                 printer.clear();
                 printer.setForegroundColor(Ansi.FColor.GREEN);
-                if (!updated.isEmpty()) {
-                    printer.println(updated.size() + "updated!");
-                }
                 printer.clear();
             }
 
             if (!updated.isEmpty()) {
+                printer.println(updated.size() + "updated!");
                 final StringBuilder sb = new StringBuilder();
                 if (updated.size() == 1) {
                     sb.append(String.format("Updated 1 new trace!"));
@@ -211,7 +210,7 @@ public class BaseSolverTest {
     @After
     public void after() {
         System.out.println(scoreMap.get(path).traces.size() + " commands");
-        TraceExporter.export("dist/traces", testcase, scoreMap.get(path).traces);
+//        TraceExporter.export("dist/traces", testcase, scoreMap.get(path).traces);
         if (bestScoreMap.get(path) == null || scoreMap.get(path).score.longValue() < bestScoreMap.get(path).score.longValue()) {
             TraceExporter.export("dist/bestTraces", testcase, scoreMap.get(path).traces);
         }

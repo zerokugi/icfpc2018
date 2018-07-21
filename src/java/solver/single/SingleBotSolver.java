@@ -16,6 +16,8 @@ import static solver.Coordinate.toSmove;
 import static solver.Trace.Type.FILL;
 import static solver.Trace.Type.FLIP;
 import static solver.Trace.Type.HALT;
+import static solver.Trace.Type.LMOVE;
+import static solver.Trace.Type.SMOVE;
 
 public class SingleBotSolver extends BaseSolver {
 
@@ -60,7 +62,7 @@ public class SingleBotSolver extends BaseSolver {
         traces.add(new Trace(HALT));
         return traces;
     }
-
+    boolean isFirstFill = true;
     private void dfs(final Coordinate p, final Coordinate parent) {
         visit(p);
         traces.add(getOptimalMove(parent, p));
@@ -70,7 +72,18 @@ public class SingleBotSolver extends BaseSolver {
                 dfs(q, p);
             }
         }
-        traces.add(getOptimalMove(p, parent));
+        if (isFirstFill) {
+            isFirstFill = false;
+            traces.clear();
+            traces.addAll(go(new Coordinate(0, 0, 0), parent));
+            traces.add(new Trace(FLIP));
+        } else {
+            if ((traces.get(traces.size() - 1).type == SMOVE) || (traces.get(traces.size() - 1).type == LMOVE)) {
+                traces.remove(traces.size() - 1);
+            } else {
+                traces.add(getOptimalMove(p, parent));
+            }
+        }
         traces.add(Coordinate.toNldTrace(FILL, difference(parent, p)));
     }
 
