@@ -1,5 +1,6 @@
 package solver;
 
+import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.Lists;
 
 import java.util.Comparator;
@@ -12,6 +13,7 @@ public class State {
     private final Board board;
     private final List<Bot> bots;
     private long energy;
+
     private Harmonics harmonics;
 
     public State(
@@ -92,7 +94,7 @@ public class State {
         bots.sort(Comparator.comparingInt(o -> o.bid));
     }
 
-    enum Harmonics {
+    public enum Harmonics {
         LOW,
         HIGH
     }

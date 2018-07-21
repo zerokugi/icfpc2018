@@ -38,6 +38,14 @@ public class Trace {
         this(type, val0, val1, null, null);
     }
 
+    public static Trace getSmoveX(final int d) {
+        return new Trace(Trace.Type.SMOVE, 1, d + 15);
+    }
+
+    public static Trace getWait() {
+        return new Trace(Type.WAIT);
+    }
+
     public enum Type {
         HALT,
         WAIT {

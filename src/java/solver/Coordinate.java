@@ -2,6 +2,8 @@ package solver;
 
 import com.google.common.base.Objects;
 
+import com.google.common.primitives.Ints;
+
 public class Coordinate {
     public static final int[][] ADJACENTS = {
             {1, 0, 0},
@@ -50,6 +52,39 @@ public class Coordinate {
         x += (a / 9) - 1;
         y += ((a / 3) % 3) - 1;
         z += (a % 3) - 1;
+    }
+
+    public static Trace toNldTrace(final Trace.Type type, final Coordinate p, final Integer val0) {
+        assert(Math.abs(p.x) + Math.abs(p.y) + Math.abs(p.z) <= 2);
+        assert(Ints.max(Math.abs(p.x) + Math.abs(p.y) + Math.abs(p.z)) <= 1);
+        return new Trace(type, 9 * (p.x + 1) + 3 * (p.y + 1) + p.z + 1, val0);
+    }
+    public static Trace toNldTrace(final Trace.Type type, final Coordinate p) {
+        return toNldTrace(type, p, null);
+    }
+
+    public static Trace toSmove(final Coordinate p) {
+        assert (Ints.max(Math.abs(p.x), Math.abs(p.y), Math.abs(p.z)) == Math.abs(p.x) + Math.abs(p.y) + Math.abs(p.z));
+        assert (Math.abs(p.x) + Math.abs(p.y) + Math.abs(p.z) <= 15);
+        return new Trace(
+                Trace.Type.SMOVE,
+                (p.x != 0) ? 1 : (p.y != 0) ? 2 : 3,
+                p.x + p.y + p.z + 15
+        );
+    }
+
+    public static Trace toLmove(final Coordinate p1, final Coordinate p2) {
+        assert (Ints.max(Math.abs(p1.x), Math.abs(p1.y), Math.abs(p1.z)) == Math.abs(p1.x) + Math.abs(p1.y) + Math.abs(p1.z));
+        assert (Math.abs(p1.x) + Math.abs(p1.y) + Math.abs(p1.z) <= 15);
+        assert (Ints.max(Math.abs(p2.x), Math.abs(p2.y), Math.abs(p2.z)) == Math.abs(p2.x) + Math.abs(p2.y) + Math.abs(p2.z));
+        assert (Math.abs(p2.x) + Math.abs(p2.y) + Math.abs(p2.z) <= 15);
+        return new Trace(
+                Trace.Type.LMOVE,
+                (p1.x != 0) ? 1 : (p1.y != 0) ? 2 : 3,
+                p1.x + p1.y + p1.z + 5,
+                (p2.x != 0) ? 1 : (p2.y != 0) ? 2 : 3,
+                p2.x + p2.y + p2.z + 5
+        );
     }
 
     public Coordinate clone() {
