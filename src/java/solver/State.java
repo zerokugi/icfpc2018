@@ -59,7 +59,7 @@ public class State {
         return harmonics;
     }
 
-    public void flip() {
+    public void flipHarmonics() {
         harmonics = (harmonics == Harmonics.LOW) ? Harmonics.HIGH : Harmonics.LOW;
     }
 

@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import solver.BaseSolver;
 import solver.Board;
 import solver.Coordinate;
+import solver.State;
 import solver.Trace;
 
 import java.util.ArrayList;
@@ -22,10 +23,12 @@ import static solver.Trace.Type.SMOVE;
 public class SingleBotSolver extends BaseSolver {
 
     private final List<Coordinate> fullVoxels = Lists.newArrayList();
+    boolean isFirstFill = true;
     private Board finalBoard;
     private int R;
     private byte[] vis;
     private List<Trace> traces;
+    private State state;
 
     public static Trace getOptimalMove(final Coordinate s, final Coordinate t) {
         final Coordinate d = new Coordinate(t.x - s.x, t.y - s.y, t.z - s.z);
@@ -51,32 +54,36 @@ public class SingleBotSolver extends BaseSolver {
         R = finalBoard.getR();
         vis = new byte[finalBoard.getBoard().length];
         this.finalBoard = finalBoard;
+        state = State.getInitialState(R);
+
         final Coordinate start = getNearestPoint();
         final Coordinate nextToStart = new Coordinate(start.x - 1, start.y, start.z - 1);
 
         traces.addAll(go(new Coordinate(0, 0, 0), nextToStart));
-        traces.add(new Trace(FLIP));
         dfs(start, nextToStart);
-        traces.add(new Trace(FLIP));
         traces.addAll(go(nextToStart, new Coordinate(0, 0, 0)));
         traces.add(new Trace(HALT));
         return traces;
     }
-    boolean isFirstFill = true;
+
     private void dfs(final Coordinate p, final Coordinate parent) {
         visit(p);
         traces.add(getOptimalMove(parent, p));
+        final List<Coordinate> candidates = new ArrayList<>();
         for (final int[] d : ADJACENTS) {
             final Coordinate q = new Coordinate(p.x + d[0], p.y + d[1], p.z + d[2]);
             if (finalBoard.in(q) && !visited(q) && finalBoard.get(q) && !q.equals(parent)) {
-                dfs(q, p);
+                candidates.add(q);
+                visit(q);
             }
+        }
+        for (final Coordinate q : candidates) {
+            dfs(q, p);
         }
         if (isFirstFill) {
             isFirstFill = false;
             traces.clear();
             traces.addAll(go(new Coordinate(0, 0, 0), parent));
-            traces.add(new Trace(FLIP));
         } else {
             if ((traces.get(traces.size() - 1).type == SMOVE) || (traces.get(traces.size() - 1).type == LMOVE)) {
                 traces.remove(traces.size() - 1);
@@ -84,7 +91,24 @@ public class SingleBotSolver extends BaseSolver {
                 traces.add(getOptimalMove(p, parent));
             }
         }
+        state.getBoard().fill(p);
+        if (!state.getBoard().grounded() && (state.getHarmonics() == State.Harmonics.LOW)) {
+            state.flipHarmonics();
+            tryFlip();
+        }
         traces.add(Coordinate.toNldTrace(FILL, difference(parent, p)));
+        if (state.getBoard().grounded() && (state.getHarmonics() == State.Harmonics.HIGH)) {
+            state.flipHarmonics();
+            tryFlip();
+        }
+    }
+
+    void tryFlip() {
+        if (traces.get(traces.size() - 1).type == FLIP) {
+            traces.remove(traces.size() - 1);
+        } else {
+            traces.add(new Trace(FLIP));
+        }
     }
 
     private List<Trace> go(final Coordinate s, final Coordinate t) {

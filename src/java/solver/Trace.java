@@ -58,7 +58,7 @@ public class Trace {
                     validVolatility(state, targetBot.pos);
                 } else {
                     unfill(state, targetBot.pos);
-                    state.flip();
+                    state.flipHarmonics();
                 }
             }
         },

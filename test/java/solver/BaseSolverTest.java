@@ -26,7 +26,6 @@ import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -111,7 +110,7 @@ public class BaseSolverTest {
                                 summary.score, date
                         );
                         t = String.format(
-                                "%4f (%s)",
+                                "%4f (%4f)",
                                 ratio,
                                 ratio - oldRatio
                         );
@@ -163,7 +162,6 @@ public class BaseSolverTest {
                 }
                 sendSlack(sb.toString());
             }
-
         } catch (IOException e) {
             e.printStackTrace();
         }
