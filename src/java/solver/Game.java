@@ -11,7 +11,7 @@ public class Game {
     private int finishedTraces = 0;
 
     public Game(final Board goal, final List<Trace> traces) {
-        state = new State(Board.getInitialBoard(goal.getR()));
+        state = State.getInitialState(goal.getR());
         this.goal = goal;
         this.traces = traces;
     }

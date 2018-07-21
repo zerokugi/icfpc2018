@@ -32,6 +32,18 @@ public class Coordinate {
         }
     }
 
+    public void applySld(final int a, final int i) {
+        if (a == 1) {
+            x += i - 5;
+        }
+        if (a == 2) {
+            y += i - 5;
+        }
+        if (a == 3) {
+            z += i - 5;
+        }
+    }
+
     public void applyNld(final int a) {
         x += (a / 9) - 1;
         y += ((a / 3) % 3) - 1;

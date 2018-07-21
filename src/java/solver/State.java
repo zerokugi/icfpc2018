@@ -1,25 +1,43 @@
 package solver;
 
-import com.google.common.collect.Sets;
+import com.google.common.collect.Lists;
 
-import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class State {
     private final Board board;
     private final List<Bot> bots;
     private long energy;
     private Harmonics harmonics;
+    private List<Trace> currentTraces;
 
-    private static HashSet<Integer> idSet = new HashSet<>();
-    private static HashSet<Integer> seedIdSet = new HashSet<>();
-
-    public State(final Board board) {
+    public State(
+            final Board board,
+            final List<Bot> bots,
+            final long energy,
+            final Harmonics harmonics
+    ) {
         this.board = board;
-        bots = new ArrayList<>();
-        bots.add(new Bot());
-        harmonics = Harmonics.LOW;
+        this.bots = bots;
+        this.energy = energy;
+        this.harmonics = harmonics;
+    }
+
+    public static State getInitialState(final int R) {
+        return new State(
+                Board.getInitialBoard(R),
+                Lists.newArrayList(new Bot(
+                        1,
+                        new Coordinate(0, 0, 0),
+                        IntStream.rangeClosed(2, 20).boxed().collect(Collectors.toList())
+                )),
+                0,
+                Harmonics.LOW
+        );
     }
 
     public long getEnergy() {
@@ -38,6 +56,10 @@ public class State {
         return bots;
     }
 
+    public List<Trace> getCurrentTraces() {
+        return currentTraces;
+    }
+
     public boolean validate() {
         if (harmonics == Harmonics.LOW) {
             if (!board.grounded()) {
@@ -45,24 +67,21 @@ public class State {
             }
         }
 
-        idSet.clear();
+        long idSet = 0;
         for (final Bot bot : bots) {
-            if (!idSet.add(bot.bid)) {
+            if ((idSet & (1L << bot.bid)) != 0) {
                 return false;
             }
+            idSet |= 1L << bot.bid;
             if (getBoard().get(bot.pos)) {
                 return false;
             }
-            seedIdSet.clear();
             for (final int seed : bot.seeds) {
-                if (!seedIdSet.add(seed)) {
+                if ((idSet & (1L << seed)) != 0) {
                     return false;
                 }
+                idSet |= 1L << seed;
             }
-        }
-
-        if (Sets.intersection(idSet, seedIdSet).size() > 0) {
-            return false;
         }
 
         return true;
@@ -77,13 +96,29 @@ public class State {
         energy += bots.size() * 20;
     }
 
+    public Optional<Bot> getBotByPos(final Coordinate pos) {
+        return bots.stream().filter(bot -> pos.equals(bot.pos)).findAny();
+    }
+
     public void step(final List<Trace> traces) {
         assert bots.size() == traces.size() : "bots and traces are inconsistent numbers.";
-        for (int i = 0; i < bots.size(); i++) {
+        currentTraces = traces;
+        for (int i = 0; i < traces.size(); i++) {
             final Trace trace = traces.get(i);
-            trace.type.execute(this, i, trace.val0, trace.val1, trace.val2, trace.val3);
+            bots.get(i).assignTrace(trace);
+//            System.out.printf("trace %s\n", trace.type.name());
         }
-        // TODO: arrange bots
+        for (int i = 0; i < traces.size(); i++) {
+            final Trace trace = traces.get(i);
+            trace.type.execute(this, bots.get(i), trace.val0, trace.val1, trace.val2, trace.val3);
+        }
+        for (int i = traces.size() - 1; i >= 0; i--) {
+            if (bots.get(i).getAssignedTrace().type == Trace.Type.FUSIONS) {
+                bots.remove(i);
+            }
+        }
+        bots.sort(Comparator.comparingInt(o -> o.bid));
+        currentTraces = null;
     }
 
     enum Harmonics {
