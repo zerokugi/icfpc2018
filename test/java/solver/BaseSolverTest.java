@@ -212,7 +212,7 @@ public class BaseSolverTest {
     public void after() {
         System.out.println(scoreMap.get(path).traces.size() + " commands");
         TraceExporter.export("dist/traces", testcase, scoreMap.get(path).traces);
-        if (bestScoreMap.get(path) == null || !Objects.equals(scoreMap.get(path).timestamp, bestScoreMap.get(path).timestamp)) {
+        if (bestScoreMap.get(path) == null || scoreMap.get(path).score.longValue() < bestScoreMap.get(path).score.longValue()) {
             TraceExporter.export("dist/bestTraces", testcase, scoreMap.get(path).traces);
         }
     }
