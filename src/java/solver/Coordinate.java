@@ -5,13 +5,23 @@ import com.google.common.primitives.Ints;
 
 public class Coordinate {
     public static final int[][] ADJACENTS = {
+            {0, -1, 0},
             {0, 1, 0},
             {1, 0, 0},
             {0, 0, 1},
             {-1, 0, 0},
             {0, 0, -1},
-            {0, -1, 0},
     };
+
+
+    public static final int[][] ADJACENTS_NOUP = {
+            {0, -1, 0},
+            {1, 0, 0},
+            {0, 0, 1},
+            {-1, 0, 0},
+            {0, 0, -1},
+    };
+
     public static final int[][] NLD = {
             {1, 0, 0},
             {0, 1, 0},

@@ -35,6 +35,14 @@ public class Board {
         return (x * R * R) + (y * R) + z;
     }
 
+    public int getFilledCound() {
+        return filledCound;
+    }
+
+    public int connectedComponents(int x, int y, int z) {
+        return unionFind.size(getPos(x, y, z));
+    }
+
     public boolean get(final int x, final int y, final int z) {
         assert (0 <= Math.min(x, Math.min(y, z))) && (Math.max(x, Math.max(y, z)) < R);
         final int pos = getPos(x, y, z);

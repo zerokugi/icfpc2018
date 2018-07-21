@@ -6,11 +6,13 @@ import solver.Board;
 import solver.Coordinate;
 import solver.State;
 import solver.Trace;
+import solver.UnionFind;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static solver.Coordinate.ADJACENTS;
+import static solver.Coordinate.ADJACENTS_NOUP;
 import static solver.Coordinate.difference;
 import static solver.Coordinate.toLmove;
 import static solver.Coordinate.toSmove;
@@ -27,6 +29,7 @@ public class SingleBotSolver extends BaseSolver {
     private Board finalBoard;
     private int R;
     private byte[] vis;
+    private boolean[] canUps;
     private List<Trace> traces;
     private State state;
 
@@ -48,37 +51,66 @@ public class SingleBotSolver extends BaseSolver {
         return ((vis[pos >> 3] >> (pos & 7)) & 1) == 1;
     }
 
+    private void calculateCanUps() {
+        int c = 0;
+        final Board board = Board.getInitialBoard(R);
+        final UnionFind unionFind = new UnionFind(R * R * R);
+
+        for (int y = R - 1; y > 0; y --) {
+            for(int x = 0; x < R; x ++) {
+                for(int z = 0; z < R; z ++) {
+                    if (finalBoard.get(x, y, z)) board.fill(x, y, z);
+                    canUps[(x * R * R) + (y * R) + z] = true;
+                }
+            }
+            for(int x = 0; x < R; x ++) {
+                for(int z = 0; z < R; z ++) {
+                    if (board.getFilledCound() == board.connectedComponents(x, y, z)) {
+                        canUps[(x * R * R) + ((y - 1) * R) + z] = false;
+                        c ++;
+                    }
+                }
+            }
+        }
+        System.out.printf("canups: %d\n", c);
+    }
+
     @Override
     public List<Trace> solve(final Board finalBoard) {
         traces = new ArrayList<>();
         R = finalBoard.getR();
         vis = new byte[finalBoard.getBoard().length];
+        canUps = new boolean[R * R * R];
         this.finalBoard = finalBoard;
         state = State.getInitialState(R);
 
+        calculateCanUps();
         final Coordinate start = getNearestPoint();
         final Coordinate nextToStart = new Coordinate(start.x - 1, start.y, start.z - 1);
 
         traces.addAll(go(new Coordinate(0, 0, 0), nextToStart));
-        dfs(start, nextToStart);
+        dfs(start, nextToStart, true);
         traces.addAll(go(nextToStart, new Coordinate(0, 0, 0)));
         traces.add(new Trace(HALT));
         return traces;
     }
 
-    private void dfs(final Coordinate p, final Coordinate parent) {
+    private void dfs(final Coordinate p, final Coordinate parent, boolean canUp) {
         visit(p);
         traces.add(getOptimalMove(parent, p));
         final List<Coordinate> candidates = new ArrayList<>();
-        for (final int[] d : ADJACENTS) {
+        for (final int[] d : canUp ? ADJACENTS : ADJACENTS_NOUP) {
             final Coordinate q = new Coordinate(p.x + d[0], p.y + d[1], p.z + d[2]);
             if (finalBoard.in(q) && !visited(q) && finalBoard.get(q) && !q.equals(parent)) {
                 candidates.add(q);
                 visit(q);
             }
         }
+
+        canUp = canUp && canUps[(p.x * R * R) + (p.y * R) + p.z];
+
         for (final Coordinate q : candidates) {
-            dfs(q, p);
+            dfs(q, p, canUp || (p.y != q.y));
         }
         if (isFirstFill) {
             isFirstFill = false;
