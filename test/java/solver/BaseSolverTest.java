@@ -1,20 +1,51 @@
 package solver;
 
+import com.diogonunes.jcdp.color.ColoredPrinter;
+import com.diogonunes.jcdp.color.api.Ansi;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.util.Collection;
-import java.util.List;
+import java.io.*;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 @Ignore
 @RunWith(Parameterized.class)
 public class BaseSolverTest {
+    private static ObjectMapper MAPPER = new ObjectMapper();
+    private static Map<String, ScoreSummary> scoreMap = new LinkedHashMap<>();
+    private static Map<String, ScoreSummary> bestScoreMap = new LinkedHashMap<>();
+
+    public static class ScoreSummary {
+        public Number score;
+        public Number timestamp;
+
+        public ScoreSummary(Number score, Number timestamp) {
+            this.score = score;
+            this.timestamp = timestamp;
+        }
+
+        public ScoreSummary() {
+        }
+    }
+
+    static {
+        try {
+            final FileInputStream input = new FileInputStream("dist/bestTraces/summary.json");
+            bestScoreMap = MAPPER.readValue(input, new TypeReference<LinkedHashMap<String, ScoreSummary>>(){});
+            scoreMap = new LinkedHashMap<>(bestScoreMap);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     public BaseSolver solver;
     @Parameterized.Parameter // first data value (0) is default
@@ -53,5 +84,66 @@ public class BaseSolverTest {
         }
         assert game.validateSuccess() : "game not success";
         System.out.printf("%s: %d\n", goal.getPath(), game.getState().getEnergy());
+
+        final ScoreSummary scoreSummary = new ScoreSummary(game.getState().getEnergy(), System.currentTimeMillis());
+        final ScoreSummary bestScore = bestScoreMap.get(path);
+        if (bestScore == null || bestScore.score.longValue() > scoreSummary.score.longValue()) {
+            scoreMap.put(path, scoreSummary);
+        }
+    }
+
+    @AfterClass
+    public static void tearDown() {
+        try {
+            final String scoreJson = MAPPER.writeValueAsString(scoreMap);
+            try (PrintStream printStream = new PrintStream(new FileOutputStream("dist/bestTraces/summary.json"))) {
+                printStream.print(scoreJson);
+            }
+            System.out.println("Score saved.");
+
+            System.out.println("Reading default score");
+            final FileInputStream input = new FileInputStream("dist/bestTraces/default.json");
+            final Map<String, ScoreSummary> defaultScore = MAPPER.readValue(input, new TypeReference<LinkedHashMap<String, ScoreSummary>>() {
+            });
+
+            System.out.println("============ Score Summary ============");
+            final ColoredPrinter printer = new ColoredPrinter.Builder(1, false).build();
+
+            for (Map.Entry<String, ScoreSummary> entry : scoreMap.entrySet()) {
+                final String path = entry.getKey();
+                final ScoreSummary summary = entry.getValue();
+                final Date date = new Date(summary.timestamp.longValue());
+                final ScoreSummary oldSummary = bestScoreMap.get(path);
+                final ScoreSummary defaultSummary = defaultScore.get(path);
+
+                if (!Objects.equals(summary.timestamp, oldSummary.timestamp)) { // if updated
+                    final String s = String.format(" | %s(%s) -> %s(%s)",
+                            oldSummary.score, new Date(oldSummary.timestamp.longValue()),
+                            summary.score, date
+                    );
+                    printer.setForegroundColor(Ansi.FColor.GREEN);
+                    printer.print(path + ": ");
+                    printer.setAttribute(Ansi.Attribute.BOLD);
+
+                    printer.print(String.format("%s (%s)",
+                            summary.score.longValue() / defaultSummary.score.longValue(),
+                            summary.score.longValue() - oldSummary.score.longValue())
+                    );
+                    printer.setAttribute(Ansi.Attribute.NONE);
+                    printer.println(s);
+                } else {
+                    printer.clear();
+                    final String s = String.format("%s | %s(%s)",
+                            summary.score.longValue() / defaultSummary.score.longValue(),
+                            summary.score,
+                            date
+                    );
+                    printer.println(path + ": " + s);
+                }
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

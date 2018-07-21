@@ -1,6 +1,9 @@
 package solver;
 
+import com.google.common.collect.Sets;
+
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 public class State {
@@ -8,6 +11,9 @@ public class State {
     private final List<Bot> bots;
     private long energy;
     private Harmonics harmonics;
+
+    private static HashSet<Integer> idSet = new HashSet<>();
+    private static HashSet<Integer> seedIdSet = new HashSet<>();
 
     public State(final Board board) {
         this.board = board;
@@ -32,18 +38,32 @@ public class State {
         return bots;
     }
 
-    private boolean validate() {
+    public boolean validate() {
         if (harmonics == Harmonics.LOW) {
             if (!board.grounded()) {
                 return false;
             }
         }
 
-        // if (bots have same bid) {
-        //   return false;
-        // }
+        idSet.clear();
+        for (final Bot bot : bots) {
+            if (!idSet.add(bot.bid)) {
+                return false;
+            }
+            if (getBoard().get(bot.pos)) {
+                return false;
+            }
+            seedIdSet.clear();
+            for (final int seed : bot.seeds) {
+                if (!seedIdSet.add(seed)) {
+                    return false;
+                }
+            }
+        }
 
-        // TODO: koko ni sonota no jouken
+        if (Sets.intersection(idSet, seedIdSet).size() > 0) {
+            return false;
+        }
 
         return true;
     }

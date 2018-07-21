@@ -41,6 +41,10 @@ public class Board {
         return ((board[pos >> 3] >> (pos & 7)) & 1) == 1;
     }
 
+    public boolean get(final Coordinate c) {
+        return get(c.x, c.y, c.z);
+    }
+
     public boolean fill(final int x, final int y, final int z) {
         assert (0 <= Math.min(x, Math.min(y, z))) && (Math.max(x, Math.max(y, z)) < R);
         final int pos = getPos(x, y, z);
