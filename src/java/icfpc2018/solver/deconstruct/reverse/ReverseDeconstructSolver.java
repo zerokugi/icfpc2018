@@ -21,7 +21,7 @@ public class ReverseDeconstructSolver<ConstructSolver extends BaseConstructSolve
         this.constructSolver = constructSolver;
     }
 
-    private static List<Trace> reverseTraces(final List<Trace> traces) {
+    static List<Trace> reverseTraces(final List<Trace> traces) {
         final int n = traces.size();
         if (traces.isEmpty()) {
             return traces;

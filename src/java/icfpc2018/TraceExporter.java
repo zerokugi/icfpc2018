@@ -38,8 +38,8 @@ public class TraceExporter {
                     rawTraces.add(trace.val1);
                     break;
                 case LMOVE:
-                    rawTraces.add((trace.val0 << 6) + (trace.val2 << 4) + 0b1100);
-                    rawTraces.add((trace.val1 << 4) + (trace.val3));
+                    rawTraces.add((trace.val0 << 4) + (trace.val2 << 6) + 0b1100);
+                    rawTraces.add((trace.val3 << 4) + (trace.val1));
                     break;
                 case FUSIONP:
                     rawTraces.add(((trace.val0) << 3) + 0b111);
