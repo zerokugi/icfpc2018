@@ -1,13 +1,14 @@
 package icfpc2018.models;
 
 import com.google.common.collect.ImmutableList;
+import icfpc2018.Game;
 import org.junit.Before;
 import org.junit.Test;
-import icfpc2018.Game;
 
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class TraceTest {
 
@@ -100,6 +101,26 @@ public class TraceTest {
         final List<Trace> traces = ImmutableList.of(Coordinate.toLmove(new Coordinate(2, 0, 0), new Coordinate(0, 1, 0)));
         final Game game = new Game(board, traces);
         game.getState().getBoard().fill(2, 1, 0);
+        game.proceed();
+    }
+
+    @Test(expected = AssertionError.class)
+    public void testLmoveFailureByVoxel2() {
+        final List<Trace> traces = ImmutableList.of(Coordinate.toLmove(new Coordinate(2, 0, 0), new Coordinate(0, 1, 0)));
+        final Game game = new Game(board, traces);
+        game.getState().getBoard().fill(1, 0, 0);
+        game.proceed();
+    }
+
+    @Test(expected = AssertionError.class)
+    public void testLmoveFailureByVoxel3() {
+        final List<Trace> traces = ImmutableList.of(
+                Coordinate.toLmove(new Coordinate(0, 0, 1), new Coordinate(1, 0, 0)),
+                Coordinate.toLmove(new Coordinate(0, 0, -1), new Coordinate(-1, 0, 0))
+        );
+        final Game game = new Game(board, traces);
+        game.proceed();
+        game.getState().getBoard().fill(1, 0, 0);
         game.proceed();
     }
 
@@ -203,4 +224,13 @@ public class TraceTest {
         addBot(game, new Coordinate(1, 0, 0));
         game.proceed();
     }
+
+//    @Test
+//    public void testVoidSuccess() {
+//        final List<Trace> traces = ImmutableList.of(Coordinate.toNldTrace(Trace.Type.VOID, new Coordinate(1, 0, 0)));
+//        final Game game = new Game(board, traces);
+//        game.getState().getBoard().fill(1, 0, 0);
+//        assertTrue(game.proceed());
+//        assertEquals(false, game.getState().getBoard().get(1, 0, 0));
+//    }
 }

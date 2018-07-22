@@ -1,6 +1,7 @@
 package icfpc2018.models;
 
 import com.google.common.collect.Lists;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.Optional;
 
@@ -36,6 +37,14 @@ public class Trace {
 
     public Trace(final Type type, final Integer val0, final Integer val1) {
         this(type, val0, val1, null, null);
+    }
+
+    public Trace copy() {
+        return new Trace(type, val0, val1,  val2, val3);
+    }
+
+    public Trace reverse() {
+        return this.type.reverse(this);
     }
 
     public enum Type {
@@ -83,6 +92,11 @@ public class Trace {
                     state.addEnergy(2 * Math.abs(trace.val1 - 15));
                 }
             }
+
+            @Override
+            public Trace reverse(Trace trace) {
+                return new Trace(Type.SMOVE, trace.val0, 30 - trace.val1);
+            }
         },
         LMOVE {
             @Override
@@ -108,6 +122,11 @@ public class Trace {
                     state.addEnergy(2 * (Math.abs(trace.val1 - 5) + 2 + Math.abs(trace.val3 - 5)));
                 }
             }
+
+            @Override
+            public Trace reverse(Trace trace) {
+                return new Trace(trace.type, trace.val2, 10 - trace.val3, trace.val0, 10 - trace.val1);
+            }
         },
         FUSIONP {
             @Override
@@ -127,6 +146,11 @@ public class Trace {
                     state.addEnergy(-24);
                 }
             }
+
+            @Override
+            public Trace reverse(Trace trace) {
+                throw new NotImplementedException();
+            }
         },
         FUSIONS {
             @Override
@@ -144,6 +168,11 @@ public class Trace {
                 } else {
                     unfill(state, p);
                 }
+            }
+
+            @Override
+            public Trace reverse(Trace trace) {
+                throw new NotImplementedException();
             }
         },
         FISSION {
@@ -164,6 +193,11 @@ public class Trace {
                     state.getBots().add(newBot);
                     state.addEnergy(24);
                 }
+            }
+
+            @Override
+            public Trace reverse(Trace trace) {
+                throw new NotImplementedException();
             }
         },
         FILL {
@@ -216,7 +250,7 @@ public class Trace {
         }
 
         public Trace reverse(final Trace trace) {
-            throw new UnsupportedOperationException();
+            return trace.copy();
         }
 
         void validVolatility(final State state, final Coordinate p) {
