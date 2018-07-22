@@ -9,12 +9,23 @@ public class Board {
     private final String path;
     private final UnionFind unionFind;
     private int filledCound = 0;
+    private boolean forceGrounded = false;
 
     public Board(final int r, final byte[] board, final String path) {
         R = r;
-        this.board = board;
         this.path = path;
         unionFind = new UnionFind((r * r * r) + 1);
+        this.board = new byte[R * R * R];
+        for (int x = 1; x < R; x ++) {
+            for (int y = 0; y < R; y ++) {
+                for (int z = 1; z < R; z++) {
+                    int pos = getPos(x, y, z);
+                    if ((board[pos >> 3] & (1 << (pos & 7))) != 0) {
+                        fill(x, y, z);
+                    }
+                }
+            }
+        }
     }
 
     public static Board getInitialBoard(final int R) {
@@ -76,8 +87,14 @@ public class Board {
 
     private void resetConnectivityDfs(final int x, final int y, final int z, boolean reset) {
         if (reset) {
+            if (unionFind.size(getPos(x, y, z)) == 1) {
+                return;
+            }
             unionFind.reset(getPos(x, y, z));
         } else {
+            if (unionFind.size(getPos(x, y, z)) != 1) {
+                return;
+            }
             if ((y == 0) && get(x, y, z)) {
                 unionFind.unite(getPos(x, y, z), R * R * R);
             }
@@ -85,7 +102,7 @@ public class Board {
         for (final int[] d : Coordinate.ADJACENTS) {
             if (in(x + d[0]) && in(y + d[1]) && in(z + d[2])) {
                 if (get(x + d[0], y + d[1], z + d[2])) {
-                    resetConnectivityDfs(x + d[0], y + d[1], z + d[2], reset);
+//                    resetConnectivityDfs(x + d[0], y + d[1], z + d[2], reset);
                     if (!reset && get(x, y, z)) {
                         unionFind.unite(getPos(x, y, z), getPos(x + d[0], y + d[1], z + d[2]));
                     }
@@ -98,9 +115,10 @@ public class Board {
         if (!flip(x, y, z, 0)) {
             return false;
         }
-        filledCound++;
-        resetConnectivityDfs(x, y, z, true);
-        resetConnectivityDfs(x, y, z, false);
+        filledCound --;
+        forceGrounded = true;
+//        resetConnectivityDfs(x, y, z, true);
+//        resetConnectivityDfs(x, y, z, false);
         return true;
     }
 
@@ -117,7 +135,7 @@ public class Board {
     }
 
     public boolean grounded() {
-        return unionFind.size(R * R * R) == (filledCound + 1);
+        return forceGrounded || (unionFind.size(R * R * R) == (filledCound + 1));
     }
 
     private void uniteAdjacents(final int x, final int y, final int z) {

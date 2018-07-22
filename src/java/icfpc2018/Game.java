@@ -6,6 +6,8 @@ import icfpc2018.models.Trace;
 
 import java.util.List;
 
+import static icfpc2018.DebugUtil.outputBoard;
+
 public class Game {
     private final State state;
     private final Board goal;
@@ -13,8 +15,12 @@ public class Game {
     private int finishedTraces = 0;
 
     public Game(final Board goal, final List<Trace> traces) {
-        state = State.getInitialState(goal.getR());
-        this.goal = goal;
+        this(Board.getInitialBoard(goal.getR()), goal, traces);
+    }
+
+    public Game(final Board initialBoard, final Board finalBoard, final List<Trace> traces) {
+        state = State.getInitialState(initialBoard);
+        this.goal = finalBoard;
         this.traces = traces;
     }
 
@@ -38,7 +44,7 @@ public class Game {
     public boolean validateSuccess() {
         assert (traces.get(finishedTraces).type == Trace.Type.HALT) : "game not halted";
         assert ((finishedTraces + 1) == traces.size()) : "traces remains";
-//        outputBoard(state.getBoard());
+//        outputBoard(goal);
 //        for(int i=0;i<state.getBoard().getBoard().length;i++) {
 //            if (state.getBoard().getBoard()[i] != goal.getBoard()[i]) {
 //                System.out.printf("different %d: %d %d\n", i, state.getBoard().getBoard()[i], goal.getBoard()[i]);

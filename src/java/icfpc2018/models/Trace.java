@@ -49,6 +49,11 @@ public class Trace {
                     unfill(state, targetBot.pos);
                 }
             }
+
+            @Override
+            public Trace reverse(final Trace trace) {
+                return new Trace(WAIT);
+            }
         },
         FLIP {
             @Override
@@ -192,12 +197,14 @@ public class Trace {
                     final int R = state.getBoard().getR();
                     assert 0 < Math.min(p.x, p.z) && Math.max(p.x, p.z) < R - 1 && 0 <= p.y && p.y < R
                             : "out of bounds to void " + p;
-                    assert state.getBoard().get(p)
-                            : "tried to void unfilled voxel " + p;
                 } else {
                     unfill(state, targetBot.pos);
-                    state.getBoard().doVoid(p);
-                    state.addEnergy(-12);
+                    if (state.getBoard().get(p)) {
+                        state.getBoard().doVoid(p);
+                        state.addEnergy(-12);
+                    } else {
+                        state.addEnergy(3);
+                    }
                 }
             }
         },
@@ -208,11 +215,15 @@ public class Trace {
             throw new UnsupportedOperationException();
         }
 
-        public void validVolatility(final State state, final Coordinate p) {
+        public Trace reverse(final Trace trace) {
+            throw new UnsupportedOperationException();
+        }
+
+        void validVolatility(final State state, final Coordinate p) {
             assert state.getBoard().flip(p.x, p.y, p.z, 1) : "Volatile confliction: " + p.toString();
         }
 
-        public void validVolatility(final State state, final Coordinate p1, final Coordinate p2) {
+        void validVolatility(final State state, final Coordinate p1, final Coordinate p2) {
             for (int x = Math.min(p1.x, p2.x); x <= Math.max(p1.x, p2.x); x++) {
                 for (int y = Math.min(p1.y, p2.y); y <= Math.max(p1.y, p2.y); y++) {
                     for (int z = Math.min(p1.z, p2.z); z <= Math.max(p1.z, p2.z); z++) {
@@ -222,11 +233,11 @@ public class Trace {
             }
         }
 
-        public void unfill(final State state, final Coordinate p) {
+        void unfill(final State state, final Coordinate p) {
             assert state.getBoard().flip(p.x, p.y, p.z, 0) : "Failed to unfill: " + p.toString();
         }
 
-        public void unfill(final State state, final Coordinate p1, final Coordinate p2) {
+        void unfill(final State state, final Coordinate p1, final Coordinate p2) {
             for (int x = Math.min(p1.x, p2.x); x <= Math.max(p1.x, p2.x); x++) {
                 for (int y = Math.min(p1.y, p2.y); y <= Math.max(p1.y, p2.y); y++) {
                     for (int z = Math.min(p1.z, p2.z); z <= Math.max(p1.z, p2.z); z++) {

@@ -27,8 +27,12 @@ public class State {
     }
 
     public static State getInitialState(final int R) {
+        return getInitialState(Board.getInitialBoard(R));
+    }
+
+    public static State getInitialState(final Board initialBoard) {
         return new State(
-                Board.getInitialBoard(R),
+                initialBoard,
                 Lists.newArrayList(new Bot(
                         1,
                         new Coordinate(0, 0, 0),

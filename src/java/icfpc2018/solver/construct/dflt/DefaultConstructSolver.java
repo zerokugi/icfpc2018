@@ -12,11 +12,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-@Ignore
 public class DefaultConstructSolver extends BaseConstructSolver {
 
-    @VisibleForTesting
-    public byte[] loadTraces(final String path) throws IOException {
+    public static byte[] loadTraces(final String path) throws IOException {
         final int length = (int) new File(path).length();
         final FileInputStream input = new FileInputStream(path);
         final byte[] buf = new byte[length];
@@ -24,7 +22,7 @@ public class DefaultConstructSolver extends BaseConstructSolver {
         return buf;
     }
 
-    public List<Trace> convertTraces(final byte[] rawTraces) {
+    public static List<Trace> convertTraces(final byte[] rawTraces) {
         final List<Trace> traces = new ArrayList<>();
         for (int i = 0; i < rawTraces.length; ) {
             final int v0 = rawTraces[i++] & 0xff;
@@ -40,6 +38,8 @@ public class DefaultConstructSolver extends BaseConstructSolver {
                 traces.add(new Trace(Trace.Type.FUSIONS, v0 >> 3));
             } else if ((v0 & 7) == 3) {
                 traces.add(new Trace(Trace.Type.FILL, v0 >> 3));
+            } else if ((v0 & 7) == 2) {
+                traces.add(new Trace(Trace.Type.VOID, v0 >> 3));
             } else {
                 assert (i < rawTraces.length) : "failed to decode.";
                 final int v1 = rawTraces[i++] & 0xff;
