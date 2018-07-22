@@ -24,28 +24,29 @@ public class TraceOptimizer {
     }
 
     public List<Trace> shortestPath(final Board board, final Coordinate start, final Coordinate end) {
-        final Queue<Coordinate> queue = new ArrayDeque<>();
+        final Queue<Integer> queue = new ArrayDeque<>();
         final int R = board.getR();
         final int Rcube = R * R * R;
         count ++;
         final long bias = ((long)count) * 4 * Rcube;
 
-        queue.add(start);
-        memo[board.getPos(start)] = bias + Rcube + board.getPos(start);
+        final int startPos = board.getPos(start);
+        final int endPos = board.getPos(end);
+        queue.add(startPos);
+        memo[startPos] = bias + Rcube + startPos;
 
         while (!queue.isEmpty()) {
-            final Coordinate c = queue.poll();
-            if (c.equals(end)) {
+            final int prevPos = queue.poll();
+            if (prevPos == endPos) {
                 break;
             }
 
             // SMOVE
-            final int prevPos = board.getPos(c);
 
             for (int i = 1; i <= 3; i++) {
                 for (int k = -1; k <= 1; k += 2) {
                     for (int j = 1; j <= 15; j++) {
-                        final Coordinate clone = c.clone();
+                        final Coordinate clone = board.fromPos(prevPos);
                         final int val = (j * k) + 15;
                         clone.applyLld(i, val);
                         if (!board.in(clone) || board.get(clone)) {
@@ -53,7 +54,7 @@ public class TraceOptimizer {
                         }
                         final int pos = board.getPos(clone);
                         if (memo[pos] < bias) {
-                            queue.add(clone);
+                            queue.add(pos);
                             memo[pos] = bias + (i * Rcube) + prevPos;
                         }
                     }
@@ -65,7 +66,7 @@ public class TraceOptimizer {
                 for (int m = -1; m <= 1; m += 2) {
                     for (int j = 1; j <= 5; j++) {
                         final int val1 = (j * m) + 5;
-                        final Coordinate clone1 = c.clone();
+                        final Coordinate clone1 = board.fromPos(prevPos).clone();
                         clone1.applySld(i, val1);
                         if (!board.in(clone1) || board.get(clone1)) { // filled
                             break;
@@ -81,7 +82,7 @@ public class TraceOptimizer {
                                     }
                                     final int pos = board.getPos(clone2);
                                     if (memo[pos] < bias) {
-                                        queue.add(clone2);
+                                        queue.add(pos);
                                         memo[pos] = bias + (i * Rcube) + prevPos;
                                     }
                                 }
