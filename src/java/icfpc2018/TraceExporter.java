@@ -54,6 +54,11 @@ public class TraceExporter {
                 case FILL:
                     rawTraces.add((trace.val0 << 3) + 0b011);
                     break;
+                case VOID:
+                    rawTraces.add((trace.val0 << 3) + 0b010);
+                    break;
+                default:
+                    assert false : "Unsupported trace type to export: " + trace.type.name();
             }
         }
         return Bytes.toArray(rawTraces);
