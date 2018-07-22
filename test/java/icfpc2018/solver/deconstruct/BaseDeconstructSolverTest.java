@@ -10,7 +10,6 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 @Ignore
-@RunWith(Parameterized.class)
 public class BaseDeconstructSolverTest extends BaseSolverTest {
     @Parameterized.Parameters(name = "{2}")
     public static Collection<Object[]> data() {

@@ -1,6 +1,7 @@
 package icfpc2018.solver.reconstruct;
 
 import com.google.common.collect.Streams;
+import com.googlecode.junittoolbox.ParallelParameterized;
 import icfpc2018.solver.BaseSolverTest;
 import org.junit.Ignore;
 import org.junit.runner.RunWith;
@@ -11,7 +12,6 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 @Ignore
-@RunWith(Parameterized.class)
 public class BaseReconstructSolverTest extends BaseSolverTest {
     @Parameterized.Parameters(name = "{2}")
     public static Collection<Object[]> data() {

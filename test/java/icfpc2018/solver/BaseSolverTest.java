@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.base.Strings;
+import com.googlecode.junittoolbox.ParallelParameterized;
 import icfpc2018.Game;
 import icfpc2018.TraceExporter;
 import icfpc2018.models.Board;
@@ -32,7 +33,7 @@ import java.util.List;
 import java.util.Map;
 
 @Ignore
-@RunWith(Parameterized.class)
+@RunWith(ParallelParameterized.class)
 public class BaseSolverTest {
     private static final ObjectMapper MAPPER = new ObjectMapper();
     private static final OkHttpClient HTTP_CLIENT = new OkHttpClient();

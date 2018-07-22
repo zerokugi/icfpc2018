@@ -29,6 +29,7 @@ dependencies {
     compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.3.4'
 
     compile 'com.squareup.okhttp3:okhttp:3.11.0'
+    compile 'com.googlecode.junit-toolbox:junit-toolbox:2.4'
 
     // Declare the dependency for your favourite test framework you want to use in your tests.
     // TestNG is also supported by the Gradle Test task. Just change the
