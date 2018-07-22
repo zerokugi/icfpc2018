@@ -75,6 +75,10 @@ public class Trace {
                     state.flipHarmonics();
                 }
             }
+            @Override
+            public Trace reverse(final Trace trace) {
+                return new Trace(FLIP);
+            }
         },
         SMOVE {
             @Override
@@ -95,7 +99,7 @@ public class Trace {
 
             @Override
             public Trace reverse(Trace trace) {
-                return new Trace(Type.SMOVE, trace.val0, 30 - trace.val1);
+                return new Trace(SMOVE, trace.val0, 30 - trace.val1);
             }
         },
         LMOVE {
@@ -125,7 +129,7 @@ public class Trace {
 
             @Override
             public Trace reverse(Trace trace) {
-                return new Trace(trace.type, trace.val2, 10 - trace.val3, trace.val0, 10 - trace.val1);
+                return new Trace(LMOVE, trace.val2, 10 - trace.val3, trace.val0, 10 - trace.val1);
             }
         },
         FUSIONP {
@@ -219,6 +223,11 @@ public class Trace {
                     state.addEnergy(12);
                 }
             }
+
+            @Override
+            public Trace reverse(Trace trace) {
+                return new Trace(VOID, trace.val0);
+            }
         },
         VOID {
             @Override
@@ -241,6 +250,11 @@ public class Trace {
                     }
                 }
             }
+
+            @Override
+            public Trace reverse(Trace trace) {
+                return new Trace(FILL, trace.val0);
+            }
         },
         GFILL,
         GVOID;
@@ -250,7 +264,7 @@ public class Trace {
         }
 
         public Trace reverse(final Trace trace) {
-            return trace.copy();
+            return trace.type.reverse(trace);
         }
 
         void validVolatility(final State state, final Coordinate p) {
