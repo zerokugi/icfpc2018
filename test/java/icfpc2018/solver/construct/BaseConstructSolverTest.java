@@ -5,6 +5,10 @@ import com.diogonunes.jcdp.color.api.Ansi;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import icfpc2018.Game;
+import icfpc2018.TraceExporter;
+import icfpc2018.models.Board;
+import icfpc2018.models.Trace;
 import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -15,10 +19,6 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
-import icfpc2018.Game;
-import icfpc2018.TraceExporter;
-import icfpc2018.models.Board;
-import icfpc2018.models.Trace;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -219,6 +219,7 @@ public class BaseConstructSolverTest {
         if (bestScoreMap.get(path) == null || scoreMap.get(path).score.longValue() < bestScoreMap.get(path).score.longValue()) {
             TraceExporter.export("dist/bestTraces", testcase, scoreMap.get(path).traces);
         }
+        scoreMap.get(path).traces = null;
     }
 
     public static class ScoreSummary {
