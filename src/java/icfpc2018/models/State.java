@@ -1,4 +1,4 @@
-package solver;
+package icfpc2018.models;
 
 import com.google.common.collect.Lists;
 

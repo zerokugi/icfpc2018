@@ -1,4 +1,4 @@
-package solver;
+package icfpc2018.models;
 
 import com.google.common.base.Objects;
 import com.google.common.primitives.Ints;

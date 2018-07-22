@@ -1,10 +1,10 @@
-package solver.dflt;
+package icfpc2018.solver.construct.dflt;
 
 import com.google.common.annotations.VisibleForTesting;
 import jdk.nashorn.internal.ir.annotations.Ignore;
-import solver.BaseSolver;
-import solver.Board;
-import solver.Trace;
+import icfpc2018.solver.construct.BaseConstructSolver;
+import icfpc2018.models.Board;
+import icfpc2018.models.Trace;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Ignore
-public class DefaultSolver extends BaseSolver {
+public class DefaultConstructSolver extends BaseConstructSolver {
 
     @VisibleForTesting
     public byte[] loadTraces(final String path) throws IOException {

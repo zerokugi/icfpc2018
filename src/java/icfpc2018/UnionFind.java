@@ -1,4 +1,4 @@
-package solver;
+package icfpc2018;
 
 import java.util.Arrays;
 

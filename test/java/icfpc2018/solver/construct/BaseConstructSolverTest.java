@@ -1,4 +1,4 @@
-package solver;
+package icfpc2018.solver.construct;
 
 import com.diogonunes.jcdp.color.ColoredPrinter;
 import com.diogonunes.jcdp.color.api.Ansi;
@@ -15,6 +15,10 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
+import icfpc2018.Game;
+import icfpc2018.TraceExporter;
+import icfpc2018.models.Board;
+import icfpc2018.models.Trace;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -31,12 +35,12 @@ import java.util.stream.IntStream;
 
 @Ignore
 @RunWith(Parameterized.class)
-public class BaseSolverTest {
+public class BaseConstructSolverTest {
     private static final ObjectMapper MAPPER = new ObjectMapper();
     private static final OkHttpClient HTTP_CLIENT = new OkHttpClient();
     private static Map<String, ScoreSummary> scoreMap = new LinkedHashMap<>();
     private static Map<String, ScoreSummary> bestScoreMap = new LinkedHashMap<>();
-    public BaseSolver solver;
+    public BaseConstructSolver solver;
     @Parameterized.Parameter // first data value (0) is default
     public String path;
     @Parameterized.Parameter(1)

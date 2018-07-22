@@ -1,8 +1,7 @@
-package solver;
+package icfpc2018.models;
 
 import com.google.common.base.Objects;
-
-import static solver.Coordinate.ADJACENTS;
+import icfpc2018.UnionFind;
 
 public class Board {
     private final int R;
@@ -88,7 +87,7 @@ public class Board {
     }
 
     private void uniteAdjacents(final int x, final int y, final int z) {
-        for (final int[] d : ADJACENTS) {
+        for (final int[] d : Coordinate.ADJACENTS) {
             if (in(x + d[0]) && in(y + d[1]) && in(z + d[2])) {
                 if (get(x + d[0], y + d[1], z + d[2])) {
                     unionFind.unite(getPos(x, y, z), getPos(x + d[0], y + d[1], z + d[2]));

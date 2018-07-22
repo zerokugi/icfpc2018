@@ -1,20 +1,22 @@
-package solver;
+package icfpc2018;
 
 import org.junit.Test;
-import solver.dflt.DefaultSolver;
+import icfpc2018.solver.construct.dflt.DefaultConstructSolver;
+import icfpc2018.models.Board;
+import icfpc2018.models.Trace;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.List;
 
+import static icfpc2018.TraceExporter.toBinaryData;
 import static org.junit.Assert.*;
-import static solver.TraceExporter.toBinaryData;
 
 public class TraceExporterTest {
 
     @Test
     public void testToBinaryData() throws IOException {
-        final DefaultSolver solver = new DefaultSolver();
+        final DefaultConstructSolver solver = new DefaultConstructSolver();
 
         final String tracePath = "dfltTracesL/LA001.nbt";
         final String modelPath = "problemsL/LA001_tgt.mdl";

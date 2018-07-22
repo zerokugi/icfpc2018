@@ -1,7 +1,8 @@
-package solver;
+package icfpc2018;
 
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.primitives.Bytes;
+import icfpc2018.models.Trace;
 
 import java.io.FileOutputStream;
 import java.io.IOException;

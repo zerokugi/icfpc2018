@@ -1,8 +1,8 @@
-package solver;
+package icfpc2018.models;
 
 import org.junit.Test;
 
-import static solver.Board.getInitialBoard;
+import static icfpc2018.models.Board.getInitialBoard;
 
 /**
  * @author ryosukek

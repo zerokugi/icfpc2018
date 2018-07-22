@@ -1,4 +1,8 @@
-package solver;
+package icfpc2018;
+
+import icfpc2018.models.Board;
+import icfpc2018.models.State;
+import icfpc2018.models.Trace;
 
 import java.util.List;
 

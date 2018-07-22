@@ -1,5 +1,8 @@
-package solver;
+package icfpc2018;
 
+import icfpc2018.models.Bot;
+import icfpc2018.models.Coordinate;
+import icfpc2018.models.State;
 
 public class Validator {
     public static void validateHalt(final State state) {

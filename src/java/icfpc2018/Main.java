@@ -1,6 +1,6 @@
-package solver;
+package icfpc2018;
 
-import com.google.common.collect.ImmutableList;
+import icfpc2018.models.Trace;
 
 import java.util.ArrayList;
 import java.util.List;

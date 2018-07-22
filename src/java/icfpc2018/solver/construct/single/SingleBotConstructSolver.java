@@ -1,28 +1,28 @@
-package solver.single;
+package icfpc2018.solver.construct.single;
 
 import com.google.common.collect.Lists;
-import solver.BaseSolver;
-import solver.Board;
-import solver.Coordinate;
-import solver.State;
-import solver.Trace;
-import solver.UnionFind;
+import icfpc2018.solver.construct.BaseConstructSolver;
+import icfpc2018.models.Board;
+import icfpc2018.models.Coordinate;
+import icfpc2018.models.State;
+import icfpc2018.models.Trace;
+import icfpc2018.UnionFind;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static solver.Coordinate.ADJACENTS;
-import static solver.Coordinate.ADJACENTS_NOUP;
-import static solver.Coordinate.difference;
-import static solver.Coordinate.toLmove;
-import static solver.Coordinate.toSmove;
-import static solver.Trace.Type.FILL;
-import static solver.Trace.Type.FLIP;
-import static solver.Trace.Type.HALT;
-import static solver.Trace.Type.LMOVE;
-import static solver.Trace.Type.SMOVE;
+import static icfpc2018.models.Coordinate.ADJACENTS;
+import static icfpc2018.models.Coordinate.ADJACENTS_NOUP;
+import static icfpc2018.models.Coordinate.difference;
+import static icfpc2018.models.Coordinate.toLmove;
+import static icfpc2018.models.Coordinate.toSmove;
+import static icfpc2018.models.Trace.Type.FILL;
+import static icfpc2018.models.Trace.Type.FLIP;
+import static icfpc2018.models.Trace.Type.HALT;
+import static icfpc2018.models.Trace.Type.LMOVE;
+import static icfpc2018.models.Trace.Type.SMOVE;
 
-public class SingleBotSolver extends BaseSolver {
+public class SingleBotConstructSolver extends BaseConstructSolver {
 
     private final List<Coordinate> fullVoxels = Lists.newArrayList();
     boolean isFirstFill = true;
@@ -51,30 +51,6 @@ public class SingleBotSolver extends BaseSolver {
         return ((vis[pos >> 3] >> (pos & 7)) & 1) == 1;
     }
 
-    private void calculateCanUps() {
-        int c = 0;
-        final Board board = Board.getInitialBoard(R);
-        final UnionFind unionFind = new UnionFind(R * R * R);
-
-        for (int y = R - 1; y > 0; y --) {
-            for(int x = 0; x < R; x ++) {
-                for(int z = 0; z < R; z ++) {
-                    if (finalBoard.get(x, y, z)) board.fill(x, y, z);
-                    canUps[(x * R * R) + (y * R) + z] = true;
-                }
-            }
-            for(int x = 0; x < R; x ++) {
-                for(int z = 0; z < R; z ++) {
-                    if (board.getFilledCound() == board.connectedComponents(x, y, z)) {
-                        canUps[(x * R * R) + ((y - 1) * R) + z] = false;
-                        c ++;
-                    }
-                }
-            }
-        }
-        System.out.printf("canups: %d\n", c);
-    }
-
     @Override
     public List<Trace> solve(final Board finalBoard) {
         traces = new ArrayList<>();
@@ -84,7 +60,6 @@ public class SingleBotSolver extends BaseSolver {
         this.finalBoard = finalBoard;
         state = State.getInitialState(R);
 
-        calculateCanUps();
         final Coordinate start = getNearestPoint();
         final Coordinate nextToStart = new Coordinate(start.x - 1, start.y, start.z - 1);
 
@@ -107,10 +82,8 @@ public class SingleBotSolver extends BaseSolver {
             }
         }
 
-        canUp = canUp && canUps[(p.x * R * R) + (p.y * R) + p.z];
-
         for (final Coordinate q : candidates) {
-            dfs(q, p, canUp || (p.y != q.y));
+            dfs(q, p, canUp);
         }
         if (isFirstFill) {
             isFirstFill = false;

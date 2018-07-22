@@ -1,12 +1,10 @@
-package solver;
+package icfpc2018.models;
 
 import com.google.common.collect.ImmutableList;
 import org.junit.Before;
 import org.junit.Test;
-import solver.dflt.DefaultSolver;
+import icfpc2018.Game;
 
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.util.List;
 
 import static org.junit.Assert.*;

@@ -1,4 +1,6 @@
-package solver;
+package icfpc2018;
+
+import icfpc2018.models.Board;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
