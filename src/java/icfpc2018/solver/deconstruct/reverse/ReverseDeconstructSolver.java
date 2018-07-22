@@ -17,7 +17,7 @@ import static icfpc2018.models.Trace.Type.HALT;
 public class ReverseDeconstructSolver<ConstructSolver extends BaseConstructSolver> extends BaseDeconstructSolver {
     final ConstructSolver constructSolver;
 
-    ReverseDeconstructSolver(final ConstructSolver constructSolver) {
+    public ReverseDeconstructSolver(final ConstructSolver constructSolver) {
         this.constructSolver = constructSolver;
     }
 
@@ -27,7 +27,6 @@ public class ReverseDeconstructSolver<ConstructSolver extends BaseConstructSolve
             return traces;
         }
         assert (traces.get(n - 1).type == HALT);
-        traces.remove(n - 1);
         final List<Trace> reversedTraces = new ArrayList<>();
         for (int i = n - 2; i >= 0; i--) {
             reversedTraces.add(traces.get(i).reverse());
