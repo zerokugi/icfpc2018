@@ -45,6 +45,10 @@ public class Board {
         return (x * R * R) + (y * R) + z;
     }
 
+    public Coordinate fromPos(final int pos) {
+        return new Coordinate(pos / (R * R), pos / R % R, pos % R);
+    }
+
     public int getFilledCound() {
         return filledCound;
     }
