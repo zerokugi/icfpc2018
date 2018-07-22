@@ -1,12 +1,11 @@
 package icfpc2018.solver.construct.single;
 
 import com.google.common.collect.Lists;
-import icfpc2018.solver.construct.BaseConstructSolver;
 import icfpc2018.models.Board;
 import icfpc2018.models.Coordinate;
 import icfpc2018.models.State;
 import icfpc2018.models.Trace;
-import icfpc2018.UnionFind;
+import icfpc2018.solver.construct.BaseConstructSolver;
 
 import java.util.ArrayList;
 import java.util.List;

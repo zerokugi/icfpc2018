@@ -25,13 +25,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 @Ignore
 @RunWith(Parameterized.class)
@@ -86,6 +83,7 @@ public class BaseSolverTest {
             });
 
             // Enable when new cases run with DefaultSolver
+//            scoreMap.forEach(bestScoreMap::putIfAbsent);
 //            scoreMap.forEach(defaultScore::putIfAbsent);
 //            final String defaultScoreJson = MAPPER.writeValueAsString(defaultScore);
 //            try (PrintStream printStream = new PrintStream(new FileOutputStream("dist/bestTraces/default.json"))) {
@@ -106,10 +104,13 @@ public class BaseSolverTest {
                 final double ratio = (1.0 * summary.score.longValue()) / defaultSummary.score.longValue();
                 final double oldRatio = (1.0 * oldSummary.score.longValue()) / defaultSummary.score.longValue();
                 totalEnergy += Math.max(summary.score.longValue(), oldSummary.score.longValue());
+
                 if (ratio < 1) { // if good
-                    printer.setForegroundColor(Ansi.FColor.GREEN);
                     final String s;
                     final String t;
+                    if (summary.score.longValue() <= oldSummary.score.longValue()) { // best
+                        printer.setForegroundColor(Ansi.FColor.GREEN);
+                    }
                     if (summary.score.longValue() < oldSummary.score.longValue()) { // best
                         s = String.format(" | %s(%s) -> %s(%s)",
                                 oldSummary.score, new Date(oldSummary.timestamp.longValue()),
@@ -128,8 +129,9 @@ public class BaseSolverTest {
                             date
                         );
                         t = String.format(
-                                "%4f",
-                                ratio
+                                "%4f (%4f)",
+                                ratio,
+                                ratio - oldRatio
                         );
                     }
                     printer.print(path + ": ");
@@ -138,7 +140,6 @@ public class BaseSolverTest {
                     printer.setAttribute(Ansi.Attribute.NONE);
                     printer.println(s);
                 } else {
-                    printer.clear();
                     if (ratio > 1) { // if bad
                         printer.setForegroundColor(Ansi.FColor.RED);
                     }
@@ -149,8 +150,6 @@ public class BaseSolverTest {
                     );
                     printer.println(path + ": " + s);
                 }
-                printer.clear();
-                printer.setForegroundColor(Ansi.FColor.GREEN);
                 printer.clear();
             }
             printer.println("totalEnergy = " + totalEnergy + "\n");
@@ -206,7 +205,7 @@ public class BaseSolverTest {
 //            System.out.printf("%d\n", game.getState().getEnergy());
         }
         assert game.validateSuccess() : "game not success";
-        System.out.printf("%s: %d\n", goal.getPath(), game.getState().getEnergy());
+//        System.out.printf("%s: %d\n", goal.getPath(), game.getState().getEnergy());
 
         final ScoreSummary scoreSummary = new ScoreSummary(game.getState().getEnergy(), System.currentTimeMillis());
         scoreSummary.traces = traces;
@@ -215,7 +214,7 @@ public class BaseSolverTest {
 
     @After
     public void after() {
-        System.out.println(scoreMap.get(path).traces.size() + " commands");
+//        System.out.println(scoreMap.get(path).traces.size() + " commands");
 //        TraceExporter.export("dist/traces", testcase, scoreMap.get(path).traces);
         if (bestScoreMap.get(path) == null || scoreMap.get(path).score.longValue() < bestScoreMap.get(path).score.longValue()) {
             TraceExporter.export("dist/bestTraces", testcase, scoreMap.get(path).traces);

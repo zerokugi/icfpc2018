@@ -182,24 +182,24 @@ public class Trace {
             }
         },
         VOID {
-//            @Override
-//            public void execute(final State state, final Bot targetBot, final Trace trace, final boolean validate) {
-//                final Coordinate p = targetBot.pos.clone();
-//                p.applyNld(trace.val0);
-//                if (validate) {
-//                    System.out.printf("validate fill (%d, %d, %d)\n", p.x, p.y, p.z);
-//                    validVolatility(state, targetBot.pos);
-//                    validVolatility(state, p);
-//                    final int R = state.getBoard().getR();
-//                    assert 0 < Math.min(p.x, p.z) && Math.max(p.x, p.z) < R - 1 && 0 <= p.y && p.y < R
-//                            : "can not fill " + p;
-//                } else {
-//                    unfill(state, targetBot.pos);
-//                    unfill(state, p);
-//                    state.getBoard().fill(p);
-//                    state.addEnergy(12);
-//                }
-//            }
+            @Override
+            public void execute(final State state, final Bot targetBot, final Trace trace, final boolean validate) {
+                final Coordinate p = targetBot.pos.clone();
+                p.applyNld(trace.val0);
+                if (validate) {
+//                    System.out.printf("validate void (%d, %d, %d)\n", p.x, p.y, p.z);
+                    validVolatility(state, targetBot.pos);
+                    final int R = state.getBoard().getR();
+                    assert 0 < Math.min(p.x, p.z) && Math.max(p.x, p.z) < R - 1 && 0 <= p.y && p.y < R
+                            : "out of bounds to void " + p;
+                    assert state.getBoard().get(p)
+                            : "tried to void unfilled voxel " + p;
+                } else {
+                    unfill(state, targetBot.pos);
+                    state.getBoard().doVoid(p);
+                    state.addEnergy(-12);
+                }
+            }
         },
         GFILL,
         GVOID;

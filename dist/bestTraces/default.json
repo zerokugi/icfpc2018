@@ -1,1 +1,746 @@
-{"problemsL/LA001_tgt.mdl":{"score":335123860,"timestamp":1532159551723},"problemsL/LA002_tgt.mdl":{"score":165905180,"timestamp":1532158363964},"problemsL/LA003_tgt.mdl":{"score":142863608,"timestamp":1532158363966},"problemsL/LA004_tgt.mdl":{"score":1097434212,"timestamp":1532158363972},"problemsL/LA005_tgt.mdl":{"score":705484076,"timestamp":1532158363975},"problemsL/LA006_tgt.mdl":{"score":758284976,"timestamp":1532158363982},"problemsL/LA007_tgt.mdl":{"score":1528766296,"timestamp":1532158363989},"problemsL/LA008_tgt.mdl":{"score":1185055212,"timestamp":1532158363995},"problemsL/LA009_tgt.mdl":{"score":288318700,"timestamp":1532158363996},"problemsL/LA010_tgt.mdl":{"score":257595824,"timestamp":1532158364000},"problemsL/LA011_tgt.mdl":{"score":204790024,"timestamp":1532158364004},"problemsL/LA012_tgt.mdl":{"score":519461556,"timestamp":1532158364007},"problemsL/LA013_tgt.mdl":{"score":446494648,"timestamp":1532158364009},"problemsL/LA014_tgt.mdl":{"score":501700108,"timestamp":1532158364012},"problemsL/LA015_tgt.mdl":{"score":337283328,"timestamp":1532158364013},"problemsL/LA016_tgt.mdl":{"score":568667136,"timestamp":1532158364020},"problemsL/LA017_tgt.mdl":{"score":510821324,"timestamp":1532158364022},"problemsL/LA018_tgt.mdl":{"score":511061356,"timestamp":1532158364025},"problemsL/LA019_tgt.mdl":{"score":35590318172,"timestamp":1532158364047},"problemsL/LA020_tgt.mdl":{"score":21353195740,"timestamp":1532158364054},"problemsL/LA021_tgt.mdl":{"score":28105622492,"timestamp":1532158364073},"problemsL/LA022_tgt.mdl":{"score":24353554268,"timestamp":1532158364090},"problemsL/LA023_tgt.mdl":{"score":26223100004,"timestamp":1532158364095},"problemsL/LA024_tgt.mdl":{"score":24279023204,"timestamp":1532158364109},"problemsL/LA025_tgt.mdl":{"score":33688354916,"timestamp":1532158364113},"problemsL/LA026_tgt.mdl":{"score":29835842724,"timestamp":1532158364116},"problemsL/LA027_tgt.mdl":{"score":12195083848,"timestamp":1532158364117},"problemsL/LA028_tgt.mdl":{"score":10089000648,"timestamp":1532158364118},"problemsL/LA029_tgt.mdl":{"score":24385955548,"timestamp":1532158364121},"problemsL/LA030_tgt.mdl":{"score":20173789148,"timestamp":1532158364123},"problemsL/LA031_tgt.mdl":{"score":23136893784,"timestamp":1532158364126},"problemsL/LA032_tgt.mdl":{"score":19391305816,"timestamp":1532158364129},"problemsL/LA033_tgt.mdl":{"score":21242221356,"timestamp":1532158364132},"problemsL/LA034_tgt.mdl":{"score":19987481788,"timestamp":1532158364135},"problemsL/LA035_tgt.mdl":{"score":23739550012,"timestamp":1532158364138},"problemsL/LA036_tgt.mdl":{"score":20398978044,"timestamp":1532158364141},"problemsL/LA037_tgt.mdl":{"score":19746902284,"timestamp":1532158364143},"problemsL/LA038_tgt.mdl":{"score":23544324180,"timestamp":1532158364147},"problemsL/LA039_tgt.mdl":{"score":22257183332,"timestamp":1532158364150},"problemsL/LA040_tgt.mdl":{"score":22492122912,"timestamp":1532158364153},"problemsL/LA041_tgt.mdl":{"score":25475470768,"timestamp":1532158364157},"problemsL/LA042_tgt.mdl":{"score":114259120196,"timestamp":1532158364163},"problemsL/LA043_tgt.mdl":{"score":46004176728,"timestamp":1532158364166},"problemsL/LA044_tgt.mdl":{"score":116040982732,"timestamp":1532158364181},"problemsL/LA045_tgt.mdl":{"score":102310808960,"timestamp":1532158364186},"problemsL/LA046_tgt.mdl":{"score":112348736256,"timestamp":1532158364190},"problemsL/LA047_tgt.mdl":{"score":18693730480,"timestamp":1532158364191},"problemsL/LA048_tgt.mdl":{"score":30676597692,"timestamp":1532158364192},"problemsL/LA049_tgt.mdl":{"score":92138489084,"timestamp":1532158364195},"problemsL/LA050_tgt.mdl":{"score":207837538792,"timestamp":1532158364203},"problemsL/LA051_tgt.mdl":{"score":39001826084,"timestamp":1532158364205},"problemsL/LA052_tgt.mdl":{"score":77746023572,"timestamp":1532158364208},"problemsL/LA053_tgt.mdl":{"score":74775762168,"timestamp":1532158364211},"problemsL/LA054_tgt.mdl":{"score":1547924140,"timestamp":1532158364212},"problemsL/LA055_tgt.mdl":{"score":40919937352,"timestamp":1532158364213},"problemsL/LA056_tgt.mdl":{"score":40610816940,"timestamp":1532158364215},"problemsL/LA057_tgt.mdl":{"score":380013105240,"timestamp":1532158364220},"problemsL/LA058_tgt.mdl":{"score":417059610808,"timestamp":1532158364247},"problemsL/LA059_tgt.mdl":{"score":345299202456,"timestamp":1532158364255},"problemsL/LA060_tgt.mdl":{"score":478740024864,"timestamp":1532158364267},"problemsL/LA061_tgt.mdl":{"score":384072259248,"timestamp":1532158364272},"problemsL/LA062_tgt.mdl":{"score":470593580272,"timestamp":1532158364280},"problemsL/LA063_tgt.mdl":{"score":334325266844,"timestamp":1532158364286},"problemsL/LA064_tgt.mdl":{"score":591860713620,"timestamp":1532158364294},"problemsL/LA065_tgt.mdl":{"score":1158953995168,"timestamp":1532158364325},"problemsL/LA066_tgt.mdl":{"score":503784239996,"timestamp":1532158364333},"problemsL/LA067_tgt.mdl":{"score":778375285076,"timestamp":1532158364343},"problemsL/LA068_tgt.mdl":{"score":405657323920,"timestamp":1532158364349},"problemsL/LA069_tgt.mdl":{"score":821655417104,"timestamp":1532158364359},"problemsL/LA070_tgt.mdl":{"score":424002348892,"timestamp":1532158364366},"problemsL/LA071_tgt.mdl":{"score":320010774596,"timestamp":1532158364371},"problemsL/LA072_tgt.mdl":{"score":445677883052,"timestamp":1532158364376},"problemsL/LA073_tgt.mdl":{"score":648645227016,"timestamp":1532158364385},"problemsL/LA074_tgt.mdl":{"score":899156717004,"timestamp":1532158364398},"problemsL/LA075_tgt.mdl":{"score":1362290361196,"timestamp":1532158364428},"problemsL/LA076_tgt.mdl":{"score":990589791004,"timestamp":1532158364437},"problemsL/LA077_tgt.mdl":{"score":278130470440,"timestamp":1532158364440},"problemsL/LA078_tgt.mdl":{"score":918746905968,"timestamp":1532158364446},"problemsL/LA079_tgt.mdl":{"score":1184857139060,"timestamp":1532158364452},"problemsL/LA080_tgt.mdl":{"score":864477249900,"timestamp":1532158364458},"problemsL/LA081_tgt.mdl":{"score":1442488715504,"timestamp":1532158364467},"problemsL/LA082_tgt.mdl":{"score":1708619486480,"timestamp":1532158364477},"problemsL/LA083_tgt.mdl":{"score":1058835122096,"timestamp":1532158364482},"problemsL/LA084_tgt.mdl":{"score":1936059553736,"timestamp":1532158364490},"problemsL/LA085_tgt.mdl":{"score":5867532392508,"timestamp":1532158364519},"problemsL/LA086_tgt.mdl":{"score":613236676416,"timestamp":1532158364523},"problemsL/LA087_tgt.mdl":{"score":232523132984,"timestamp":1532158364526},"problemsL/LA088_tgt.mdl":{"score":178686248124,"timestamp":1532158364530},"problemsL/LA089_tgt.mdl":{"score":1879916556088,"timestamp":1532158364544},"problemsL/LA090_tgt.mdl":{"score":11237428456952,"timestamp":1532158364610},"problemsL/LA091_tgt.mdl":{"score":1676012282628,"timestamp":1532158364625},"problemsL/LA092_tgt.mdl":{"score":2061149608696,"timestamp":1532158364640},"problemsL/LA093_tgt.mdl":{"score":2203167968968,"timestamp":1532158364653},"problemsL/LA094_tgt.mdl":{"score":3845814716784,"timestamp":1532158364673},"problemsL/LA095_tgt.mdl":{"score":708069477024,"timestamp":1532158364681},"problemsL/LA096_tgt.mdl":{"score":6432688784096,"timestamp":1532158364725},"problemsL/LA097_tgt.mdl":{"score":3026941340600,"timestamp":1532158364734},"problemsL/LA098_tgt.mdl":{"score":3257741213512,"timestamp":1532158364746},"problemsL/LA099_tgt.mdl":{"score":6130526068852,"timestamp":1532158364764},"problemsL/LA100_tgt.mdl":{"score":2351760910796,"timestamp":1532158364773},"problemsL/LA101_tgt.mdl":{"score":904969572052,"timestamp":1532158364777},"problemsL/LA102_tgt.mdl":{"score":1649623515172,"timestamp":1532158364784},"problemsL/LA103_tgt.mdl":{"score":6977508661896,"timestamp":1532158364805},"problemsL/LA104_tgt.mdl":{"score":12743562563240,"timestamp":1532158364864},"problemsL/LA105_tgt.mdl":{"score":16639105453102,"timestamp":1532158364924},"problemsL/LA106_tgt.mdl":{"score":15362099501052,"timestamp":1532158364959},"problemsL/LA107_tgt.mdl":{"score":7294816300604,"timestamp":1532158364975},"problemsL/LA108_tgt.mdl":{"score":13853331018236,"timestamp":1532158365010},"problemsL/LA109_tgt.mdl":{"score":11593238013552,"timestamp":1532158365045},"problemsL/LA110_tgt.mdl":{"score":8521047197952,"timestamp":1532158365076},"problemsL/LA111_tgt.mdl":{"score":8884810892908,"timestamp":1532158365104},"problemsL/LA112_tgt.mdl":{"score":5278930391696,"timestamp":1532158365120},"problemsL/LA113_tgt.mdl":{"score":2095447608804,"timestamp":1532158365127},"problemsL/LA114_tgt.mdl":{"score":1053096842044,"timestamp":1532158365133},"problemsL/LA115_tgt.mdl":{"score":43643533140144,"timestamp":1532158365244},"problemsL/LA116_tgt.mdl":{"score":25678796308956,"timestamp":1532158365284},"problemsL/LA117_tgt.mdl":{"score":23246934210372,"timestamp":1532158365319},"problemsL/LA118_tgt.mdl":{"score":2915888457500,"timestamp":1532158365325},"problemsL/LA119_tgt.mdl":{"score":7578672220112,"timestamp":1532158365340},"problemsL/LA120_tgt.mdl":{"score":16721719229928,"timestamp":1532158365366},"problemsL/LA121_tgt.mdl":{"score":4085199386204,"timestamp":1532158365375},"problemsL/LA122_tgt.mdl":{"score":7628322090712,"timestamp":1532158365388},"problemsL/LA123_tgt.mdl":{"score":37889317953020,"timestamp":1532158365481},"problemsL/LA124_tgt.mdl":{"score":289896224084,"timestamp":1532158365483},"problemsL/LA125_tgt.mdl":{"score":17102808729044,"timestamp":1532158365504},"problemsL/LA126_tgt.mdl":{"score":9894763855668,"timestamp":1532158365521},"problemsL/LA127_tgt.mdl":{"score":6826511262728,"timestamp":1532158365532},"problemsL/LA128_tgt.mdl":{"score":11305844970840,"timestamp":1532158365551},"problemsL/LA129_tgt.mdl":{"score":8900412927568,"timestamp":1532158365566},"problemsL/LA130_tgt.mdl":{"score":14766527282652,"timestamp":1532158365586},"problemsL/LA131_tgt.mdl":{"score":15193367463268,"timestamp":1532158365607},"problemsL/LA132_tgt.mdl":{"score":9015942931320,"timestamp":1532158365621},"problemsL/LA133_tgt.mdl":{"score":8967552944364,"timestamp":1532158365635},"problemsL/LA134_tgt.mdl":{"score":7205381395876,"timestamp":1532158365646},"problemsL/LA135_tgt.mdl":{"score":5196880031636,"timestamp":1532158365655},"problemsL/LA136_tgt.mdl":{"score":16601928520792,"timestamp":1532158365685},"problemsL/LA137_tgt.mdl":{"score":72616580831932,"timestamp":1532158365768},"problemsL/LA138_tgt.mdl":{"score":79266515044248,"timestamp":1532158365875},"problemsL/LA139_tgt.mdl":{"score":43669424403624,"timestamp":1532158365916},"problemsL/LA140_tgt.mdl":{"score":12952136394064,"timestamp":1532158365929},"problemsL/LA141_tgt.mdl":{"score":22001071643284,"timestamp":1532158365948},"problemsL/LA142_tgt.mdl":{"score":3551000251176,"timestamp":1532158365955},"problemsL/LA143_tgt.mdl":{"score":21654936925000,"timestamp":1532158365982},"problemsL/LA144_tgt.mdl":{"score":82704862674520,"timestamp":1532158366078},"problemsL/LA145_tgt.mdl":{"score":56172666337572,"timestamp":1532158366120},"problemsL/LA146_tgt.mdl":{"score":27317006934304,"timestamp":1532158366145},"problemsL/LA147_tgt.mdl":{"score":25033557444608,"timestamp":1532158366167},"problemsL/LA148_tgt.mdl":{"score":46597036383372,"timestamp":1532158366219},"problemsL/LA149_tgt.mdl":{"score":39770069516096,"timestamp":1532158366255},"problemsL/LA150_tgt.mdl":{"score":27579939715408,"timestamp":1532158366280},"problemsL/LA151_tgt.mdl":{"score":27547954217804,"timestamp":1532158366304},"problemsL/LA152_tgt.mdl":{"score":52568075699696,"timestamp":1532158366354},"problemsL/LA153_tgt.mdl":{"score":12712480544188,"timestamp":1532158366370},"problemsL/LA154_tgt.mdl":{"score":29163445235880,"timestamp":1532158366398},"problemsL/LA155_tgt.mdl":{"score":7152793112484,"timestamp":1532158366407},"problemsL/LA156_tgt.mdl":{"score":11291959881104,"timestamp":1532158366421},"problemsL/LA157_tgt.mdl":{"score":63152888227964,"timestamp":1532158366464},"problemsL/LA158_tgt.mdl":{"score":39171724193900,"timestamp":1532158366492},"problemsL/LA159_tgt.mdl":{"score":17013425114676,"timestamp":1532158366507},"problemsL/LA160_tgt.mdl":{"score":43157029944216,"timestamp":1532158366535},"problemsL/LA161_tgt.mdl":{"score":38096571266940,"timestamp":1532158366564},"problemsL/LA162_tgt.mdl":{"score":113682404131060,"timestamp":1532158366657},"problemsL/LA163_tgt.mdl":{"score":209106622524412,"timestamp":1532158366859},"problemsL/LA164_tgt.mdl":{"score":301604296762512,"timestamp":1532158366980},"problemsL/LA165_tgt.mdl":{"score":216141178136592,"timestamp":1532158367071},"problemsL/LA166_tgt.mdl":{"score":61001109736364,"timestamp":1532158367106},"problemsL/LA167_tgt.mdl":{"score":137102307663380,"timestamp":1532158367180},"problemsL/LA168_tgt.mdl":{"score":46198244244012,"timestamp":1532158367206},"problemsL/LA169_tgt.mdl":{"score":143933083450968,"timestamp":1532158367268},"problemsL/LA170_tgt.mdl":{"score":159248112628116,"timestamp":1532158367343},"problemsL/LA171_tgt.mdl":{"score":56817781088216,"timestamp":1532158367368},"problemsL/LA172_tgt.mdl":{"score":86677504117104,"timestamp":1532158367409},"problemsL/LA173_tgt.mdl":{"score":1026356292625844,"timestamp":1532158367632},"problemsL/LA174_tgt.mdl":{"score":251868985569048,"timestamp":1532158367705},"problemsL/LA175_tgt.mdl":{"score":398454869586368,"timestamp":1532158367833},"problemsL/LA176_tgt.mdl":{"score":313068077236736,"timestamp":1532158367950},"problemsL/LA177_tgt.mdl":{"score":146023246474456,"timestamp":1532158368004},"problemsL/LA178_tgt.mdl":{"score":982122567357920,"timestamp":1532158368324},"problemsL/LA179_tgt.mdl":{"score":761317053608732,"timestamp":1532158369443},"problemsL/LA180_tgt.mdl":{"score":751443710418548,"timestamp":1532158369621},"problemsL/LA181_tgt.mdl":{"score":1790478455250280,"timestamp":1532158371407},"problemsL/LA182_tgt.mdl":{"score":736259157641300,"timestamp":1532158371538},"problemsL/LA183_tgt.mdl":{"score":550948183601692,"timestamp":1532158371663},"problemsL/LA184_tgt.mdl":{"score":1503745149502116,"timestamp":1532158371978},"problemsL/LA185_tgt.mdl":{"score":484180415428284,"timestamp":1532158372083},"problemsL/LA186_tgt.mdl":{"score":1582339515307896,"timestamp":1532158372373},"problemsF/FA001_tgt.mdl":{"score":335123860,"timestamp":1532259817767},"problemsF/FA002_tgt.mdl":{"score":165905180,"timestamp":1532259817775},"problemsF/FA003_tgt.mdl":{"score":142863608,"timestamp":1532259817780},"problemsF/FA004_tgt.mdl":{"score":1097434212,"timestamp":1532259817791},"problemsF/FA005_tgt.mdl":{"score":705484076,"timestamp":1532259817795},"problemsF/FA006_tgt.mdl":{"score":758284976,"timestamp":1532259817806},"problemsF/FA007_tgt.mdl":{"score":1528766296,"timestamp":1532259817823},"problemsF/FA008_tgt.mdl":{"score":1185055212,"timestamp":1532259817830},"problemsF/FA009_tgt.mdl":{"score":288318700,"timestamp":1532259817836},"problemsF/FA010_tgt.mdl":{"score":257595824,"timestamp":1532259817837},"problemsF/FA011_tgt.mdl":{"score":204790024,"timestamp":1532259817839},"problemsF/FA012_tgt.mdl":{"score":519461556,"timestamp":1532259817860},"problemsF/FA013_tgt.mdl":{"score":446494648,"timestamp":1532259817866},"problemsF/FA014_tgt.mdl":{"score":501700108,"timestamp":1532259817874},"problemsF/FA015_tgt.mdl":{"score":337283328,"timestamp":1532259817875},"problemsF/FA016_tgt.mdl":{"score":568667136,"timestamp":1532259817887},"problemsF/FA017_tgt.mdl":{"score":510821324,"timestamp":1532259817896},"problemsF/FA018_tgt.mdl":{"score":511061356,"timestamp":1532259817903},"problemsF/FA019_tgt.mdl":{"score":35590318172,"timestamp":1532259818006},"problemsF/FA020_tgt.mdl":{"score":21353195740,"timestamp":1532259818042},"problemsF/FA021_tgt.mdl":{"score":28105622492,"timestamp":1532259818064},"problemsF/FA022_tgt.mdl":{"score":24353554268,"timestamp":1532259818115},"problemsF/FA023_tgt.mdl":{"score":26223100004,"timestamp":1532259818159},"problemsF/FA024_tgt.mdl":{"score":24279023204,"timestamp":1532259818194},"problemsF/FA025_tgt.mdl":{"score":33688354916,"timestamp":1532259818227},"problemsF/FA026_tgt.mdl":{"score":29835842724,"timestamp":1532259818260},"problemsF/FA027_tgt.mdl":{"score":12195083848,"timestamp":1532259818272},"problemsF/FA028_tgt.mdl":{"score":10089000648,"timestamp":1532259818274},"problemsF/FA029_tgt.mdl":{"score":24385955548,"timestamp":1532259818292},"problemsF/FA030_tgt.mdl":{"score":20173789148,"timestamp":1532259818310},"problemsF/FA031_tgt.mdl":{"score":23136893784,"timestamp":1532259818320},"problemsF/FA032_tgt.mdl":{"score":19391305816,"timestamp":1532259818328},"problemsF/FA033_tgt.mdl":{"score":21242221356,"timestamp":1532259818332},"problemsF/FA034_tgt.mdl":{"score":19987481788,"timestamp":1532259818338},"problemsF/FA035_tgt.mdl":{"score":23739550012,"timestamp":1532259818344},"problemsF/FA036_tgt.mdl":{"score":20398978044,"timestamp":1532259818350},"problemsF/FA037_tgt.mdl":{"score":19746902284,"timestamp":1532259818354},"problemsF/FA038_tgt.mdl":{"score":23544324180,"timestamp":1532259818361},"problemsF/FA039_tgt.mdl":{"score":22257183332,"timestamp":1532259818372},"problemsF/FA040_tgt.mdl":{"score":22492122912,"timestamp":1532259818377},"problemsF/FA041_tgt.mdl":{"score":25475470768,"timestamp":1532259818388},"problemsF/FA042_tgt.mdl":{"score":114259120196,"timestamp":1532259818399},"problemsF/FA043_tgt.mdl":{"score":46004176728,"timestamp":1532259818403},"problemsF/FA044_tgt.mdl":{"score":116040982732,"timestamp":1532259818412},"problemsF/FA045_tgt.mdl":{"score":102310808960,"timestamp":1532259818420},"problemsF/FA046_tgt.mdl":{"score":112348736256,"timestamp":1532259818436},"problemsF/FA047_tgt.mdl":{"score":18693730480,"timestamp":1532259818437},"problemsF/FA048_tgt.mdl":{"score":30676597692,"timestamp":1532259818439},"problemsF/FA049_tgt.mdl":{"score":92138489084,"timestamp":1532259818446},"problemsF/FA050_tgt.mdl":{"score":207837538792,"timestamp":1532259818462},"problemsF/FA051_tgt.mdl":{"score":39001826084,"timestamp":1532259818465},"problemsF/FA052_tgt.mdl":{"score":77746023572,"timestamp":1532259818471},"problemsF/FA053_tgt.mdl":{"score":74775762168,"timestamp":1532259818478},"problemsF/FA054_tgt.mdl":{"score":1547924140,"timestamp":1532259818479},"problemsF/FA055_tgt.mdl":{"score":40919937352,"timestamp":1532259818482},"problemsF/FA056_tgt.mdl":{"score":40610816940,"timestamp":1532259818485},"problemsF/FA057_tgt.mdl":{"score":380013105240,"timestamp":1532259818501},"problemsF/FA058_tgt.mdl":{"score":417059610808,"timestamp":1532259818519},"problemsF/FA059_tgt.mdl":{"score":345299202456,"timestamp":1532259818535},"problemsF/FA060_tgt.mdl":{"score":478740024864,"timestamp":1532259818552},"problemsF/FA061_tgt.mdl":{"score":384072259248,"timestamp":1532259818560},"problemsF/FA062_tgt.mdl":{"score":470593580272,"timestamp":1532259818569},"problemsF/FA063_tgt.mdl":{"score":334325266844,"timestamp":1532259818577},"problemsF/FA064_tgt.mdl":{"score":591860713620,"timestamp":1532259818589},"problemsF/FA065_tgt.mdl":{"score":1158953995168,"timestamp":1532259818626},"problemsF/FA066_tgt.mdl":{"score":503784239996,"timestamp":1532259818637},"problemsF/FA067_tgt.mdl":{"score":778375285076,"timestamp":1532259818654},"problemsF/FA068_tgt.mdl":{"score":405657323920,"timestamp":1532259818663},"problemsF/FA069_tgt.mdl":{"score":821655417104,"timestamp":1532259818693},"problemsF/FA070_tgt.mdl":{"score":424002348892,"timestamp":1532259818703},"problemsF/FA071_tgt.mdl":{"score":320010774596,"timestamp":1532259818710},"problemsF/FA072_tgt.mdl":{"score":445677883052,"timestamp":1532259818721},"problemsF/FA073_tgt.mdl":{"score":648645227016,"timestamp":1532259818739},"problemsF/FA074_tgt.mdl":{"score":899156717004,"timestamp":1532259818765},"problemsF/FA075_tgt.mdl":{"score":1362290361196,"timestamp":1532259818804},"problemsF/FA076_tgt.mdl":{"score":990589791004,"timestamp":1532259818843},"problemsF/FA077_tgt.mdl":{"score":278130470440,"timestamp":1532259818851},"problemsF/FA078_tgt.mdl":{"score":918746905968,"timestamp":1532259818866},"problemsF/FA079_tgt.mdl":{"score":1184857139060,"timestamp":1532259818885},"problemsF/FA080_tgt.mdl":{"score":864477249900,"timestamp":1532259818898},"problemsF/FA081_tgt.mdl":{"score":1442488715504,"timestamp":1532259818921},"problemsF/FA082_tgt.mdl":{"score":1708619486480,"timestamp":1532259818947},"problemsF/FA083_tgt.mdl":{"score":1058835122096,"timestamp":1532259818962},"problemsF/FA084_tgt.mdl":{"score":1936059553736,"timestamp":1532259818992},"problemsF/FA085_tgt.mdl":{"score":5867532392508,"timestamp":1532259819063},"problemsF/FA086_tgt.mdl":{"score":613236676416,"timestamp":1532259819071},"problemsF/FA087_tgt.mdl":{"score":232523132984,"timestamp":1532259819074},"problemsF/FA088_tgt.mdl":{"score":178686248124,"timestamp":1532259819076},"problemsF/FA089_tgt.mdl":{"score":1879916556088,"timestamp":1532259819094},"problemsF/FA090_tgt.mdl":{"score":11237428456952,"timestamp":1532259819197},"problemsF/FA091_tgt.mdl":{"score":1676012282628,"timestamp":1532259819214},"problemsF/FA092_tgt.mdl":{"score":2061149608696,"timestamp":1532259819238},"problemsF/FA093_tgt.mdl":{"score":2203167968968,"timestamp":1532259819265},"problemsF/FA094_tgt.mdl":{"score":3845814716784,"timestamp":1532259819312},"problemsF/FA095_tgt.mdl":{"score":708069477024,"timestamp":1532259819323},"problemsF/FA096_tgt.mdl":{"score":6432688784096,"timestamp":1532259819400},"problemsF/FA097_tgt.mdl":{"score":3026941340600,"timestamp":1532259819448},"problemsF/FA098_tgt.mdl":{"score":3257741213512,"timestamp":1532259819476},"problemsF/FA099_tgt.mdl":{"score":6130526068852,"timestamp":1532259819525},"problemsF/FA100_tgt.mdl":{"score":2351760910796,"timestamp":1532259819545},"problemsF/FA101_tgt.mdl":{"score":904969572052,"timestamp":1532259819554},"problemsF/FA102_tgt.mdl":{"score":1649623515172,"timestamp":1532259819569},"problemsF/FA103_tgt.mdl":{"score":6977508661896,"timestamp":1532259819626},"problemsF/FA104_tgt.mdl":{"score":12743562563240,"timestamp":1532259819717},"problemsF/FA105_tgt.mdl":{"score":16639105453102,"timestamp":1532259819863},"problemsF/FA106_tgt.mdl":{"score":15362099501052,"timestamp":1532259819954},"problemsF/FA107_tgt.mdl":{"score":7294816300604,"timestamp":1532259819996},"problemsF/FA108_tgt.mdl":{"score":13853331018236,"timestamp":1532259820079},"problemsF/FA109_tgt.mdl":{"score":11593238013552,"timestamp":1532259820165},"problemsF/FA110_tgt.mdl":{"score":8521047197952,"timestamp":1532259820236},"problemsF/FA111_tgt.mdl":{"score":8884810892908,"timestamp":1532259820308},"problemsF/FA112_tgt.mdl":{"score":5278930391696,"timestamp":1532259820341},"problemsF/FA113_tgt.mdl":{"score":2095447608804,"timestamp":1532259820356},"problemsF/FA114_tgt.mdl":{"score":1053096842044,"timestamp":1532259820366},"problemsF/FA115_tgt.mdl":{"score":43643533140144,"timestamp":1532259820649},"problemsF/FA116_tgt.mdl":{"score":25678796308956,"timestamp":1532259820756},"problemsF/FA117_tgt.mdl":{"score":23246934210372,"timestamp":1532259820852},"problemsF/FA118_tgt.mdl":{"score":2915888457500,"timestamp":1532259820871},"problemsF/FA119_tgt.mdl":{"score":7578672220112,"timestamp":1532259820912},"problemsF/FA120_tgt.mdl":{"score":16721719229928,"timestamp":1532259820985},"problemsF/FA121_tgt.mdl":{"score":4085199386204,"timestamp":1532259821007},"problemsF/FA122_tgt.mdl":{"score":7628322090712,"timestamp":1532259821043},"problemsF/FA123_tgt.mdl":{"score":37889317953020,"timestamp":1532259821275},"problemsF/FA124_tgt.mdl":{"score":289896224084,"timestamp":1532259821278},"problemsF/FA125_tgt.mdl":{"score":17102808729044,"timestamp":1532259821346},"problemsF/FA126_tgt.mdl":{"score":9894763855668,"timestamp":1532259821389},"problemsF/FA127_tgt.mdl":{"score":6826511262728,"timestamp":1532259821420},"problemsF/FA128_tgt.mdl":{"score":11305844970840,"timestamp":1532259821469},"problemsF/FA129_tgt.mdl":{"score":8900412927568,"timestamp":1532259821508},"problemsF/FA130_tgt.mdl":{"score":14766527282652,"timestamp":1532259821569},"problemsF/FA131_tgt.mdl":{"score":15193367463268,"timestamp":1532259821631},"problemsF/FA132_tgt.mdl":{"score":9015942931320,"timestamp":1532259821670},"problemsF/FA133_tgt.mdl":{"score":8967552944364,"timestamp":1532259821709},"problemsF/FA134_tgt.mdl":{"score":7205381395876,"timestamp":1532259821742},"problemsF/FA135_tgt.mdl":{"score":5196880031636,"timestamp":1532259821766},"problemsF/FA136_tgt.mdl":{"score":16601928520792,"timestamp":1532259821840},"problemsF/FA137_tgt.mdl":{"score":72616580831932,"timestamp":1532259822081},"problemsF/FA138_tgt.mdl":{"score":79266515044248,"timestamp":1532259822368},"problemsF/FA139_tgt.mdl":{"score":43669424403624,"timestamp":1532259822477},"problemsF/FA140_tgt.mdl":{"score":12952136394064,"timestamp":1532259822513},"problemsF/FA141_tgt.mdl":{"score":22001071643284,"timestamp":1532259822573},"problemsF/FA142_tgt.mdl":{"score":3551000251176,"timestamp":1532259822587},"problemsF/FA143_tgt.mdl":{"score":21654936925000,"timestamp":1532259822659},"problemsF/FA144_tgt.mdl":{"score":82704862674520,"timestamp":1532259822895},"problemsF/FA145_tgt.mdl":{"score":56172666337572,"timestamp":1532259823030},"problemsF/FA146_tgt.mdl":{"score":27317006934304,"timestamp":1532259823098},"problemsF/FA147_tgt.mdl":{"score":25033557444608,"timestamp":1532259823164},"problemsF/FA148_tgt.mdl":{"score":46597036383372,"timestamp":1532259823275},"problemsF/FA149_tgt.mdl":{"score":39770069516096,"timestamp":1532259823383},"problemsF/FA150_tgt.mdl":{"score":27579939715408,"timestamp":1532259823452},"problemsF/FA151_tgt.mdl":{"score":27547954217804,"timestamp":1532259823524},"problemsF/FA152_tgt.mdl":{"score":52568075699696,"timestamp":1532259823655},"problemsF/FA153_tgt.mdl":{"score":12712480544188,"timestamp":1532259823692},"problemsF/FA154_tgt.mdl":{"score":29163445235880,"timestamp":1532259823769},"problemsF/FA155_tgt.mdl":{"score":7152793112484,"timestamp":1532259823790},"problemsF/FA156_tgt.mdl":{"score":11291959881104,"timestamp":1532259823821},"problemsF/FA157_tgt.mdl":{"score":63152888227964,"timestamp":1532259823945},"problemsF/FA158_tgt.mdl":{"score":39171724193900,"timestamp":1532259824022},"problemsF/FA159_tgt.mdl":{"score":17013425114676,"timestamp":1532259824053},"problemsF/FA160_tgt.mdl":{"score":43157029944216,"timestamp":1532259824126},"problemsF/FA161_tgt.mdl":{"score":38096571266940,"timestamp":1532259824197},"problemsF/FA162_tgt.mdl":{"score":113682404131060,"timestamp":1532259824420},"problemsF/FA163_tgt.mdl":{"score":209106622524412,"timestamp":1532259824870},"problemsF/FA164_tgt.mdl":{"score":301604296762512,"timestamp":1532259825371},"problemsF/FA165_tgt.mdl":{"score":216141178136592,"timestamp":1532259825637},"problemsF/FA166_tgt.mdl":{"score":61001109736364,"timestamp":1532259825709},"problemsF/FA167_tgt.mdl":{"score":137102307663380,"timestamp":1532259825873},"problemsF/FA168_tgt.mdl":{"score":46198244244012,"timestamp":1532259825930},"problemsF/FA169_tgt.mdl":{"score":143933083450968,"timestamp":1532259826089},"problemsF/FA170_tgt.mdl":{"score":159248112628116,"timestamp":1532259826272},"problemsF/FA171_tgt.mdl":{"score":56817781088216,"timestamp":1532259826335},"problemsF/FA172_tgt.mdl":{"score":86677504117104,"timestamp":1532259826428},"problemsF/FA173_tgt.mdl":{"score":1026356292625844,"timestamp":1532259827269},"problemsF/FA174_tgt.mdl":{"score":251868985569048,"timestamp":1532259827456},"problemsF/FA175_tgt.mdl":{"score":398454869586368,"timestamp":1532259827758},"problemsF/FA176_tgt.mdl":{"score":313068077236736,"timestamp":1532259827989},"problemsF/FA177_tgt.mdl":{"score":146023246474456,"timestamp":1532259828138},"problemsF/FA178_tgt.mdl":{"score":982122567357920,"timestamp":1532259828905},"problemsF/FA179_tgt.mdl":{"score":761317053608732,"timestamp":1532259829427},"problemsF/FA180_tgt.mdl":{"score":751443710418548,"timestamp":1532259830693},"problemsF/FA181_tgt.mdl":{"score":1790478455250280,"timestamp":1532259831579},"problemsF/FA182_tgt.mdl":{"score":736259157641300,"timestamp":1532259831983},"problemsF/FA183_tgt.mdl":{"score":550948183601692,"timestamp":1532259832294},"problemsF/FA184_tgt.mdl":{"score":1503745149502116,"timestamp":1532259833224},"problemsF/FA185_tgt.mdl":{"score":484180415428284,"timestamp":1532259833483},"problemsF/FA186_tgt.mdl":{"score":1582339515307896,"timestamp":1532259834129}}
+{
+  "problemsF/FA001_tgt.mdl": {
+    "score": 335123860,
+    "timestamp": 1532261775441
+  },
+  "problemsF/FA002_tgt.mdl": {
+    "score": 165905180,
+    "timestamp": 1532261775448
+  },
+  "problemsF/FA003_tgt.mdl": {
+    "score": 142863608,
+    "timestamp": 1532261775453
+  },
+  "problemsF/FA004_tgt.mdl": {
+    "score": 1097434212,
+    "timestamp": 1532261775461
+  },
+  "problemsF/FA005_tgt.mdl": {
+    "score": 705484076,
+    "timestamp": 1532261775464
+  },
+  "problemsF/FA006_tgt.mdl": {
+    "score": 758284976,
+    "timestamp": 1532261775470
+  },
+  "problemsF/FA007_tgt.mdl": {
+    "score": 1528766296,
+    "timestamp": 1532261775480
+  },
+  "problemsF/FA008_tgt.mdl": {
+    "score": 1185055212,
+    "timestamp": 1532261775485
+  },
+  "problemsF/FA009_tgt.mdl": {
+    "score": 288318700,
+    "timestamp": 1532261775498
+  },
+  "problemsF/FA010_tgt.mdl": {
+    "score": 257595824,
+    "timestamp": 1532261775499
+  },
+  "problemsF/FA011_tgt.mdl": {
+    "score": 204790024,
+    "timestamp": 1532261775501
+  },
+  "problemsF/FA012_tgt.mdl": {
+    "score": 519461556,
+    "timestamp": 1532261775503
+  },
+  "problemsF/FA013_tgt.mdl": {
+    "score": 446494648,
+    "timestamp": 1532261775509
+  },
+  "problemsF/FA014_tgt.mdl": {
+    "score": 501700108,
+    "timestamp": 1532261775514
+  },
+  "problemsF/FA015_tgt.mdl": {
+    "score": 337283328,
+    "timestamp": 1532261775521
+  },
+  "problemsF/FA016_tgt.mdl": {
+    "score": 568667136,
+    "timestamp": 1532261775528
+  },
+  "problemsF/FA017_tgt.mdl": {
+    "score": 510821324,
+    "timestamp": 1532261775532
+  },
+  "problemsF/FA018_tgt.mdl": {
+    "score": 511061356,
+    "timestamp": 1532261775536
+  },
+  "problemsF/FA019_tgt.mdl": {
+    "score": 35590318172,
+    "timestamp": 1532261775585
+  },
+  "problemsF/FA020_tgt.mdl": {
+    "score": 21353195740,
+    "timestamp": 1532261775653
+  },
+  "problemsF/FA021_tgt.mdl": {
+    "score": 28105622492,
+    "timestamp": 1532261775707
+  },
+  "problemsF/FA022_tgt.mdl": {
+    "score": 24353554268,
+    "timestamp": 1532261775776
+  },
+  "problemsF/FA023_tgt.mdl": {
+    "score": 26223100004,
+    "timestamp": 1532261775841
+  },
+  "problemsF/FA024_tgt.mdl": {
+    "score": 24279023204,
+    "timestamp": 1532261775900
+  },
+  "problemsF/FA025_tgt.mdl": {
+    "score": 33688354916,
+    "timestamp": 1532261775956
+  },
+  "problemsF/FA026_tgt.mdl": {
+    "score": 29835842724,
+    "timestamp": 1532261776009
+  },
+  "problemsF/FA027_tgt.mdl": {
+    "score": 12195083848,
+    "timestamp": 1532261776047
+  },
+  "problemsF/FA028_tgt.mdl": {
+    "score": 10089000648,
+    "timestamp": 1532261776087
+  },
+  "problemsF/FA029_tgt.mdl": {
+    "score": 24385955548,
+    "timestamp": 1532261776139
+  },
+  "problemsF/FA030_tgt.mdl": {
+    "score": 20173789148,
+    "timestamp": 1532261776186
+  },
+  "problemsF/FA031_tgt.mdl": {
+    "score": 23136893784,
+    "timestamp": 1532261776222
+  },
+  "problemsF/FA032_tgt.mdl": {
+    "score": 19391305816,
+    "timestamp": 1532261776239
+  },
+  "problemsF/FA033_tgt.mdl": {
+    "score": 21242221356,
+    "timestamp": 1532261776254
+  },
+  "problemsF/FA034_tgt.mdl": {
+    "score": 19987481788,
+    "timestamp": 1532261776269
+  },
+  "problemsF/FA035_tgt.mdl": {
+    "score": 23739550012,
+    "timestamp": 1532261776288
+  },
+  "problemsF/FA036_tgt.mdl": {
+    "score": 20398978044,
+    "timestamp": 1532261776312
+  },
+  "problemsF/FA037_tgt.mdl": {
+    "score": 19746902284,
+    "timestamp": 1532261776327
+  },
+  "problemsF/FA038_tgt.mdl": {
+    "score": 23544324180,
+    "timestamp": 1532261776350
+  },
+  "problemsF/FA039_tgt.mdl": {
+    "score": 22257183332,
+    "timestamp": 1532261776383
+  },
+  "problemsF/FA040_tgt.mdl": {
+    "score": 22492122912,
+    "timestamp": 1532261776403
+  },
+  "problemsF/FA041_tgt.mdl": {
+    "score": 25475470768,
+    "timestamp": 1532261776414
+  },
+  "problemsF/FA042_tgt.mdl": {
+    "score": 114259120196,
+    "timestamp": 1532261776430
+  },
+  "problemsF/FA043_tgt.mdl": {
+    "score": 46004176728,
+    "timestamp": 1532261776443
+  },
+  "problemsF/FA044_tgt.mdl": {
+    "score": 116040982732,
+    "timestamp": 1532261776457
+  },
+  "problemsF/FA045_tgt.mdl": {
+    "score": 102310808960,
+    "timestamp": 1532261776465
+  },
+  "problemsF/FA046_tgt.mdl": {
+    "score": 112348736256,
+    "timestamp": 1532261776474
+  },
+  "problemsF/FA047_tgt.mdl": {
+    "score": 18693730480,
+    "timestamp": 1532261776477
+  },
+  "problemsF/FA048_tgt.mdl": {
+    "score": 30676597692,
+    "timestamp": 1532261776480
+  },
+  "problemsF/FA049_tgt.mdl": {
+    "score": 92138489084,
+    "timestamp": 1532261776486
+  },
+  "problemsF/FA050_tgt.mdl": {
+    "score": 207837538792,
+    "timestamp": 1532261776505
+  },
+  "problemsF/FA051_tgt.mdl": {
+    "score": 39001826084,
+    "timestamp": 1532261776510
+  },
+  "problemsF/FA052_tgt.mdl": {
+    "score": 77746023572,
+    "timestamp": 1532261776516
+  },
+  "problemsF/FA053_tgt.mdl": {
+    "score": 74775762168,
+    "timestamp": 1532261776528
+  },
+  "problemsF/FA054_tgt.mdl": {
+    "score": 1547924140,
+    "timestamp": 1532261776529
+  },
+  "problemsF/FA055_tgt.mdl": {
+    "score": 40919937352,
+    "timestamp": 1532261776538
+  },
+  "problemsF/FA056_tgt.mdl": {
+    "score": 40610816940,
+    "timestamp": 1532261776553
+  },
+  "problemsF/FA057_tgt.mdl": {
+    "score": 380013105240,
+    "timestamp": 1532261776572
+  },
+  "problemsF/FA058_tgt.mdl": {
+    "score": 417059610808,
+    "timestamp": 1532261776590
+  },
+  "problemsF/FA059_tgt.mdl": {
+    "score": 345299202456,
+    "timestamp": 1532261776605
+  },
+  "problemsF/FA060_tgt.mdl": {
+    "score": 478740024864,
+    "timestamp": 1532261776623
+  },
+  "problemsF/FA061_tgt.mdl": {
+    "score": 384072259248,
+    "timestamp": 1532261776633
+  },
+  "problemsF/FA062_tgt.mdl": {
+    "score": 470593580272,
+    "timestamp": 1532261776661
+  },
+  "problemsF/FA063_tgt.mdl": {
+    "score": 334325266844,
+    "timestamp": 1532261776681
+  },
+  "problemsF/FA064_tgt.mdl": {
+    "score": 591860713620,
+    "timestamp": 1532261776702
+  },
+  "problemsF/FA065_tgt.mdl": {
+    "score": 1158953995168,
+    "timestamp": 1532261776730
+  },
+  "problemsF/FA066_tgt.mdl": {
+    "score": 503784239996,
+    "timestamp": 1532261776743
+  },
+  "problemsF/FA067_tgt.mdl": {
+    "score": 778375285076,
+    "timestamp": 1532261776762
+  },
+  "problemsF/FA068_tgt.mdl": {
+    "score": 405657323920,
+    "timestamp": 1532261776775
+  },
+  "problemsF/FA069_tgt.mdl": {
+    "score": 821655417104,
+    "timestamp": 1532261776802
+  },
+  "problemsF/FA070_tgt.mdl": {
+    "score": 424002348892,
+    "timestamp": 1532261776822
+  },
+  "problemsF/FA071_tgt.mdl": {
+    "score": 320010774596,
+    "timestamp": 1532261776832
+  },
+  "problemsF/FA072_tgt.mdl": {
+    "score": 445677883052,
+    "timestamp": 1532261776846
+  },
+  "problemsF/FA073_tgt.mdl": {
+    "score": 648645227016,
+    "timestamp": 1532261776872
+  },
+  "problemsF/FA074_tgt.mdl": {
+    "score": 899156717004,
+    "timestamp": 1532261776894
+  },
+  "problemsF/FA075_tgt.mdl": {
+    "score": 1362290361196,
+    "timestamp": 1532261776928
+  },
+  "problemsF/FA076_tgt.mdl": {
+    "score": 990589791004,
+    "timestamp": 1532261776957
+  },
+  "problemsF/FA077_tgt.mdl": {
+    "score": 278130470440,
+    "timestamp": 1532261776967
+  },
+  "problemsF/FA078_tgt.mdl": {
+    "score": 918746905968,
+    "timestamp": 1532261776981
+  },
+  "problemsF/FA079_tgt.mdl": {
+    "score": 1184857139060,
+    "timestamp": 1532261776998
+  },
+  "problemsF/FA080_tgt.mdl": {
+    "score": 864477249900,
+    "timestamp": 1532261777013
+  },
+  "problemsF/FA081_tgt.mdl": {
+    "score": 1442488715504,
+    "timestamp": 1532261777040
+  },
+  "problemsF/FA082_tgt.mdl": {
+    "score": 1708619486480,
+    "timestamp": 1532261777075
+  },
+  "problemsF/FA083_tgt.mdl": {
+    "score": 1058835122096,
+    "timestamp": 1532261777094
+  },
+  "problemsF/FA084_tgt.mdl": {
+    "score": 1936059553736,
+    "timestamp": 1532261777121
+  },
+  "problemsF/FA085_tgt.mdl": {
+    "score": 5867532392508,
+    "timestamp": 1532261777180
+  },
+  "problemsF/FA086_tgt.mdl": {
+    "score": 613236676416,
+    "timestamp": 1532261777195
+  },
+  "problemsF/FA087_tgt.mdl": {
+    "score": 232523132984,
+    "timestamp": 1532261777202
+  },
+  "problemsF/FA088_tgt.mdl": {
+    "score": 178686248124,
+    "timestamp": 1532261777205
+  },
+  "problemsF/FA089_tgt.mdl": {
+    "score": 1879916556088,
+    "timestamp": 1532261777227
+  },
+  "problemsF/FA090_tgt.mdl": {
+    "score": 11237428456952,
+    "timestamp": 1532261777368
+  },
+  "problemsF/FA091_tgt.mdl": {
+    "score": 1676012282628,
+    "timestamp": 1532261777407
+  },
+  "problemsF/FA092_tgt.mdl": {
+    "score": 2061149608696,
+    "timestamp": 1532261777436
+  },
+  "problemsF/FA093_tgt.mdl": {
+    "score": 2203167968968,
+    "timestamp": 1532261777471
+  },
+  "problemsF/FA094_tgt.mdl": {
+    "score": 3845814716784,
+    "timestamp": 1532261777505
+  },
+  "problemsF/FA095_tgt.mdl": {
+    "score": 708069477024,
+    "timestamp": 1532261777517
+  },
+  "problemsF/FA096_tgt.mdl": {
+    "score": 6432688784096,
+    "timestamp": 1532261777572
+  },
+  "problemsF/FA097_tgt.mdl": {
+    "score": 3026941340600,
+    "timestamp": 1532261777606
+  },
+  "problemsF/FA098_tgt.mdl": {
+    "score": 3257741213512,
+    "timestamp": 1532261777637
+  },
+  "problemsF/FA099_tgt.mdl": {
+    "score": 6130526068852,
+    "timestamp": 1532261777691
+  },
+  "problemsF/FA100_tgt.mdl": {
+    "score": 2351760910796,
+    "timestamp": 1532261777718
+  },
+  "problemsF/FA101_tgt.mdl": {
+    "score": 904969572052,
+    "timestamp": 1532261777734
+  },
+  "problemsF/FA102_tgt.mdl": {
+    "score": 1649623515172,
+    "timestamp": 1532261777752
+  },
+  "problemsF/FA103_tgt.mdl": {
+    "score": 6977508661896,
+    "timestamp": 1532261777819
+  },
+  "problemsF/FA104_tgt.mdl": {
+    "score": 12743562563240,
+    "timestamp": 1532261777943
+  },
+  "problemsF/FA105_tgt.mdl": {
+    "score": 16639105453102,
+    "timestamp": 1532261778095
+  },
+  "problemsF/FA106_tgt.mdl": {
+    "score": 15362099501052,
+    "timestamp": 1532261778240
+  },
+  "problemsF/FA107_tgt.mdl": {
+    "score": 7294816300604,
+    "timestamp": 1532261778319
+  },
+  "problemsF/FA108_tgt.mdl": {
+    "score": 13853331018236,
+    "timestamp": 1532261778446
+  },
+  "problemsF/FA109_tgt.mdl": {
+    "score": 11593238013552,
+    "timestamp": 1532261778555
+  },
+  "problemsF/FA110_tgt.mdl": {
+    "score": 8521047197952,
+    "timestamp": 1532261778641
+  },
+  "problemsF/FA111_tgt.mdl": {
+    "score": 8884810892908,
+    "timestamp": 1532261778702
+  },
+  "problemsF/FA112_tgt.mdl": {
+    "score": 5278930391696,
+    "timestamp": 1532261778735
+  },
+  "problemsF/FA113_tgt.mdl": {
+    "score": 2095447608804,
+    "timestamp": 1532261778762
+  },
+  "problemsF/FA114_tgt.mdl": {
+    "score": 1053096842044,
+    "timestamp": 1532261778774
+  },
+  "problemsF/FA115_tgt.mdl": {
+    "score": 43643533140144,
+    "timestamp": 1532261778988
+  },
+  "problemsF/FA116_tgt.mdl": {
+    "score": 25678796308956,
+    "timestamp": 1532261779121
+  },
+  "problemsF/FA117_tgt.mdl": {
+    "score": 23246934210372,
+    "timestamp": 1532261779236
+  },
+  "problemsF/FA118_tgt.mdl": {
+    "score": 2915888457500,
+    "timestamp": 1532261779297
+  },
+  "problemsF/FA119_tgt.mdl": {
+    "score": 7578672220112,
+    "timestamp": 1532261779335
+  },
+  "problemsF/FA120_tgt.mdl": {
+    "score": 16721719229928,
+    "timestamp": 1532261779416
+  },
+  "problemsF/FA121_tgt.mdl": {
+    "score": 4085199386204,
+    "timestamp": 1532261779447
+  },
+  "problemsF/FA122_tgt.mdl": {
+    "score": 7628322090712,
+    "timestamp": 1532261779482
+  },
+  "problemsF/FA123_tgt.mdl": {
+    "score": 37889317953020,
+    "timestamp": 1532261779661
+  },
+  "problemsF/FA124_tgt.mdl": {
+    "score": 289896224084,
+    "timestamp": 1532261779685
+  },
+  "problemsF/FA125_tgt.mdl": {
+    "score": 17102808729044,
+    "timestamp": 1532261779757
+  },
+  "problemsF/FA126_tgt.mdl": {
+    "score": 9894763855668,
+    "timestamp": 1532261779817
+  },
+  "problemsF/FA127_tgt.mdl": {
+    "score": 6826511262728,
+    "timestamp": 1532261779853
+  },
+  "problemsF/FA128_tgt.mdl": {
+    "score": 11305844970840,
+    "timestamp": 1532261779912
+  },
+  "problemsF/FA129_tgt.mdl": {
+    "score": 8900412927568,
+    "timestamp": 1532261779974
+  },
+  "problemsF/FA130_tgt.mdl": {
+    "score": 14766527282652,
+    "timestamp": 1532261780066
+  },
+  "problemsF/FA131_tgt.mdl": {
+    "score": 15193367463268,
+    "timestamp": 1532261780164
+  },
+  "problemsF/FA132_tgt.mdl": {
+    "score": 9015942931320,
+    "timestamp": 1532261780258
+  },
+  "problemsF/FA133_tgt.mdl": {
+    "score": 8967552944364,
+    "timestamp": 1532261780318
+  },
+  "problemsF/FA134_tgt.mdl": {
+    "score": 7205381395876,
+    "timestamp": 1532261780368
+  },
+  "problemsF/FA135_tgt.mdl": {
+    "score": 5196880031636,
+    "timestamp": 1532261780406
+  },
+  "problemsF/FA136_tgt.mdl": {
+    "score": 16601928520792,
+    "timestamp": 1532261780476
+  },
+  "problemsF/FA137_tgt.mdl": {
+    "score": 72616580831932,
+    "timestamp": 1532261780658
+  },
+  "problemsF/FA138_tgt.mdl": {
+    "score": 79266515044248,
+    "timestamp": 1532261780860
+  },
+  "problemsF/FA139_tgt.mdl": {
+    "score": 43669424403624,
+    "timestamp": 1532261781000
+  },
+  "problemsF/FA140_tgt.mdl": {
+    "score": 12952136394064,
+    "timestamp": 1532261781047
+  },
+  "problemsF/FA141_tgt.mdl": {
+    "score": 22001071643284,
+    "timestamp": 1532261781105
+  },
+  "problemsF/FA142_tgt.mdl": {
+    "score": 3551000251176,
+    "timestamp": 1532261781126
+  },
+  "problemsF/FA143_tgt.mdl": {
+    "score": 21654936925000,
+    "timestamp": 1532261781188
+  },
+  "problemsF/FA144_tgt.mdl": {
+    "score": 82704862674520,
+    "timestamp": 1532261781485
+  },
+  "problemsF/FA145_tgt.mdl": {
+    "score": 56172666337572,
+    "timestamp": 1532261781640
+  },
+  "problemsF/FA146_tgt.mdl": {
+    "score": 27317006934304,
+    "timestamp": 1532261781761
+  },
+  "problemsF/FA147_tgt.mdl": {
+    "score": 25033557444608,
+    "timestamp": 1532261781831
+  },
+  "problemsF/FA148_tgt.mdl": {
+    "score": 46597036383372,
+    "timestamp": 1532261781944
+  },
+  "problemsF/FA149_tgt.mdl": {
+    "score": 39770069516096,
+    "timestamp": 1532261782062
+  },
+  "problemsF/FA150_tgt.mdl": {
+    "score": 27579939715408,
+    "timestamp": 1532261782146
+  },
+  "problemsF/FA151_tgt.mdl": {
+    "score": 27547954217804,
+    "timestamp": 1532261782224
+  },
+  "problemsF/FA152_tgt.mdl": {
+    "score": 52568075699696,
+    "timestamp": 1532261782405
+  },
+  "problemsF/FA153_tgt.mdl": {
+    "score": 12712480544188,
+    "timestamp": 1532261782478
+  },
+  "problemsF/FA154_tgt.mdl": {
+    "score": 29163445235880,
+    "timestamp": 1532261782585
+  },
+  "problemsF/FA155_tgt.mdl": {
+    "score": 7152793112484,
+    "timestamp": 1532261782627
+  },
+  "problemsF/FA156_tgt.mdl": {
+    "score": 11291959881104,
+    "timestamp": 1532261782673
+  },
+  "problemsF/FA157_tgt.mdl": {
+    "score": 63152888227964,
+    "timestamp": 1532261782893
+  },
+  "problemsF/FA158_tgt.mdl": {
+    "score": 39171724193900,
+    "timestamp": 1532261783023
+  },
+  "problemsF/FA159_tgt.mdl": {
+    "score": 17013425114676,
+    "timestamp": 1532261783080
+  },
+  "problemsF/FA160_tgt.mdl": {
+    "score": 43157029944216,
+    "timestamp": 1532261783188
+  },
+  "problemsF/FA161_tgt.mdl": {
+    "score": 38096571266940,
+    "timestamp": 1532261783261
+  },
+  "problemsF/FA162_tgt.mdl": {
+    "score": 113682404131060,
+    "timestamp": 1532261783483
+  },
+  "problemsF/FA163_tgt.mdl": {
+    "score": 209106622524412,
+    "timestamp": 1532261783817
+  },
+  "problemsF/FA164_tgt.mdl": {
+    "score": 301604296762512,
+    "timestamp": 1532261784244
+  },
+  "problemsF/FA165_tgt.mdl": {
+    "score": 216141178136592,
+    "timestamp": 1532261784583
+  },
+  "problemsF/FA166_tgt.mdl": {
+    "score": 61001109736364,
+    "timestamp": 1532261784714
+  },
+  "problemsF/FA167_tgt.mdl": {
+    "score": 137102307663380,
+    "timestamp": 1532261784886
+  },
+  "problemsF/FA168_tgt.mdl": {
+    "score": 46198244244012,
+    "timestamp": 1532261784958
+  },
+  "problemsF/FA169_tgt.mdl": {
+    "score": 143933083450968,
+    "timestamp": 1532261785120
+  },
+  "problemsF/FA170_tgt.mdl": {
+    "score": 159248112628116,
+    "timestamp": 1532261785319
+  },
+  "problemsF/FA171_tgt.mdl": {
+    "score": 56817781088216,
+    "timestamp": 1532261785404
+  },
+  "problemsF/FA172_tgt.mdl": {
+    "score": 86677504117104,
+    "timestamp": 1532261785503
+  },
+  "problemsF/FA173_tgt.mdl": {
+    "score": 1026356292625844,
+    "timestamp": 1532261787228
+  },
+  "problemsF/FA174_tgt.mdl": {
+    "score": 251868985569048,
+    "timestamp": 1532261787537
+  },
+  "problemsF/FA175_tgt.mdl": {
+    "score": 398454869586368,
+    "timestamp": 1532261787867
+  },
+  "problemsF/FA176_tgt.mdl": {
+    "score": 313068077236736,
+    "timestamp": 1532261788140
+  },
+  "problemsF/FA177_tgt.mdl": {
+    "score": 146023246474456,
+    "timestamp": 1532261788298
+  },
+  "problemsF/FA178_tgt.mdl": {
+    "score": 982122567357920,
+    "timestamp": 1532261789981
+  },
+  "problemsF/FA179_tgt.mdl": {
+    "score": 761317053608732,
+    "timestamp": 1532261790636
+  },
+  "problemsF/FA180_tgt.mdl": {
+    "score": 751443710418548,
+    "timestamp": 1532261791341
+  },
+  "problemsF/FA181_tgt.mdl": {
+    "score": 1790478455250280,
+    "timestamp": 1532261792403
+  },
+  "problemsF/FA182_tgt.mdl": {
+    "score": 736259157641300,
+    "timestamp": 1532261793108
+  },
+  "problemsF/FA183_tgt.mdl": {
+    "score": 550948183601692,
+    "timestamp": 1532261793475
+  },
+  "problemsF/FA184_tgt.mdl": {
+    "score": 1503745149502116,
+    "timestamp": 1532261794410
+  },
+  "problemsF/FA185_tgt.mdl": {
+    "score": 484180415428284,
+    "timestamp": 1532261794798
+  },
+  "problemsF/FA186_tgt.mdl": {
+    "score": 1582339515307896,
+    "timestamp": 1532261795706
+  }
+}

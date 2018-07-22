@@ -66,7 +66,7 @@ public class Board {
         if (!flip(x, y, z, 1)) {
             return false;
         }
-        filledCound ++;
+        filledCound++;
         uniteAdjacents(x, y, z);
         if (y == 0) {
             unionFind.unite(getPos(x, y, z), R * R * R);
@@ -74,8 +74,42 @@ public class Board {
         return true;
     }
 
+    private void resetConnectivityDfs(final int x, final int y, final int z, boolean reset) {
+        if (reset) {
+            unionFind.reset(getPos(x, y, z));
+        } else {
+            if ((y == 0) && get(x, y, z)) {
+                unionFind.unite(getPos(x, y, z), R * R * R);
+            }
+        }
+        for (final int[] d : Coordinate.ADJACENTS) {
+            if (in(x + d[0]) && in(y + d[1]) && in(z + d[2])) {
+                if (get(x + d[0], y + d[1], z + d[2])) {
+                    resetConnectivityDfs(x + d[0], y + d[1], z + d[2], reset);
+                    if (!reset && get(x, y, z)) {
+                        unionFind.unite(getPos(x, y, z), getPos(x + d[0], y + d[1], z + d[2]));
+                    }
+                }
+            }
+        }
+    }
+
+    public boolean doVoid(final int x, final int y, final int z) {
+        if (!flip(x, y, z, 0)) {
+            return false;
+        }
+        filledCound++;
+        resetConnectivityDfs(x, y, z, true);
+        resetConnectivityDfs(x, y, z, false);
+        return true;
+    }
+
     public boolean fill(final Coordinate p) {
         return fill(p.x, p.y, p.z);
+    }
+
+    public boolean doVoid(final Coordinate p) {
+        return doVoid(p.x, p.y, p.z);
     }
 
     public String getPath() {
