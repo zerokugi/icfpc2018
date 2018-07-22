@@ -52,20 +52,26 @@ public class SingleBotConstructSolver extends BaseConstructSolver {
 
     @Override
     public List<Trace> solve(final Board finalBoard) {
-        traces = new ArrayList<>();
         R = finalBoard.getR();
         vis = new byte[finalBoard.getBoard().length];
         canUps = new boolean[R * R * R];
         this.finalBoard = finalBoard;
         state = State.getInitialState(R);
-
-        final Coordinate start = getNearestPoint();
-        final Coordinate nextToStart = new Coordinate(start.x - 1, start.y, start.z - 1);
-
-        traces.addAll(go(new Coordinate(0, 0, 0), nextToStart));
-        dfs(start, nextToStart, true);
-        traces.addAll(go(nextToStart, new Coordinate(0, 0, 0)));
-        traces.add(new Trace(HALT));
+        List<Trace> resultTraces = new ArrayList<>();
+        while(true) {
+            final Coordinate start = getNearestPoint();
+            if (start == null) {
+                break;
+            }
+            final Coordinate nextToStart = new Coordinate(start.x - 1, start.y, start.z - 1);
+            traces = new ArrayList<>();
+            traces.addAll(go(new Coordinate(0, 0, 0), nextToStart));
+            dfs(start, nextToStart, true);
+            traces.addAll(go(nextToStart, new Coordinate(0, 0, 0)));
+            traces.addAll(resultTraces);
+            resultTraces = traces;
+        }
+        resultTraces.add(new Trace(HALT));
         return traces;
     }
 
@@ -150,13 +156,12 @@ public class SingleBotConstructSolver extends BaseConstructSolver {
                 for (int y = 0; y < R; y++) {
                     int z = d - x - y;
                     final Coordinate p = new Coordinate(x, y, z);
-                    if (finalBoard.in(p) && finalBoard.get(p)) {
+                    if (finalBoard.in(p) && !visited(p) && finalBoard.get(p)) {
                         return p;
                     }
                 }
             }
         }
-        assert false : "no fulls";
         return null;
     }
 }
