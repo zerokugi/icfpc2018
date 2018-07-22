@@ -180,7 +180,29 @@ public class Trace {
                     state.addEnergy(12);
                 }
             }
-        };
+        },
+        VOID {
+//            @Override
+//            public void execute(final State state, final Bot targetBot, final Trace trace, final boolean validate) {
+//                final Coordinate p = targetBot.pos.clone();
+//                p.applyNld(trace.val0);
+//                if (validate) {
+//                    System.out.printf("validate fill (%d, %d, %d)\n", p.x, p.y, p.z);
+//                    validVolatility(state, targetBot.pos);
+//                    validVolatility(state, p);
+//                    final int R = state.getBoard().getR();
+//                    assert 0 < Math.min(p.x, p.z) && Math.max(p.x, p.z) < R - 1 && 0 <= p.y && p.y < R
+//                            : "can not fill " + p;
+//                } else {
+//                    unfill(state, targetBot.pos);
+//                    unfill(state, p);
+//                    state.getBoard().fill(p);
+//                    state.addEnergy(12);
+//                }
+//            }
+        },
+        GFILL,
+        GVOID;
 
         public void execute(final State state, final Bot targetBot, final Trace trace, final boolean validate) {
             throw new UnsupportedOperationException();

@@ -73,7 +73,7 @@ public class DefaultConstructSolver extends BaseConstructSolver {
         try {
             final byte[] rawTraces = loadTraces(
                     finalBoard.getPath()
-                            .replace("problemsL", "dfltTracesL")
+                            .replace("problems", "dfltTraces")
                             .replace("_tgt.mdl", ".nbt")
             );
             return convertTraces(rawTraces);
