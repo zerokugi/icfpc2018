@@ -33,6 +33,10 @@ public class Board {
         return new Board(R, new byte[boardSize], "");
     }
 
+    public Board clone() {
+        return new Board(R, board, path);
+    }
+
     public byte[] getBoard() {
         return board;
     }
@@ -45,6 +49,9 @@ public class Board {
         return (x * R * R) + (y * R) + z;
     }
 
+    public int getPos(final Coordinate p) {
+        return getPos(p.x, p.y, p.z);
+    }
     public Coordinate fromPos(final int pos) {
         return new Coordinate(pos / (R * R), pos / R % R, pos % R);
     }

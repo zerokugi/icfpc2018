@@ -10,11 +10,11 @@ import icfpc2018.solver.construct.BaseConstructSolver;
 import java.util.ArrayList;
 import java.util.List;
 
+import static icfpc2018.TraceOptimizer.getOptimalMove;
+import static icfpc2018.TraceOptimizer.go;
 import static icfpc2018.models.Coordinate.ADJACENTS;
 import static icfpc2018.models.Coordinate.ADJACENTS_NOUP;
 import static icfpc2018.models.Coordinate.difference;
-import static icfpc2018.models.Coordinate.toLmove;
-import static icfpc2018.models.Coordinate.toSmove;
 import static icfpc2018.models.Trace.Type.FILL;
 import static icfpc2018.models.Trace.Type.FLIP;
 import static icfpc2018.models.Trace.Type.HALT;
@@ -32,21 +32,13 @@ public class SingleBotConstructSolver extends BaseConstructSolver {
     private List<Trace> traces;
     private State state;
 
-    public static Trace getOptimalMove(final Coordinate s, final Coordinate t) {
-        final Coordinate d = new Coordinate(t.x - s.x, t.y - s.y, t.z - s.z);
-        if (d.clen() == d.mlen()) {
-            return toSmove(d);
-        }
-        return toLmove(new Coordinate(d.x, (d.x == 0) ? d.y : 0, 0), new Coordinate(0, (d.z == 0) ? d.y : 0, d.z));
-    }
-
     private void visit(final Coordinate p) {
-        final int pos = finalBoard.getPos(p.x, p.y, p.z);
+        final int pos = finalBoard.getPos(p);
         vis[pos >> 3] |= 1 << (pos & 7);
     }
 
     private boolean visited(final Coordinate p) {
-        final int pos = finalBoard.getPos(p.x, p.y, p.z);
+        final int pos = finalBoard.getPos(p);
         return ((vis[pos >> 3] >> (pos & 7)) & 1) == 1;
     }
 
@@ -72,7 +64,7 @@ public class SingleBotConstructSolver extends BaseConstructSolver {
             resultTraces = traces;
         }
         resultTraces.add(new Trace(HALT));
-        return traces;
+        return resultTraces;
     }
 
     private void dfs(final Coordinate p, final Coordinate parent, boolean canUp) {
@@ -119,35 +111,6 @@ public class SingleBotConstructSolver extends BaseConstructSolver {
         } else {
             traces.add(new Trace(FLIP));
         }
-    }
-
-    private List<Trace> go(final Coordinate s, final Coordinate t) {
-        final Coordinate d = Coordinate.difference(s, t);
-        final List<Trace> traces = new ArrayList<>();
-        while (Math.abs(d.x) > 5) {
-            final int len = Math.max(-15, Math.min(d.x, 15));
-            traces.add(Coordinate.toSmove(new Coordinate(len, 0, 0)));
-            d.x -= len;
-        }
-        while (Math.abs(d.y) > 5) {
-            final int len = Math.max(-15, Math.min(d.y, 15));
-            traces.add(Coordinate.toSmove(new Coordinate(0, len, 0)));
-            d.y -= len;
-        }
-        while (Math.abs(d.z) > 5) {
-            final int len = Math.max(-15, Math.min(d.z, 15));
-            traces.add(Coordinate.toSmove(new Coordinate(0, 0, len)));
-            d.z -= len;
-        }
-        if (d.clen() > 0) {
-            if ((d.x != 0) && (d.y != 0) && (d.z != 0)) {
-                traces.add(getOptimalMove(new Coordinate(0, 0, 0), new Coordinate(d.x, d.y, 0)));
-                traces.add(getOptimalMove(new Coordinate(0, 0, 0), new Coordinate(0, 0, d.z)));
-            } else {
-                traces.add(getOptimalMove(new Coordinate(0, 0, 0), new Coordinate(d.x, d.y, d.z)));
-            }
-        }
-        return traces;
     }
 
     private Coordinate getNearestPoint() {

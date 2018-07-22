@@ -5,7 +5,7 @@ import icfpc2018.solver.deconstruct.reverse.ReverseDeconstructSolver;
 import icfpc2018.solver.reconstruct.BaseReconstructSolverTest;
 import org.junit.Before;
 
-public class ConcatenateReconstructSolverTest extends BaseReconstructSolverTest {
+public class ConcatenateSingleBotReconstructSolverTest extends BaseReconstructSolverTest {
     @Before
     public void setUp() {
         solver = new ConcatenateReconstructSolver<>(

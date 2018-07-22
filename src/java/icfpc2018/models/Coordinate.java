@@ -76,6 +76,11 @@ public class Coordinate {
     public static Trace toLmove(final Coordinate p1, final Coordinate p2) {
         assert (Ints.max(Math.abs(p1.x), Math.abs(p1.y), Math.abs(p1.z)) == (Math.abs(p1.x) + Math.abs(p1.y) + Math.abs(p1.z)));
         assert ((Math.abs(p1.x) + Math.abs(p1.y) + Math.abs(p1.z)) <= 15);
+        if (Ints.max(Math.abs(p2.x), Math.abs(p2.y), Math.abs(p2.z)) == (Math.abs(p2.x) + Math.abs(p2.y) + Math.abs(p2.z))) {
+
+        } else {
+            final int a = 0;
+        }
         assert (Ints.max(Math.abs(p2.x), Math.abs(p2.y), Math.abs(p2.z)) == (Math.abs(p2.x) + Math.abs(p2.y) + Math.abs(p2.z)));
         assert ((Math.abs(p2.x) + Math.abs(p2.y) + Math.abs(p2.z)) <= 15);
         return new Trace(

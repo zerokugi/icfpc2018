@@ -11,7 +11,7 @@ public abstract class BaseDeconstructSolver extends BaseSolver {
     public abstract List<Trace> solve(final Board initialBoard);
 
     public List<Trace> solve(final Board initialBoard, final Board finalBoard) {
-        assert finalBoard == null;
+        assert (finalBoard == null) || (finalBoard.getFilledCound() == 0);
         return solve(initialBoard);
     }
 }

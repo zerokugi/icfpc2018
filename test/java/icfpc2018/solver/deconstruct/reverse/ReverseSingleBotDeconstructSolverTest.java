@@ -8,7 +8,7 @@ import org.junit.Before;
  * @author ryosukek
  */
 
-public class ReverseDeconstructSolverTest extends BaseDeconstructSolverTest {
+public class ReverseSingleBotDeconstructSolverTest extends BaseDeconstructSolverTest {
     @Before
     public void setUp() {
         solver = new ReverseDeconstructSolver<>(

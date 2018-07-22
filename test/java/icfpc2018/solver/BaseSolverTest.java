@@ -5,13 +5,11 @@ import com.diogonunes.jcdp.color.api.Ansi;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.common.base.MoreObjects;
 import com.google.common.base.Strings;
 import icfpc2018.Game;
 import icfpc2018.TraceExporter;
 import icfpc2018.models.Board;
 import icfpc2018.models.Trace;
-import icfpc2018.solver.construct.BaseConstructSolver;
 import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -32,8 +30,6 @@ import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-
-import static icfpc2018.DebugUtil.outputBoard;
 
 @Ignore
 @RunWith(Parameterized.class)
@@ -207,8 +203,8 @@ public class BaseSolverTest {
         final Board srcBoard = Strings.isNullOrEmpty(srcPath) ? null : getState(srcPath);
         final Board tgtBoard = Strings.isNullOrEmpty(tgtPath) ? null : getState(tgtPath);
         final List<Trace> traces = solver.solve(
-                srcBoard,
-                tgtBoard
+                (srcBoard == null) ? Board.getInitialBoard(tgtBoard.getR()) : srcBoard,
+                (tgtBoard == null) ? Board.getInitialBoard(srcBoard.getR()) : tgtBoard
         );
         assert (tgtBoard == null) || ((0 < tgtBoard.getR()) && (tgtBoard.getR() <= 250));
         assert (srcBoard == null) || ((0 < srcBoard.getR()) && (srcBoard.getR() <= 250));
