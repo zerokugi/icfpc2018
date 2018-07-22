@@ -14,17 +14,27 @@ import static icfpc2018.models.Coordinate.toLmove;
 import static icfpc2018.models.Coordinate.toSmove;
 
 public class TraceOptimizer {
-    public static List<Trace> shortestPath(final Board board, final Coordinate start, final Coordinate end) {
+    final int R;
+    final long[] memo;
+    int count = 0;
+
+    public TraceOptimizer(final int r) {
+        R = r;
+        memo = new long[R * R * R];
+    }
+
+    public List<Trace> shortestPath(final Board board, final Coordinate start, final Coordinate end) {
         final Queue<Coordinate> queue = new ArrayDeque<>();
         final int R = board.getR();
         final int Rcube = R * R * R;
-
-        final int[] memo = new int[Rcube];
+        count ++;
+        final long bias = ((long)count) * 4 * Rcube;
 
         queue.add(start);
+        memo[board.getPos(start)] = bias + Rcube + board.getPos(start);
 
-        Coordinate c;
-        while ((c = queue.poll()) != null) {
+        while (!queue.isEmpty()) {
+            final Coordinate c = queue.poll();
             if (c.equals(end)) {
                 break;
             }
@@ -42,9 +52,9 @@ public class TraceOptimizer {
                             break;
                         }
                         final int pos = board.getPos(clone);
-                        if (memo[pos] < Rcube) {
+                        if (memo[pos] < bias) {
                             queue.add(clone);
-                            memo[pos] = (i * Rcube) + prevPos;
+                            memo[pos] = bias + (i * Rcube) + prevPos;
                         }
                     }
                 }
@@ -70,9 +80,9 @@ public class TraceOptimizer {
                                         break;
                                     }
                                     final int pos = board.getPos(clone2);
-                                    if (memo[pos] < Rcube) {
+                                    if (memo[pos] < bias) {
                                         queue.add(clone2);
-                                        memo[pos] = (i * Rcube) + prevPos;
+                                        memo[pos] = bias + (i * Rcube) + prevPos;
                                     }
                                 }
                             }
@@ -82,16 +92,16 @@ public class TraceOptimizer {
             }
         }
 
-        assert memo[board.getPos(end)] > Rcube
-                : "No way...";
         int prevPos = board.getPos(end);
+        assert memo[prevPos] >= bias
+                : "No way...";
         final List<Trace> traces = new ArrayList<>();
 
         // Revive trace
         while (prevPos != board.getPos(start)) {
             final Coordinate cTo = board.fromPos(prevPos);
-            int firstAxis = memo[prevPos] / Rcube; // 1:x, 2:y, 3:z
-            prevPos = memo[prevPos] % Rcube;
+            final int firstAxis = (int)(memo[prevPos] - bias) / Rcube; // 1:x, 2:y, 3:z
+            prevPos = (int)(memo[prevPos] - bias) % Rcube;
             final Coordinate cFrom = board.fromPos(prevPos);
 
             final Coordinate d = new Coordinate(cTo.x - cFrom.x, cTo.y - cFrom.y, cTo.z - cFrom.z);
