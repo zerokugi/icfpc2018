@@ -17,15 +17,17 @@ public class TraceOptimizerTest {
     public ExpectedException expectedException = ExpectedException.none();
 
     private Board board;
+    private TraceOptimizer traceOptimizer;
 
     @Before
     public void setUp(){
         board = Board.getInitialBoard(20);
+        traceOptimizer = new TraceOptimizer(board.getR());
     }
 
     @Test
     public void testShortestPathFindSmove() {
-        final List<Trace> traces = TraceOptimizer.shortestPath(board, new Coordinate(0, 0, 0), new Coordinate(4, 0, 0));
+        final List<Trace> traces = traceOptimizer.shortestPath(board, new Coordinate(0, 0, 0), new Coordinate(4, 0, 0));
 
         assertEquals(1, traces.size());
         assertEquals(Trace.Type.SMOVE, traces.get(0).type);
@@ -36,7 +38,7 @@ public class TraceOptimizerTest {
     @Test
     public void testShortestPathFindLmoveWithVoxel() {
         board.fill(2, 0, 0);
-        final List<Trace> traces = TraceOptimizer.shortestPath(board, new Coordinate(0, 0, 0), new Coordinate(4, 3, 0));
+        final List<Trace> traces = traceOptimizer.shortestPath(board, new Coordinate(0, 0, 0), new Coordinate(4, 3, 0));
 
         assertEquals(1, traces.size());
         assertEquals(Trace.Type.LMOVE, traces.get(0).type);
@@ -49,7 +51,7 @@ public class TraceOptimizerTest {
     @Test
     public void testShortestPathFindLongPath() {
         board.fill(2, 0, 0);
-        final List<Trace> traces = TraceOptimizer.shortestPath(board, new Coordinate(0, 0, 0), new Coordinate(19, 3, 0));
+        final List<Trace> traces = traceOptimizer.shortestPath(board, new Coordinate(0, 0, 0), new Coordinate(19, 3, 0));
 
         assertEquals(2, traces.size());
         assertEquals(Trace.Type.LMOVE, traces.get(0).type);
@@ -66,7 +68,7 @@ public class TraceOptimizerTest {
     public void testShortestPathFindLongestPath() {
         board.fill(2, 0, 0);
         board.fill(1, 0, 1);
-        final List<Trace> traces = TraceOptimizer.shortestPath(board, new Coordinate(1, 0, 0), new Coordinate(19, 3, 11));
+        final List<Trace> traces = traceOptimizer.shortestPath(board, new Coordinate(1, 0, 0), new Coordinate(19, 3, 11));
         traces.add(0, new Trace(Trace.Type.SMOVE, 1, 1 + 15));
         final Game game = new Game(board, traces);
         game.getState().getBoard().fill(2, 0, 0);
@@ -86,6 +88,6 @@ public class TraceOptimizerTest {
         board.fill(0, 1, 0);
         board.fill(1, 0, 0);
         board.fill(0, 0, 1);
-        TraceOptimizer.shortestPath(board, new Coordinate(0, 0, 0), new Coordinate(10, 9, 3));
+        traceOptimizer.shortestPath(board, new Coordinate(0, 0, 0), new Coordinate(10, 9, 3));
     }
 }
