@@ -141,6 +141,7 @@ public class BaseSolverTest {
                                 ratio - oldRatio
                         );
                     }
+
                     printer.print(path + ": ");
 
                     printer.print(t);
@@ -157,7 +158,9 @@ public class BaseSolverTest {
                     );
                     printer.println(path + ": " + s);
                 }
-                printer.clear();
+                printer.setAttribute(Ansi.Attribute.CLEAR);
+                printer.setForegroundColor(Ansi.FColor.NONE);
+                printer.setBackgroundColor(Ansi.BColor.NONE);
             }
             printer.println("totalEnergy = " + totalEnergy + "\n");
 
