@@ -8,6 +8,7 @@ import icfpc2018.models.Trace;
 import java.util.ArrayList;
 import java.util.List;
 
+import static icfpc2018.TraceOptimizer.lowerBoundMoveCount;
 import static icfpc2018.models.Trace.Type.FILL;
 import static icfpc2018.models.Trace.Type.VOID;
 
@@ -19,15 +20,7 @@ public class MoveOptimizedSolver<Solver extends BaseSolver> extends BaseSolver {
     }
 
     private static boolean isOptimized(final int traceNum, final Coordinate diff) {
-        final int x = Math.abs(diff.x);
-        final int y = Math.abs(diff.y);
-        final int z = Math.abs(diff.z);
-        final int lmoveCount = (x / 15) + (y / 15) + (z / 15)
-                + (((x % 15) > 5) ? 1 : 0) + (((y % 15) > 5) ? 1 : 0) + (((z % 15) > 5) ? 1 : 0);
-        final int smoveCount = ((((0 < (x % 15)) && ((x % 15) < 6)) ? 1 : 0))
-                + ((((0 < (y % 15)) && ((y % 15) < 6)) ? 1 : 0))
-                + ((((0 < (z % 15)) && ((z % 15) < 6)) ? 1 : 0));
-        return (lmoveCount + ((smoveCount + 1) / 2)) >= traceNum;
+        return lowerBoundMoveCount(diff) >= traceNum;
     }
 
     public static List<Trace> optimizeMove(final List<Trace> originalTraces, final Board initialBoard) {

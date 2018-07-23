@@ -4,12 +4,15 @@ import com.google.common.collect.Lists;
 import icfpc2018.models.Board;
 import icfpc2018.models.Coordinate;
 import icfpc2018.models.Trace;
+import javafx.util.Pair;
 
-import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.PriorityQueue;
 import java.util.Queue;
 
+import static icfpc2018.models.Coordinate.difference;
 import static icfpc2018.models.Coordinate.toLmove;
 import static icfpc2018.models.Coordinate.toSmove;
 
@@ -21,6 +24,18 @@ public class TraceOptimizer {
     public TraceOptimizer(final int r) {
         R = r;
         memo = new long[R * R * R];
+    }
+
+    public static int lowerBoundMoveCount(final Coordinate diff) {
+        final int x = Math.abs(diff.x);
+        final int y = Math.abs(diff.y);
+        final int z = Math.abs(diff.z);
+        final int lmoveCount = (x / 15) + (y / 15) + (z / 15)
+                + (((x % 15) > 5) ? 1 : 0) + (((y % 15) > 5) ? 1 : 0) + (((z % 15) > 5) ? 1 : 0);
+        final int smoveCount = ((((0 < (x % 15)) && ((x % 15) < 6)) ? 1 : 0))
+                + ((((0 < (y % 15)) && ((y % 15) < 6)) ? 1 : 0))
+                + ((((0 < (z % 15)) && ((z % 15) < 6)) ? 1 : 0));
+        return (lmoveCount + ((smoveCount + 1) / 2));
     }
 
     public static Trace getOptimalMove(final Coordinate s, final Coordinate t) {
@@ -64,7 +79,6 @@ public class TraceOptimizer {
         if (start.equals(end)) {
             return new ArrayList<>();
         }
-        final Queue<Integer> queue = new ArrayDeque<>();
         final int R = board.getR();
         final int Rcube = R * R * R;
         final int Rcube2 = R * R * R * 2;
@@ -73,8 +87,9 @@ public class TraceOptimizer {
 
         final int startPos = board.getPos(start);
         final int endPos = board.getPos(end);
-        queue.add(startPos);
-        queue.add(endPos + Rcube);
+        final Queue<Pair<Integer, Integer>> queue = new PriorityQueue<>(Comparator.comparingInt(o -> o.getKey()));
+        queue.add(new Pair<>(0, startPos));
+        queue.add(new Pair<>(0, endPos + Rcube));
         memo[startPos] = bias + startPos;
         memo[endPos] = bias + Rcube + endPos;
 
@@ -82,8 +97,9 @@ public class TraceOptimizer {
         long lastMemoValue = -1;
 
         bfs: while (!queue.isEmpty()) {
-            final boolean isFromEnd = (queue.peek() / Rcube) == 1;
-            final int prevPos = queue.poll() % Rcube;
+            final boolean isFromEnd = ((queue.peek().getValue() % Rcube2) / Rcube) == 1;
+            final int prevPos = queue.poll().getValue() % Rcube;
+            final int currentCost = queue.poll().getValue() / Rcube2;
 
             // SMOVE
 
@@ -97,8 +113,12 @@ public class TraceOptimizer {
                             break;
                         }
                         final int pos = board.getPos(clone);
+                        final int nextCost = currentCost + 1;
                         if (memo[pos] < bias) {
-                            queue.add(pos + (isFromEnd ? Rcube : 0));
+                            queue.add(new Pair<>(
+                                    nextCost + lowerBoundMoveCount(difference(clone, isFromEnd ? start : end)),
+                                    pos + (isFromEnd ? Rcube : 0) + (nextCost * Rcube2)
+                            ));
                             memo[pos] = bias + (i * Rcube2) + prevPos + (isFromEnd ? Rcube : 0);
                         } else {
                             final boolean isFromEnd2 = Rcube <= ((memo[pos] - bias) % Rcube2);
@@ -132,8 +152,12 @@ public class TraceOptimizer {
                                         break;
                                     }
                                     final int pos = board.getPos(clone2);
+                                    final int nextCost = currentCost + 1;
                                     if (memo[pos] < bias) {
-                                        queue.add(pos + (isFromEnd ? Rcube : 0));
+                                        queue.add(new Pair<>(
+                                                nextCost + lowerBoundMoveCount(difference(clone2, isFromEnd ? start : end)),
+                                                pos + (isFromEnd ? Rcube : 0) + (nextCost * Rcube2)
+                                        ));
                                         memo[pos] = bias + (i * Rcube2) + prevPos + (isFromEnd ? Rcube : 0);
                                     } else {
                                         final boolean isFromEnd2 = Rcube <= ((memo[pos] - bias) % Rcube2);
