@@ -25,7 +25,7 @@ import static icfpc2018.models.Trace.Type.VOID;
 
 public class SingleBotReconstructSolver extends BaseSolver {
 
-    private final List<Coordinate> fullVoxels = Lists.newArrayList();
+    int[] permutations = {0, 1, 2, 3, 4, 5};
     private Board initialBoard;
     private Board finalBoard;
     private int R;
@@ -33,6 +33,10 @@ public class SingleBotReconstructSolver extends BaseSolver {
     private List<Trace> traces;
     private State state;
     private UnionFind unionFind;
+
+    public void setPermutation(int[] permutations) {
+        this.permutations = permutations;
+    }
 
     private void visit(final Coordinate p) {
         final int pos = finalBoard.getPos(p);
@@ -129,7 +133,8 @@ public class SingleBotReconstructSolver extends BaseSolver {
 
         traces.add(getOptimalMove(parent, p));
         final List<Coordinate> candidates = new ArrayList<>();
-        for (final int[] d : ADJACENTS) {
+        for (int i = 0; i < 6; i++) {
+            final int[] d = ADJACENTS[permutations[i]];
             final Coordinate q = new Coordinate(p.x + d[0], p.y + d[1], p.z + d[2]);
             if (finalBoard.in(q) && !visited(q) && !q.equals(parent) && (finalBoard.get(q) || initialBoard.get(q))) {
                 if (d[1] != 0) {

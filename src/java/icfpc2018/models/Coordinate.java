@@ -13,15 +13,6 @@ public class Coordinate {
             {0, 1, 0},
     };
 
-
-    public static final int[][] ADJACENTS_NOUP = {
-            {1, 0, 0},
-            {0, 0, 1},
-            {-1, 0, 0},
-            {0, 0, -1},
-            {0, -1, 0},
-    };
-
     public static final int[][] NLD = {
             {1, 0, 0},
             {0, 1, 0},

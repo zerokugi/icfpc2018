@@ -22,6 +22,15 @@ public class Game {
         this.traces = traces;
     }
 
+    public static long getEnergy(final Board initialBoard, final Board finalBoard, final List<Trace> traces) {
+        final Game game = new Game(initialBoard, finalBoard, traces);
+        while (game.proceed()) {
+            ;
+        }
+        assert game.validateSuccess();
+        return game.state.getEnergy();
+    }
+
     public State getState() {
         return state;
     }
