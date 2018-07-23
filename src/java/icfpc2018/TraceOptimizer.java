@@ -4,7 +4,6 @@ import com.google.common.collect.Lists;
 import icfpc2018.models.Board;
 import icfpc2018.models.Coordinate;
 import icfpc2018.models.Trace;
-import javafx.util.Pair;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -73,6 +72,24 @@ public class TraceOptimizer {
             }
         }
         return traces;
+    }
+
+    public class Pair<T, S> {
+        final S first;
+        final T second;
+
+        public Pair(final S first, final T second) {
+            this.first = first;
+            this.second = second;
+        }
+
+        public S getKey() {
+            return first;
+        }
+
+        public T getValue() {
+            return second;
+        }
     }
 
     public List<Trace> shortestPath(final Board board, final Coordinate start, final Coordinate end) {
