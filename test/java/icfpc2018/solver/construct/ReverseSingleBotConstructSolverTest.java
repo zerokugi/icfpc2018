@@ -1,7 +1,6 @@
-package icfpc2018.solver.deconstruct.reverse;
+package icfpc2018.solver.construct;
 
 import icfpc2018.solver.ReverseSolver;
-import icfpc2018.solver.deconstruct.BaseDeconstructSolverTest;
 import icfpc2018.solver.reconstruct.SingleBotReconstructSolver;
 import org.junit.Before;
 
@@ -9,7 +8,7 @@ import org.junit.Before;
  * @author ryosukek
  */
 
-public class ReverseSingleBotDeconstructSolverTest extends BaseDeconstructSolverTest {
+public class ReverseSingleBotConstructSolverTest extends BaseConstructSolverTest {
     @Before
     public void setUp() {
         solver = new ReverseSolver<>(

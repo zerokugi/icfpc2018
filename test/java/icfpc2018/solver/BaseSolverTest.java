@@ -204,8 +204,8 @@ public class BaseSolverTest {
         final Board srcBoard = Strings.isNullOrEmpty(srcPath) ? null : getState(srcPath);
         final Board tgtBoard = Strings.isNullOrEmpty(tgtPath) ? null : getState(tgtPath);
         final List<Trace> traces = solver.solve(
-                (srcBoard == null) ? Board.getInitialBoard(tgtBoard.getR()) : srcBoard,
-                (tgtBoard == null) ? Board.getInitialBoard(srcBoard.getR()) : tgtBoard
+                (srcBoard == null) ? Board.getInitialBoard(tgtBoard.getR()) : srcBoard.clone(),
+                (tgtBoard == null) ? Board.getInitialBoard(srcBoard.getR()) : tgtBoard.clone()
         );
         assert (tgtBoard == null) || ((0 < tgtBoard.getR()) && (tgtBoard.getR() <= 250));
         assert (srcBoard == null) || ((0 < srcBoard.getR()) && (srcBoard.getR() <= 250));
@@ -230,8 +230,8 @@ public class BaseSolverTest {
     @After
     public void after() {
 //        System.out.println(scoreMap.get(path).traces.size() + " commands");
-//        TraceExporter.export("dist/traces", testcase, scoreMap.get(path).traces);
-        if (bestScoreMap.get(testcase) == null || scoreMap.get(testcase).score.longValue() < bestScoreMap.get(testcase).score.longValue()) {
+        TraceExporter.export("dist/traces", testcase, scoreMap.get(testcase).traces);
+        if (bestScoreMap.get(testcase) == null || scoreMap.get(testcase).score.longValue() <= bestScoreMap.get(testcase).score.longValue()) {
             TraceExporter.export("dist/bestTraces", testcase, scoreMap.get(testcase).traces);
         }
         scoreMap.get(testcase).traces = null;

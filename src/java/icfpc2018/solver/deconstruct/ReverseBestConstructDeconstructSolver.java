@@ -1,17 +1,16 @@
-package icfpc2018.solver.deconstruct.reverse;
+package icfpc2018.solver.deconstruct;
 
 import icfpc2018.models.Board;
 import icfpc2018.models.Trace;
-import icfpc2018.solver.deconstruct.BaseDeconstructSolver;
 
 import java.io.IOException;
 import java.util.List;
 
-import static icfpc2018.solver.construct.dflt.DefaultConstructSolver.convertTraces;
-import static icfpc2018.solver.construct.dflt.DefaultConstructSolver.loadTraces;
-import static icfpc2018.solver.deconstruct.reverse.ReverseDeconstructSolver.reverseTraces;
+import static icfpc2018.solver.DefaultSolver.convertTraces;
+import static icfpc2018.solver.DefaultSolver.loadTraces;
+import static icfpc2018.solver.ReverseSolver.reverseTraces;
 
-public class BestConstructDeconstructSolver extends BaseDeconstructSolver {
+public class ReverseBestConstructDeconstructSolver extends BaseDeconstructSolver {
     @Override
     public List<Trace> solve(final Board initialBoard) {
         try {

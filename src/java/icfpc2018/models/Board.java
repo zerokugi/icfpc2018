@@ -9,7 +9,7 @@ public class Board {
     private final String path;
     private final UnionFind unionFind;
     private int filledCound = 0;
-    private boolean forceGrounded = false;
+    private boolean gaveUpGroundedCheck = false;
 
     public Board(final int r, final byte[] board, final String path) {
         R = r;
@@ -96,40 +96,17 @@ public class Board {
         return true;
     }
 
-    private void resetConnectivityDfs(final int x, final int y, final int z, boolean reset) {
-        if (reset) {
-            if (unionFind.size(getPos(x, y, z)) == 1) {
-                return;
-            }
-            unionFind.reset(getPos(x, y, z));
-        } else {
-            if (unionFind.size(getPos(x, y, z)) != 1) {
-                return;
-            }
-            if ((y == 0) && get(x, y, z)) {
-                unionFind.unite(getPos(x, y, z), R * R * R);
-            }
-        }
-        for (final int[] d : Coordinate.ADJACENTS) {
-            if (in(x + d[0]) && in(y + d[1]) && in(z + d[2])) {
-                if (get(x + d[0], y + d[1], z + d[2])) {
-//                    resetConnectivityDfs(x + d[0], y + d[1], z + d[2], reset);
-                    if (!reset && get(x, y, z)) {
-                        unionFind.unite(getPos(x, y, z), getPos(x + d[0], y + d[1], z + d[2]));
-                    }
-                }
-            }
-        }
-    }
-
     public boolean doVoid(final int x, final int y, final int z) {
         if (!flip(x, y, z, 0)) {
             return false;
         }
         filledCound --;
-        forceGrounded = true;
-//        resetConnectivityDfs(x, y, z, true);
-//        resetConnectivityDfs(x, y, z, false);
+        if (filledCound == 0) {
+            gaveUpGroundedCheck = false;
+            unionFind.reset();
+        } else {
+            gaveUpGroundedCheck = true;
+        }
         return true;
     }
 
@@ -145,8 +122,12 @@ public class Board {
         return path;
     }
 
-    public boolean grounded() {
-        return forceGrounded || (unionFind.size(R * R * R) == (filledCound + 1));
+    public boolean mustBeGrounded() {
+        return !gaveUpGroundedCheck && (unionFind.size(R * R * R) == (filledCound + 1));
+    }
+
+    public boolean mustBeUngrounded() {
+        return !gaveUpGroundedCheck && (unionFind.size(R * R * R) != (filledCound + 1));
     }
 
     private void uniteAdjacents(final int x, final int y, final int z) {

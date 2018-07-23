@@ -1,10 +1,9 @@
-package icfpc2018.solver.construct.single;
+package icfpc2018.solver;
 
 import icfpc2018.TraceOptimizer;
 import icfpc2018.models.Board;
 import icfpc2018.models.Coordinate;
 import icfpc2018.models.Trace;
-import icfpc2018.solver.construct.BaseConstructSolver;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,11 +11,11 @@ import java.util.List;
 import static icfpc2018.models.Trace.Type.FILL;
 import static icfpc2018.models.Trace.Type.VOID;
 
-public class MoveOptimizedConstructSolver<ConstructSolver extends BaseConstructSolver> extends BaseConstructSolver {
-    final ConstructSolver constructSolver;
+public class MoveOptimizedSolver<Solver extends BaseSolver> extends BaseSolver {
+    final Solver solver;
 
-    public MoveOptimizedConstructSolver(final ConstructSolver constructSolver) {
-        this.constructSolver = constructSolver;
+    public MoveOptimizedSolver(final Solver constructSolver) {
+        solver = constructSolver;
     }
 
     public static List<Trace> optimizeMove(final List<Trace> originalTraces, final Board initialBoard) {
@@ -62,7 +61,7 @@ public class MoveOptimizedConstructSolver<ConstructSolver extends BaseConstructS
     }
 
     @Override
-    public List<Trace> solve(final Board finalBoard) {
-        return optimizeMove(constructSolver.solve(finalBoard), Board.getInitialBoard(finalBoard.getR()));
+    public List<Trace> solve(final Board initialBoard, final Board finalBoard) {
+        return optimizeMove(solver.solve(initialBoard, finalBoard), Board.getInitialBoard(finalBoard.getR()));
     }
 }

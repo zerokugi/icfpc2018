@@ -1,10 +1,8 @@
-package icfpc2018.solver.reconstruct.concatenate;
+package icfpc2018.solver.reconstruct;
 
 import icfpc2018.models.Board;
 import icfpc2018.models.Trace;
-import icfpc2018.solver.construct.BaseConstructSolver;
-import icfpc2018.solver.deconstruct.BaseDeconstructSolver;
-import icfpc2018.solver.reconstruct.BaseReconstructSolver;
+import icfpc2018.solver.BaseSolver;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,9 +10,9 @@ import java.util.List;
 import static icfpc2018.models.Trace.Type.HALT;
 
 public class ConcatenateReconstructSolver<
-        DeconstructSolver extends BaseDeconstructSolver,
-        ConstructSolver extends BaseConstructSolver
-        > extends BaseReconstructSolver {
+        DeconstructSolver extends BaseSolver,
+        ConstructSolver extends BaseSolver
+        > extends BaseSolver {
     private final DeconstructSolver deconstructSolver;
     private final ConstructSolver constructSolver;
 
@@ -39,8 +37,8 @@ public class ConcatenateReconstructSolver<
 
     @Override
     public List<Trace> solve(final Board initialBoard, final Board finalBoard) {
-        final List<Trace> deconstructTraces = deconstructSolver.solve(initialBoard);
-        final List<Trace> constructTraces = constructSolver.solve(finalBoard);
+        final List<Trace> deconstructTraces = deconstructSolver.solve(initialBoard, Board.getInitialBoard(initialBoard.getR()));
+        final List<Trace> constructTraces = constructSolver.solve(Board.getInitialBoard(finalBoard.getR()), finalBoard);
         return concatenateTraces(deconstructTraces, constructTraces);
     }
 }

@@ -14,7 +14,7 @@ public class Validator {
     }
 
     public static void validateGlobal(final State state) {
-        assert (state.getHarmonics() == State.Harmonics.HIGH) || state.getBoard().canBeGrounded()
+        assert (state.getHarmonics() == State.Harmonics.HIGH) || !state.getBoard().mustBeUngrounded()
                 : "must be grounded if harmonics is low";
 
         long idSet = 0;

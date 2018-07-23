@@ -1,22 +1,22 @@
 package icfpc2018;
 
-import org.junit.Test;
-import icfpc2018.solver.construct.dflt.DefaultConstructSolver;
 import icfpc2018.models.Board;
 import icfpc2018.models.Trace;
+import icfpc2018.solver.DefaultSolver;
+import org.junit.Test;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.List;
 
 import static icfpc2018.TraceExporter.toBinaryData;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertArrayEquals;
 
 public class TraceExporterTest {
 
     @Test
     public void testToBinaryData() throws IOException {
-        final DefaultConstructSolver solver = new DefaultConstructSolver();
+        final DefaultSolver solver = new DefaultSolver();
 
         final String tracePath = "dfltTracesL/LA001.nbt";
         final String modelPath = "problemsL/LA001_tgt.mdl";
@@ -34,9 +34,9 @@ public class TraceExporterTest {
             input.close();
         }
         board = new Board(R, rawBoard, modelPath);
-        solved = solver.solve(board);
+        solved = solver.solve(Board.getInitialBoard(board.getR()), board);
 
-        byte[] expected = solver.loadTraces(tracePath);
+        byte[] expected = DefaultSolver.loadTraces(tracePath);
 
         final byte[] actual = toBinaryData(solved);
         assertArrayEquals(expected, actual);

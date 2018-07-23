@@ -1,10 +1,10 @@
-package icfpc2018.solver.construct.dflt;
+package icfpc2018.solver;
 
-import com.google.common.annotations.VisibleForTesting;
-import jdk.nashorn.internal.ir.annotations.Ignore;
-import icfpc2018.solver.construct.BaseConstructSolver;
+import com.google.common.base.MoreObjects;
+import com.google.common.base.Strings;
 import icfpc2018.models.Board;
 import icfpc2018.models.Trace;
+import jdk.nashorn.internal.ir.annotations.Ignore;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -12,8 +12,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DefaultConstructSolver extends BaseConstructSolver {
-
+@Ignore
+public class DefaultSolver extends BaseSolver {
     public static byte[] loadTraces(final String path) throws IOException {
         final int length = (int) new File(path).length();
         final FileInputStream input = new FileInputStream(path);
@@ -69,11 +69,15 @@ public class DefaultConstructSolver extends BaseConstructSolver {
     }
 
     @Override
-    public List<Trace> solve(final Board finalBoard) {
+    public List<Trace> solve(final Board initialBoard, final Board finalBoard) {
         try {
             final byte[] rawTraces = loadTraces(
-                    finalBoard.getPath()
+                    MoreObjects.firstNonNull(
+                            Strings.emptyToNull(initialBoard.getPath()),
+                            Strings.emptyToNull(finalBoard.getPath())
+                    )
                             .replace("problems", "dfltTraces")
+                            .replace("_src.mdl", ".nbt")
                             .replace("_tgt.mdl", ".nbt")
             );
             return convertTraces(rawTraces);

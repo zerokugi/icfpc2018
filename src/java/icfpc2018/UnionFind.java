@@ -23,8 +23,8 @@ public class UnionFind {
         return x != y;
     }
 
-    public void reset(final int x) {
-        d[x] = -1;
+    public void reset() {
+        Arrays.fill(d, -1);
     }
 
     public boolean find(final int x, final int y) {

@@ -1,11 +1,11 @@
-package icfpc2018.solver.construct.dflt;
+package icfpc2018.solver.construct;
 
+import icfpc2018.solver.DefaultSolver;
 import org.junit.Before;
-import icfpc2018.solver.construct.BaseConstructSolverTest;
 
 public class DefaultConstructSolverTest extends BaseConstructSolverTest {
     @Before
     public void setUp() {
-        solver = new DefaultConstructSolver();
+        solver = new DefaultSolver();
     }
 }

@@ -1,11 +1,10 @@
-package icfpc2018.solver.construct.single;
+package icfpc2018.solver.construct;
 
 import com.google.common.collect.Lists;
 import icfpc2018.models.Board;
 import icfpc2018.models.Coordinate;
 import icfpc2018.models.State;
 import icfpc2018.models.Trace;
-import icfpc2018.solver.construct.BaseConstructSolver;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,20 +50,28 @@ public class SingleBotConstructSolver extends BaseConstructSolver {
         state = State.getInitialState(R);
         List<Trace> resultTraces = new ArrayList<>();
         while(true) {
-            final Coordinate start = getNearestPoint();
-            if (start == null) {
+            final List<Trace> traces = solveNearestComponent(new Coordinate(0, 0, 0));
+            if (traces.isEmpty()) {
                 break;
             }
-            final Coordinate nextToStart = new Coordinate(start.x - 1, start.y, start.z - 1);
-            traces = new ArrayList<>();
-            traces.addAll(go(new Coordinate(0, 0, 0), nextToStart));
-            dfs(start, nextToStart, true);
-            traces.addAll(go(nextToStart, new Coordinate(0, 0, 0)));
             traces.addAll(resultTraces);
             resultTraces = traces;
         }
         resultTraces.add(new Trace(HALT));
         return resultTraces;
+    }
+
+    public List<Trace> solveNearestComponent(final Coordinate origin) {
+        final Coordinate start = getNearestPoint();
+        if (start == null) {
+            return new ArrayList<>();
+        }
+        final Coordinate nextToStart = new Coordinate(start.x - 1, start.y, start.z - 1);
+        traces = new ArrayList<>();
+        traces.addAll(go(new Coordinate(0, 0, 0), nextToStart));
+        dfs(start, nextToStart, true);
+        traces.addAll(go(nextToStart, new Coordinate(0, 0, 0)));
+        return traces;
     }
 
     private void dfs(final Coordinate p, final Coordinate parent, boolean canUp) {
@@ -94,12 +101,12 @@ public class SingleBotConstructSolver extends BaseConstructSolver {
             }
         }
         state.getBoard().fill(p);
-        if (!state.getBoard().grounded() && (state.getHarmonics() == State.Harmonics.LOW)) {
+        if (!state.getBoard().mustBeGrounded() && (state.getHarmonics() == State.Harmonics.LOW)) {
             state.flipHarmonics();
             tryFlip();
         }
         traces.add(Coordinate.toNldTrace(FILL, difference(parent, p)));
-        if (state.getBoard().grounded() && (state.getHarmonics() == State.Harmonics.HIGH)) {
+        if (state.getBoard().mustBeGrounded() && (state.getHarmonics() == State.Harmonics.HIGH)) {
             state.flipHarmonics();
             tryFlip();
         }
