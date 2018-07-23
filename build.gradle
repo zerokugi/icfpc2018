@@ -60,5 +60,5 @@ sourceSets {
 }
 
 test {
-    jvmArgs = ['-ea', '-Xmx4g', '-Xss1g']
+    jvmArgs = ['-ea', '-Xmx20g', '-Xss1g']
 }
