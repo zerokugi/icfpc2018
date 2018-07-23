@@ -46,6 +46,9 @@ public class BaseSolverTest {
     public String tgtPath;
     @Parameterized.Parameter(2)
     public String testcase;
+    static {
+        System.setProperty("maxParallelTestThreads", "32");
+    }
 
     private static Board getState(final String path) throws IOException {
         final FileInputStream input = new FileInputStream(path);
