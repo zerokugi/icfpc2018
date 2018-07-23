@@ -128,8 +128,8 @@ public class BaseSolverTest {
                         printer.setAttribute(Ansi.Attribute.BOLD);
                         updated.add(String.format("%s: *%s* %s", path, t, s));
                     } else {
-                        s = String.format(" | %s(%s)",
-                            summary.score,
+                        s = String.format(" | %16d(%s)",
+                                summary.score.longValue(),
                             date
                         );
                         t = String.format(
@@ -148,9 +148,9 @@ public class BaseSolverTest {
                     if (ratio > 1) { // if bad
                         printer.setForegroundColor(Ansi.FColor.RED);
                     }
-                    final String s = String.format("%4f | %s(%s)",
+                    final String s = String.format("%4f | %16d(%s)",
                             ratio,
-                            summary.score,
+                            summary.score.longValue(),
                             date
                     );
                     printer.println(path + ": " + s);
