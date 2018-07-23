@@ -58,3 +58,7 @@ sourceSets {
         }
     }
 }
+
+test {
+    jvmArgs = ['-ea', '-Xmx4g', '-Xss1g']
+}
