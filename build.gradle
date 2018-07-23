@@ -59,6 +59,16 @@ sourceSets {
     }
 }
 
+def runningTests = []
+
 test {
     jvmArgs = ['-ea', '-Xmx20g', '-Xss1g']
+    beforeTest { desc ->
+        runningTests.add(desc.name)
+        logger.quiet "Running tests ${runningTests}"
+    }
+    afterTest { desc, result ->
+        runningTests.remove(runningTests.indexOf(desc.name))
+        logger.quiet "Running tests ${runningTests}"
+    }
 }
