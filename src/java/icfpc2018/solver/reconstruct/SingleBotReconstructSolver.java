@@ -1,6 +1,7 @@
 package icfpc2018.solver.reconstruct;
 
 import com.google.common.collect.Lists;
+import icfpc2018.UnionFind;
 import icfpc2018.models.Board;
 import icfpc2018.models.Coordinate;
 import icfpc2018.models.State;
@@ -16,7 +17,6 @@ import java.util.Queue;
 import static icfpc2018.TraceOptimizer.getOptimalMove;
 import static icfpc2018.TraceOptimizer.go;
 import static icfpc2018.models.Coordinate.ADJACENTS;
-import static icfpc2018.models.Coordinate.ADJACENTS_NOUP;
 import static icfpc2018.models.Coordinate.difference;
 import static icfpc2018.models.Trace.Type.FILL;
 import static icfpc2018.models.Trace.Type.FLIP;
@@ -30,9 +30,9 @@ public class SingleBotReconstructSolver extends BaseSolver {
     private Board finalBoard;
     private int R;
     private byte[] vis;
-    private boolean[] canUps;
     private List<Trace> traces;
     private State state;
+    private UnionFind unionFind;
 
     private void visit(final Coordinate p) {
         final int pos = finalBoard.getPos(p);
@@ -44,14 +44,34 @@ public class SingleBotReconstructSolver extends BaseSolver {
         return ((vis[pos >> 3] >> (pos & 7)) & 1) == 1;
     }
 
+    private void calculateCanUps() {
+        unionFind = new UnionFind(R * R * R);
+        for (int y = R - 1; y >= 1; y--) {
+            for (int x = 0; x < R; x++) {
+                for (int z = 0; z < R; z++) {
+                    if (initialBoard.get(x, y, z) || finalBoard.get(x, y, z)) {
+                        for (int k = 0; k < 2; k++) {
+                            final int dx = x - ((k == 0) ? 1 : 0);
+                            final int dz = z - ((k == 1) ? 1 : 0);
+                            if ((initialBoard.in(new Coordinate(dx, y, dz))
+                                    && initialBoard.get(dx, y, dz)) || finalBoard.get(dx, y, dz)) {
+                                unionFind.unite(initialBoard.getPos(x, y, z), initialBoard.getPos(dx, y, dz));
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     @Override
     public List<Trace> solve(final Board initialBoard, final Board finalBoard) {
         R = finalBoard.getR();
         vis = new byte[finalBoard.getBoard().length];
-        canUps = new boolean[R * R * R];
         this.initialBoard = new Board(R, initialBoard.getBoard(), "");
         this.finalBoard = new Board(R, finalBoard.getBoard(), "");
         state = State.getInitialState(initialBoard);
+        calculateCanUps();
         final List<Coordinate> nearestPoints = enumerateNearestPoints(new Coordinate(0, 0, 0));
         traces = new ArrayList<>();
         for (final Coordinate nearestPoint : nearestPoints) {
@@ -93,14 +113,15 @@ public class SingleBotReconstructSolver extends BaseSolver {
         }
         final Coordinate nextToStart = new Coordinate(start.x - 1, start.y, start.z);
         traces.addAll(go(new Coordinate(0, 0, 0), nextToStart));
-        dfs(start, nextToStart, true);
+        dfs(start, nextToStart);
         traces.addAll(go(nextToStart, new Coordinate(0, 0, 0)));
         if (state.getHarmonics() == State.Harmonics.HIGH) {
             tryFlip();
         }
     }
 
-    private void dfs(final Coordinate p, final Coordinate parent, boolean canUp) {
+    private void dfs(final Coordinate p, final Coordinate parent) {
+        unionFind.set(initialBoard.getPos(p));
         visit(p);
         if (initialBoard.get(p)) {
             changeFillVoid(p, parent, false);
@@ -108,16 +129,22 @@ public class SingleBotReconstructSolver extends BaseSolver {
 
         traces.add(getOptimalMove(parent, p));
         final List<Coordinate> candidates = new ArrayList<>();
-        for (final int[] d : canUp ? ADJACENTS : ADJACENTS_NOUP) {
+        for (final int[] d : ADJACENTS) {
             final Coordinate q = new Coordinate(p.x + d[0], p.y + d[1], p.z + d[2]);
             if (finalBoard.in(q) && !visited(q) && !q.equals(parent) && (finalBoard.get(q) || initialBoard.get(q))) {
+                if (d[1] != 0) {
+                    if (unionFind.get(initialBoard.getPos(q))) {
+                        continue;
+                    }
+                    unionFind.set(initialBoard.getPos(q));
+                }
                 candidates.add(q);
                 visit(q);
             }
         }
 
         for (final Coordinate q : candidates) {
-            dfs(q, p, canUp);
+            dfs(q, p);
         }
 
         traces.add(getOptimalMove(p, parent));
@@ -154,7 +181,7 @@ public class SingleBotReconstructSolver extends BaseSolver {
     private Coordinate getNearestPoint(final Coordinate o) {
         for (int d = 0; d <= (R * 3); d++) {
             for (int x = 0; x < R; x++) {
-                for (int y = 0; y < R; y++) {
+                for (int y = 0; y <= 0; y++) {
                     final int dz = d - Math.abs(x - o.x) - Math.abs(y - o.y);
                     if (dz < 0) {
                         continue;

@@ -23,6 +23,43 @@ public class TraceOptimizer {
         memo = new long[R * R * R];
     }
 
+    public static Trace getOptimalMove(final Coordinate s, final Coordinate t) {
+        final Coordinate d = new Coordinate(t.x - s.x, t.y - s.y, t.z - s.z);
+        if (d.clen() == d.mlen()) {
+            return toSmove(d);
+        }
+        return toLmove(new Coordinate(d.x, (d.x == 0) ? d.y : 0, 0), new Coordinate(0, (d.z == 0) ? d.y : 0, d.z));
+    }
+
+    public static List<Trace> go(final Coordinate s, final Coordinate t) {
+        final Coordinate d = Coordinate.difference(s, t);
+        final List<Trace> traces = new ArrayList<>();
+        while (Math.abs(d.x) > 5) {
+            final int len = Math.max(-15, Math.min(d.x, 15));
+            traces.add(Coordinate.toSmove(new Coordinate(len, 0, 0)));
+            d.x -= len;
+        }
+        while (Math.abs(d.z) > 5) {
+            final int len = Math.max(-15, Math.min(d.z, 15));
+            traces.add(Coordinate.toSmove(new Coordinate(0, 0, len)));
+            d.z -= len;
+        }
+        while (Math.abs(d.y) > 5) {
+            final int len = Math.max(-15, Math.min(d.y, 15));
+            traces.add(Coordinate.toSmove(new Coordinate(0, len, 0)));
+            d.y -= len;
+        }
+        if (d.clen() > 0) {
+            if ((d.x != 0) && (d.y != 0) && (d.z != 0)) {
+                traces.add(getOptimalMove(new Coordinate(0, 0, 0), new Coordinate(d.x, d.y, 0)));
+                traces.add(getOptimalMove(new Coordinate(0, 0, 0), new Coordinate(0, 0, d.z)));
+            } else {
+                traces.add(getOptimalMove(new Coordinate(0, 0, 0), new Coordinate(d.x, d.y, d.z)));
+            }
+        }
+        return traces;
+    }
+
     public List<Trace> shortestPath(final Board board, final Coordinate start, final Coordinate end) {
         if (start.equals(end)) {
             return new ArrayList<>();
@@ -153,75 +190,36 @@ public class TraceOptimizer {
             }
         }
         traces = Lists.reverse(traces);
-        {
-            int prevPos = intermediatePos;
+        int prevPos = intermediatePos;
 
-            // Revive trace
-            while (prevPos != board.getPos(end)) {
-                final Coordinate cFrom = board.fromPos(prevPos);
-                final long memoValue;
-                if ((prevPos == intermediatePos) && intermediateMemoByStart) {
-                    memoValue = lastMemoValue - bias;
-                } else {
-                    memoValue = memo[prevPos] - bias;
-                }
-                final int secondAxis = (int)memoValue / Rcube2; // 1:x, 2:y, 3:z
-                prevPos = (int)memoValue % Rcube;
-                final Coordinate cTo = board.fromPos(prevPos);
-
-                final Coordinate d = Coordinate.difference(cFrom, cTo);
-                if (d.clen() == d.mlen()) {
-                    traces.add(Coordinate.toSmove(d));
-                } else {
-                    final Coordinate first = new Coordinate(
-                            (secondAxis == 1) ? 0 : d.x,
-                            (secondAxis == 2) ? 0 : d.y,
-                            (secondAxis == 3) ? 0 : d.z
-                    );
-                    final Coordinate second = new Coordinate(
-                            (secondAxis == 1) ? d.x : 0,
-                            (secondAxis == 2) ? d.y : 0,
-                            (secondAxis == 3) ? d.z : 0
-                    );
-                    traces.add(Coordinate.toLmove(first, second));
-                }
-            }
-        }
-        return traces;
-    }
-
-    public static Trace getOptimalMove(final Coordinate s, final Coordinate t) {
-        final Coordinate d = new Coordinate(t.x - s.x, t.y - s.y, t.z - s.z);
-        if (d.clen() == d.mlen()) {
-            return toSmove(d);
-        }
-        return toLmove(new Coordinate(d.x, (d.x == 0) ? d.y : 0, 0), new Coordinate(0, (d.z == 0) ? d.y : 0, d.z));
-    }
-
-    public static List<Trace> go(final Coordinate s, final Coordinate t) {
-        final Coordinate d = Coordinate.difference(s, t);
-        final List<Trace> traces = new ArrayList<>();
-        while (Math.abs(d.x) > 5) {
-            final int len = Math.max(-15, Math.min(d.x, 15));
-            traces.add(Coordinate.toSmove(new Coordinate(len, 0, 0)));
-            d.x -= len;
-        }
-        while (Math.abs(d.y) > 5) {
-            final int len = Math.max(-15, Math.min(d.y, 15));
-            traces.add(Coordinate.toSmove(new Coordinate(0, len, 0)));
-            d.y -= len;
-        }
-        while (Math.abs(d.z) > 5) {
-            final int len = Math.max(-15, Math.min(d.z, 15));
-            traces.add(Coordinate.toSmove(new Coordinate(0, 0, len)));
-            d.z -= len;
-        }
-        if (d.clen() > 0) {
-            if ((d.x != 0) && (d.y != 0) && (d.z != 0)) {
-                traces.add(getOptimalMove(new Coordinate(0, 0, 0), new Coordinate(d.x, d.y, 0)));
-                traces.add(getOptimalMove(new Coordinate(0, 0, 0), new Coordinate(0, 0, d.z)));
+        // Revive trace
+        while (prevPos != board.getPos(end)) {
+            final Coordinate cFrom = board.fromPos(prevPos);
+            final long memoValue;
+            if ((prevPos == intermediatePos) && intermediateMemoByStart) {
+                memoValue = lastMemoValue - bias;
             } else {
-                traces.add(getOptimalMove(new Coordinate(0, 0, 0), new Coordinate(d.x, d.y, d.z)));
+                memoValue = memo[prevPos] - bias;
+            }
+            final int secondAxis = (int) memoValue / Rcube2; // 1:x, 2:y, 3:z
+            prevPos = (int) memoValue % Rcube;
+            final Coordinate cTo = board.fromPos(prevPos);
+
+            final Coordinate d = Coordinate.difference(cFrom, cTo);
+            if (d.clen() == d.mlen()) {
+                traces.add(Coordinate.toSmove(d));
+            } else {
+                final Coordinate first = new Coordinate(
+                        (secondAxis == 1) ? 0 : d.x,
+                        (secondAxis == 2) ? 0 : d.y,
+                        (secondAxis == 3) ? 0 : d.z
+                );
+                final Coordinate second = new Coordinate(
+                        (secondAxis == 1) ? d.x : 0,
+                        (secondAxis == 2) ? d.y : 0,
+                        (secondAxis == 3) ? d.z : 0
+                );
+                traces.add(Coordinate.toLmove(first, second));
             }
         }
         return traces;

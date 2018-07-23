@@ -5,11 +5,14 @@ import java.util.Arrays;
 public class UnionFind {
     private final int n;
     private final int[] d;
+    private final boolean[] f;
 
     public UnionFind(final int n) {
         this.n = n;
         d = new int[n];
+        f = new boolean[n];
         Arrays.fill(d, -1);
+        Arrays.fill(f, false);
     }
 
     public boolean unite(int x, int y) {
@@ -21,6 +24,14 @@ public class UnionFind {
             d[y] = x;
         }
         return x != y;
+    }
+
+    public void set(final int x) {
+        f[root(x)] = true;
+    }
+
+    public boolean get(final int x) {
+        return f[root(x)];
     }
 
     public void reset() {
