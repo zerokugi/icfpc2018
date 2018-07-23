@@ -18,6 +18,18 @@ public class MoveOptimizedSolver<Solver extends BaseSolver> extends BaseSolver {
         solver = constructSolver;
     }
 
+    private static boolean isOptimized(final int traceNum, final Coordinate diff) {
+        final int x = Math.abs(diff.x);
+        final int y = Math.abs(diff.y);
+        final int z = Math.abs(diff.z);
+        final int lmoveCount = (x / 15) + (y / 15) + (z / 15)
+                + (((x % 15) > 5) ? 1 : 0) + (((y % 15) > 5) ? 1 : 0) + (((z % 15) > 5) ? 1 : 0);
+        final int smoveCount = ((((0 < (x % 15)) && ((x % 15) < 6)) ? 1 : 0))
+                + ((((0 < (y % 15)) && ((y % 15) < 6)) ? 1 : 0))
+                + ((((0 < (z % 15)) && ((z % 15) < 6)) ? 1 : 0));
+        return (lmoveCount + ((smoveCount + 1) / 2)) >= traceNum;
+    }
+
     public static List<Trace> optimizeMove(final List<Trace> originalTraces, final Board initialBoard) {
         final Board board = initialBoard.clone();
         final List<Trace> optimizedTraces = new ArrayList<>();
@@ -37,10 +49,10 @@ public class MoveOptimizedSolver<Solver extends BaseSolver> extends BaseSolver {
                     current.applySld(trace.val2, trace.val3);
                     break;
                 default:
-                    if (moveTraces.size() > 1) {
-                        optimizedTraces.addAll(traceOptimizer.shortestPath(board, prev, current));
-                    } else {
+                    if (isOptimized(moveTraces.size(), Coordinate.difference(prev, current))) {
                         optimizedTraces.addAll(moveTraces);
+                    } else {
+                        optimizedTraces.addAll(traceOptimizer.shortestPath(board, prev, current));
                     }
                     moveTraces.clear();
                     optimizedTraces.add(trace);
@@ -62,6 +74,6 @@ public class MoveOptimizedSolver<Solver extends BaseSolver> extends BaseSolver {
 
     @Override
     public List<Trace> solve(final Board initialBoard, final Board finalBoard) {
-        return optimizeMove(solver.solve(initialBoard, finalBoard), Board.getInitialBoard(finalBoard.getR()));
+        return optimizeMove(solver.solve(initialBoard.clone(), finalBoard.clone()), initialBoard);
     }
 }
